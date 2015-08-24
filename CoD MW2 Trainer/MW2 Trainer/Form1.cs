@@ -114,16 +114,21 @@ namespace MW2_Trainer
                     noclip_toggle.Invoke(new MethodInvoker(delegate { noclip_toggle.Text = "Disabled"; noclip_toggle.ForeColor = System.Drawing.Color.DarkRed; }));
                 }
 
+                if (godmode_checkbox.Checked) //make sure we keep this
+                    MemLib.writeMemory("godMode", codeFile, "int", "1");
+
                 if (infammo_checkbox.Checked) //since backgroundworker stays running, this will lock our ammo/magazine values
                 {
                     MemLib.writeMemory("grenades", codeFile, "int", "4");
                     MemLib.writeMemory("flashGrenades", codeFile, "int", "4");
-                    MemLib.writeMemory("grenadeLauncher", codeFile, "int", "4");
 
                     //sometimes the game switches these around, so I want to set them all to 50 for now
-                    MemLib.writeMemory("RPG", codeFile, "int", "50"); //supposed to be 2, but sometimes it can be primary ammo?
+                    MemLib.writeMemory("RPG", codeFile, "int", "50");
+                    MemLib.writeMemory("grenadeLauncher", codeFile, "int", "50"); //can be picked up weapons ammo too sometimes
                     MemLib.writeMemory("primaryAmmo", codeFile, "int", "50");
                     MemLib.writeMemory("primaryWieldedMagazine", codeFile, "int", "50");
+                    MemLib.writeMemory("primaryWieldedMagazine2", codeFile, "int", "50");
+                    MemLib.writeMemory("secondaryWieldedMagazine", codeFile, "int", "50");
                     MemLib.writeMemory("primaryMagazine", codeFile, "int", "50");
                     MemLib.writeMemory("secondaryAmmo", codeFile, "int", "50");
                     MemLib.writeMemory("secondaryMagazine", codeFile, "int", "50");
@@ -161,12 +166,18 @@ namespace MW2_Trainer
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (timescale_trackbar.Value == 30)
+                return;
+
             timescale_trackbar.Value = timescale_trackbar.Value + 1;
             MemLib.writeMemory("timescale", codeFile, "float", (timescale_trackbar.Value * 0.2).ToString());
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            if (timescale_trackbar.Value == 0)
+                return; 
+
             timescale_trackbar.Value = timescale_trackbar.Value - 1;
             MemLib.writeMemory("timescale", codeFile, "float", (timescale_trackbar.Value * 0.2).ToString());
         }

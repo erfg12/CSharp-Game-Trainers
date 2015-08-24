@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="18">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"Ammo and Weapons"</Description>
+      <LastState Value="" Activated="0" RealAddress="00000000"/>
+      <Color>80000008</Color>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>1</ID>
+          <Description>"Grenade"</Description>
+          <LastState Value="4" Activated="0" RealAddress="0108DFE0"/>
+          <Color>80000008</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>iw4sp.exe+C8DFE0</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>2</ID>
+          <Description>"Flash Grenade"</Description>
+          <LastState Value="4" Activated="0" RealAddress="0108DFEC"/>
+          <Color>80000008</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>iw4sp.exe+C8DFEC</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>3</ID>
+          <Description>"Grenade Launcher (can be picked up weapons ammo too)"</Description>
+          <LastState Value="50" Activated="1" RealAddress="0108DFD4"/>
+          <Color>80000008</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>iw4sp.exe+C8DFD4</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>4</ID>
+          <Description>"RPG-7"</Description>
+          <LastState Value="50" Activated="0" RealAddress="0108DFBC"/>
+          <Color>80000008</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>iw4sp.exe+C8DFBC</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>12</ID>
+          <Description>"Primary Ammo"</Description>
+          <LastState Value="50" Activated="0" RealAddress="0108DF44"/>
+          <Color>80000008</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>iw4sp.exe+C8DF44</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>131</ID>
+          <Description>"Primary Wielded Gun Magazine (primary)"</Description>
+          <LastState Value="50" Activated="1" RealAddress="0108DFCC"/>
+          <Color>80000008</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>iw4sp.exe+C8DFCC</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>132</ID>
+          <Description>"Primary Wielded Gun Magazine (secondary)"</Description>
+          <LastState Value="50" Activated="1" RealAddress="0108DFD8"/>
+          <Color>80000008</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>iw4sp.exe+C8DFD8</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>120</ID>
+          <Description>"Primary Wielded Gun Magazine"</Description>
+          <LastState Value="50" Activated="0" RealAddress="0108DFE4"/>
+          <Color>80000008</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>iw4sp.exe+C8DFE4</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>14</ID>
+          <Description>"Primary Magazine"</Description>
+          <LastState Value="50" Activated="0" RealAddress="0108DFBC"/>
+          <Color>80000008</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>iw4sp.exe+C8DFBC</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>13</ID>
+          <Description>"Secondary Ammo"</Description>
+          <LastState Value="0" Activated="0" RealAddress="0108DF4C"/>
+          <Color>80000008</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>iw4sp.exe+C8DF4C</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>15</ID>
+          <Description>"Secondary Magazine"</Description>
+          <LastState Value="6" Activated="0" RealAddress="0108DFC8"/>
+          <Color>80000008</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>iw4sp.exe+C8DFC8</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"Character Health"</Description>
+      <LastState Value="" Activated="0" RealAddress="00000000"/>
+      <Color>80000008</Color>
+      <GroupHeader>1</GroupHeader>
+      <CheatEntries>
+        <CheatEntry>
+          <ID>7</ID>
+          <Description>"Health"</Description>
+          <LastState Value="100" Activated="0" RealAddress="00EA7804"/>
+          <Color>80000008</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>00EA7804</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>127</ID>
+          <Description>"God Mode"</Description>
+          <LastState Value="1" Activated="0" RealAddress="00EA77F0"/>
+          <Color>80000008</Color>
+          <VariableType>Byte</VariableType>
+          <Address>iw4sp.exe+AA77F0</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>16</ID>
+          <Description>"Grenade / Car icon"</Description>
+          <LastState Value="0" Activated="0" RealAddress="00E9CDD4"/>
+          <Color>80000008</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>iw4sp.exe+A9CDD4</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>17</ID>
+          <Description>"Bloody Screen After Death (does it work?)"</Description>
+          <LastState Value="0" Activated="0" RealAddress="00E9CE78"/>
+          <Color>80000008</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>iw4sp.exe+A9CE78</Address>
+        </CheatEntry>
+        <CheatEntry>
+          <ID>64</ID>
+          <Description>"Bloody Screen From Shots / Explosions (crashes)"</Description>
+          <LastState Value="0" Activated="0" RealAddress="01779A88"/>
+          <Color>80000008</Color>
+          <VariableType>4 Bytes</VariableType>
+          <Address>iw4sp.exe+1379A88</Address>
+        </CheatEntry>
+      </CheatEntries>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>66</ID>
+      <Description>"z axis"</Description>
+      <LastState Value="64.125" Activated="0" RealAddress="0075F2F0"/>
+      <Color>80000008</Color>
+      <VariableType>Float</VariableType>
+      <Address>iw4sp.exe+35F2F0</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>125</ID>
+      <Description>"Set to 2 and freeze for rapid fire from single shot pistols"</Description>
+      <LastState Value="0" Activated="0" RealAddress="0108DC6C"/>
+      <Color>80000008</Color>
+      <VariableType>Byte</VariableType>
+      <Address>iw4sp.exe+C8DC6C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>126</ID>
+      <Description>"No Clip"</Description>
+      <LastState Value="0" Activated="0" RealAddress="010989BC"/>
+      <Color>80000008</Color>
+      <VariableType>Byte</VariableType>
+      <Address>010989bc</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>130</ID>
+      <Description>"Timescale"</Description>
+      <LastState Value="1" Activated="0" RealAddress="0196ADC0"/>
+      <Color>80000008</Color>
+      <VariableType>Float</VariableType>
+      <Address>iw4sp.exe+156ADC0</Address>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
