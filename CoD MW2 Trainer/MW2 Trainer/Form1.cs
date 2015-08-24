@@ -170,5 +170,10 @@ namespace MW2_Trainer
             timescale_trackbar.Value = timescale_trackbar.Value - 1;
             MemLib.writeMemory("timescale", codeFile, "float", (timescale_trackbar.Value * 0.2).ToString());
         }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://newagesoldier.com");
+        }
     }
 }
