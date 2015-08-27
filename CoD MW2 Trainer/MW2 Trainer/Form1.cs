@@ -27,7 +27,6 @@ namespace MW2_Trainer
         public string codeFile = Application.StartupPath + @"\codes.ini";
         public Mem MemLib = new Mem();
 
-        public string gameProcId;
         public bool loaded;
 
         private void openGame()
@@ -35,20 +34,13 @@ namespace MW2_Trainer
             if (loaded)
                 return;
 
-            Process[] processlist = Process.GetProcesses();
+            //new memory.dll 1.0.2 function
+            int gameProcId = getProcIDFromName("iw4sp"); //use task manager to find game name. For CoD MW2 it is iw4sp. Do not add .exe extension
 
-            foreach (Process theprocess in processlist)
+            if (gameProcId != 0)
             {
-                if (theprocess.ProcessName == "iw4sp") //find iw4sp.exe in the process list (use task manager to find the name)
-                {
-                    gameProcId = theprocess.Id.ToString();
-                    loaded = true;
-                    break; //just grab the first process, ignore the others.
-                }
-            }
-            if (!String.IsNullOrEmpty(gameProcId))
-            {
-                ProcessID.Text = gameProcId;
+                loaded = true;
+                ProcessID.Text = gameProcId.ToString();
                 MemLib.OpenGameProcess(gameProcId);
 
                 int godMode = MemLib.readInt("godMode", codeFile);
@@ -176,7 +168,7 @@ namespace MW2_Trainer
         private void button2_Click(object sender, EventArgs e)
         {
             if (timescale_trackbar.Value == 0)
-                return; 
+                return;
 
             timescale_trackbar.Value = timescale_trackbar.Value - 1;
             MemLib.writeMemory("timescale", codeFile, "float", (timescale_trackbar.Value * 0.2).ToString());
