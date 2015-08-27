@@ -4,8 +4,7 @@ http://newagesoldier.com
 
 These programs were built using the memory.dll program found at https://newagesoldier.com/memory-hacker/
 
-These programs may require administrative privileges. Right click on the program and select the following...
-Properties > Compatibility (Tab) > Check "Run this program as an administrator" and press the OK button
+These programs may require administrative privileges. Execute the GrantAdmin.bat file.
 
 If you do not feel safe using the program, you may use Cheat Engine with the tables provided.
 

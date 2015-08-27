@@ -35,7 +35,7 @@ namespace MW2_Trainer
                 return;
 
             //new memory.dll 1.0.2 function
-            int gameProcId = getProcIDFromName("iw4sp"); //use task manager to find game name. For CoD MW2 it is iw4sp. Do not add .exe extension
+            int gameProcId = MemLib.getProcIDFromName("iw4sp"); //use task manager to find game name. For CoD MW2 it is iw4sp. Do not add .exe extension
 
             if (gameProcId != 0)
             {
