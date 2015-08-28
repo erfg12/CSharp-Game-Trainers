@@ -53,6 +53,11 @@ namespace Trainer_Manager
                 return;
             }
 
+            using (WebClient client = new WebClient())
+            {
+                centerNews.DocumentText = client.DownloadString("https://newagesoldier.com/myfiles/trainers/news.php");
+            }
+
             XmlTextReader reader = new XmlTextReader("https://newagesoldier.com/myfiles/trainers/tscan.php");
             int i = 0;
             while (reader.Read()) //read line by line
@@ -87,7 +92,6 @@ namespace Trainer_Manager
         private void startDownload()
         {
             dlprogressLabel.Visible = true;
-            progressBar1.Visible = true;
             progressBar1.Value = 0;
             dlprogressLabel.Text = "Downloading...";
             if (!backgroundWorker2.IsBusy)
@@ -115,7 +119,7 @@ namespace Trainer_Manager
                 {
                     if (Convert.ToDateTime(last_modified[listBox1.SelectedIndex]) > Directory.GetCreationTime(trainerDir))
                     { //check if we need to upate this trainer
-                        MessageBox.Show(Convert.ToDateTime(last_modified[listBox1.SelectedIndex]).ToString() + ">" + Directory.GetCreationTime(trainerDir));
+                        //MessageBox.Show(Convert.ToDateTime("DEBUG: " + last_modified[listBox1.SelectedIndex]).ToString() + " > " + Directory.GetCreationTime(trainerDir));
                         Directory.Delete(trainerDir, true);
                         startDownload();
                     }
@@ -159,7 +163,6 @@ namespace Trainer_Manager
 
             File.Delete(tmpFile);
             dlprogressLabel.Visible = false;
-            progressBar1.Visible = false;
             backgroundWorker2.CancelAsync();
         }
 
@@ -169,9 +172,10 @@ namespace Trainer_Manager
             dlprogressLabel.Invoke(new MethodInvoker(delegate { dlprogressLabel.Text = e.ProgressPercentage.ToString() + "%"; }));
         }
 
-        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void backgroundWorker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             launchTrainer();
+            progressBar1.Value = 0;
         }
 
         void WebDocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
@@ -280,6 +284,12 @@ namespace Trainer_Manager
         private void button3_Click(object sender, EventArgs e)
         {
             textBox1.Text = defaultDir;
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndex != -1)
+                button1.Enabled = true;
         }
     }
 }

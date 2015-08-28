@@ -1,9 +1,9 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
-MinimumVisualStudioVersion = 10.0.40219.1
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trainer Manager", "Trainer Manager\Trainer Manager.csproj", "{98BB75F6-7C81-4E57-903F-559140A2A851}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Trainer Installer", "Trainer Installer\Trainer Installer.vdproj", "{7094E434-DC11-4697-8C59-8BA866FD98B0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +15,8 @@ Global
 		{98BB75F6-7C81-4E57-903F-559140A2A851}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98BB75F6-7C81-4E57-903F-559140A2A851}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98BB75F6-7C81-4E57-903F-559140A2A851}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7094E434-DC11-4697-8C59-8BA866FD98B0}.Debug|Any CPU.ActiveCfg = Debug
+		{7094E434-DC11-4697-8C59-8BA866FD98B0}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
