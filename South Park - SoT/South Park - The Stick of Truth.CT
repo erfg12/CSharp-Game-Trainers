@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="16">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>31</ID>
+      <Description>"experience"</Description>
+      <Color>80000008</Color>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"South Park - The Stick of Truth.exe"+01B71160</Address>
+      <Offsets>
+        <Offset>24</Offset>
+        <Offset>60</Offset>
+        <Offset>0</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>37</ID>
+      <Description>"current HP"</Description>
+      <Color>80000008</Color>
+      <VariableType>Float</VariableType>
+      <Address>"South Park - The Stick of Truth.exe"+00B0126C</Address>
+      <Offsets>
+        <Offset>18</Offset>
+        <Offset>34</Offset>
+        <Offset>4</Offset>
+        <Offset>2CC</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>41</ID>
+      <Description>"max HP"</Description>
+      <Color>80000008</Color>
+      <VariableType>Float</VariableType>
+      <Address>"South Park - The Stick of Truth.exe"+01B71124</Address>
+      <Offsets>
+        <Offset>1C</Offset>
+        <Offset>14</Offset>
+        <Offset>310</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>44</ID>
+      <Description>"armor"</Description>
+      <Color>80000008</Color>
+      <VariableType>Float</VariableType>
+      <Address>"South Park - The Stick of Truth.exe"+01B71124</Address>
+      <Offsets>
+        <Offset>B4</Offset>
+        <Offset>14</Offset>
+        <Offset>310</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>67</ID>
+      <Description>"LVL"</Description>
+      <Color>80000008</Color>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"South Park - The Stick of Truth.exe"+01B71084</Address>
+      <Offsets>
+        <Offset>18</Offset>
+        <Offset>A0</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>75</ID>
+      <Description>"Your Combat HP (shows in combat)"</Description>
+      <Color>80000008</Color>
+      <VariableType>Float</VariableType>
+      <Address>"South Park - The Stick of Truth.exe"+01B71278</Address>
+      <Offsets>
+        <Offset>18</Offset>
+        <Offset>20C</Offset>
+        <Offset>14</Offset>
+        <Offset>0</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>81</ID>
+      <Description>"Your Combat MP (shows in combat)"</Description>
+      <Color>80000008</Color>
+      <VariableType>Float</VariableType>
+      <Address>"South Park - The Stick of Truth.exe"+01B712F0</Address>
+      <Offsets>
+        <Offset>2C</Offset>
+        <Offset>14</Offset>
+        <Offset>6C</Offset>
+        <Offset>4</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>87</ID>
+      <Description>"Buddy Combat HP (shows in combat)"</Description>
+      <Color>80000008</Color>
+      <VariableType>Float</VariableType>
+      <Address>"South Park - The Stick of Truth.exe"+01B712DC</Address>
+      <Offsets>
+        <Offset>18</Offset>
+        <Offset>6C</Offset>
+        <Offset>38</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>91</ID>
+      <Description>"Buddy Combat MP (shows in combat)"</Description>
+      <Color>80000008</Color>
+      <VariableType>Float</VariableType>
+      <Address>"South Park - The Stick of Truth.exe"+01B71110</Address>
+      <Offsets>
+        <Offset>2C</Offset>
+        <Offset>23C</Offset>
+        <Offset>13C</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>92</ID>
+      <Description>"Skill Points"</Description>
+      <Color>80000008</Color>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"South Park - The Stick of Truth.exe"+9054B0</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>96</ID>
+      <Description>"Skill Points"</Description>
+      <Color>80000008</Color>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"South Park - The Stick of Truth.exe"+003E6E14</Address>
+      <Offsets>
+        <Offset>8</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>97</ID>
+      <Description>"No description"</Description>
+      <Color>80000008</Color>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"South Park - The Stick of Truth.exe"+9054AC</Address>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

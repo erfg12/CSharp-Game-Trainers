@@ -23,10 +23,16 @@ namespace Trainer_Manager
         }
 
         private string defaultDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\cheat_trainers";
+        Dictionary<int, string> last_modified = new Dictionary<int, string>();
+        private string trainerDir = null;
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            textBox1.Text = Properties.Settings.Default.trainer_folder;
+            if (!String.IsNullOrEmpty(Properties.Settings.Default.trainer_folder))
+                textBox1.Text = Properties.Settings.Default.trainer_folder;
+            else
+                textBox1.Text = defaultDir;
+
             if (!backgroundWorker1.IsBusy)
                 backgroundWorker1.RunWorkerAsync();
         }
@@ -35,7 +41,20 @@ namespace Trainer_Manager
         {
             listBox1.Invoke(new MethodInvoker(delegate { listBox1.Items.Clear(); }));
 
+            try
+            {
+                HttpWebRequest myHttpWebRequest = (HttpWebRequest)WebRequest.Create("https://newagesoldier.com/myfiles/trainers/tscan.php");
+                HttpWebResponse myHttpWebResponse = (HttpWebResponse)myHttpWebRequest.GetResponse();
+                if (myHttpWebResponse.StatusCode != HttpStatusCode.OK)
+                    listBox1.Invoke(new MethodInvoker(delegate { listBox1.Items.Add("ERROR: There was a problem pulling the XML data."); }));
+            }
+            catch {
+                listBox1.Invoke(new MethodInvoker(delegate { listBox1.Items.Add("ERROR: Cant connect to the internet."); }));
+                return;
+            }
+
             XmlTextReader reader = new XmlTextReader("https://newagesoldier.com/myfiles/trainers/tscan.php");
+            int i = 0;
             while (reader.Read()) //read line by line
             {
                 try
@@ -43,28 +62,69 @@ namespace Trainer_Manager
                     if (reader.Name == "name")
                         listBox1.Invoke(new MethodInvoker(delegate { listBox1.Items.Add(reader.ReadString()); }));
 
-                    //if (reader.Name == "title")
-                    //    title = reader.ReadString();
+                    if (reader.Name == "last_modified")
+                    {
+                        last_modified.Add(i, reader.ReadString());
+                        i++;
+                    }
                 }
                 catch
                 {
-                    //MessageBox.Show("Could not create covers. Your internet connection may have been interrupted.");
+                    MessageBox.Show("ERROR: Your internet connection may have been interrupted.");
                 }
             }
         }
 
+        private void launchTrainer()
+        {
+            foreach (var file in Directory.GetFiles(trainerDir, "*trainer*.exe", SearchOption.AllDirectories))
+            {
+                System.Diagnostics.Process.Start(file);
+                return;
+            }
+        }
+
+        private void startDownload()
+        {
+            dlprogressLabel.Visible = true;
+            progressBar1.Visible = true;
+            progressBar1.Value = 0;
+            dlprogressLabel.Text = "Downloading...";
+            if (!backgroundWorker2.IsBusy)
+                backgroundWorker2.RunWorkerAsync();
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
+            trainerDir = textBox1.Text + "\\" + listBox1.Text;
+
             if (!Directory.Exists(textBox1.Text))
                 Directory.CreateDirectory(textBox1.Text);
 
             string[] dirs = Directory.GetFiles(textBox1.Text, listBox1.Text + @".*");
 
-            if (dirs == null || dirs.Length == 0) //begin the download
+            if (Directory.Exists(trainerDir))
             {
-                if (!backgroundWorker2.IsBusy)
-                    backgroundWorker2.RunWorkerAsync();
+                if (Directory.GetFiles(trainerDir, "*trainer*.exe").Length == 0) //directory is empty? I guess it could happen...
+                {
+                    Directory.Delete(trainerDir, true);
+                    startDownload();
+                    return;
+                }
+                else
+                {
+                    if (Convert.ToDateTime(last_modified[listBox1.SelectedIndex]) > Directory.GetCreationTime(trainerDir))
+                    { //check if we need to upate this trainer
+                        MessageBox.Show(Convert.ToDateTime(last_modified[listBox1.SelectedIndex]).ToString() + ">" + Directory.GetCreationTime(trainerDir));
+                        Directory.Delete(trainerDir, true);
+                        startDownload();
+                    }
+                    else
+                        launchTrainer();
+                }
             }
+            else
+                startDownload();
         }
 
         static String BytesToString(double byteCount)
@@ -80,10 +140,11 @@ namespace Trainer_Manager
 
         public void ExtractFileToDirectory(string zipFileName, string outputDirectory)
         {
+            progressBar1.Value = 100;
             dlprogressLabel.Invoke(new MethodInvoker(delegate { dlprogressLabel.Text = "Unzipping files..."; }));
 
             FileStream fs = File.OpenRead(zipFileName);
-            string tmpFile = "";
+            string tmpFile = null;
             if (zipFileName.Contains(".zip") == true)
             {
                 ZipFile zip = ZipFile.Read(fs);
@@ -98,25 +159,24 @@ namespace Trainer_Manager
 
             File.Delete(tmpFile);
             dlprogressLabel.Visible = false;
+            progressBar1.Visible = false;
             backgroundWorker2.CancelAsync();
         }
 
         private void backgroundWorker2_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            progressBar1.Value = e.ProgressPercentage;
-            if (dlprogressLabel.InvokeRequired)
-                dlprogressLabel.Invoke(new MethodInvoker(delegate
-                {
-                    dlprogressLabel.Text = e.ProgressPercentage.ToString() + "%";
-                }));
+            progressBar1.Invoke(new MethodInvoker(delegate{ progressBar1.Value = e.ProgressPercentage; }));
+            dlprogressLabel.Invoke(new MethodInvoker(delegate { dlprogressLabel.Text = e.ProgressPercentage.ToString() + "%"; }));
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            foreach (var file in Directory.GetFiles(textBox1.Text + "\\" + listBox1.Text, "*.exe", SearchOption.AllDirectories))
-            {
-                System.Diagnostics.Process.Start(file);
-            }
+            launchTrainer();
+        }
+
+        void WebDocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            webBrowser1.Document.Window.ScrollTo(0, 9999);
         }
 
         void listBox1_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -132,28 +192,32 @@ namespace Trainer_Manager
             listBox1.Invoke(new MethodInvoker(delegate
             {
                 realURL = HttpUtility.HtmlDecode("https://newagesoldier.com/myfiles/trainers/" + listBox1.Text + ".zip");
-                if (!Directory.Exists(textBox1.Text + "\\" + listBox1.Text))
-                    Directory.CreateDirectory(textBox1.Text + "\\" + listBox1.Text);
-                sFilePathToWriteFileTo = textBox1.Text + "\\" + listBox1.Text + @"\tmp.zip";
+
+                if (!Directory.Exists(trainerDir))
+                    Directory.CreateDirectory(trainerDir);
+
+                Directory.SetCreationTime(trainerDir, Convert.ToDateTime(last_modified[listBox1.SelectedIndex])); //server time can be different, so let's update the folder create time to match
+
+                sFilePathToWriteFileTo = trainerDir + @"\tmp.zip";
             }));
 
-            string sUrlToReadFileFrom = realURL;
-
-            Uri url = new Uri(sUrlToReadFileFrom);
+            Uri url = new Uri(realURL);
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                MessageBox.Show("ERROR: There was a problem pulling the zip file. Check internet connection.");
+                return;
+            }
+
             response.Close();
             long iSize = response.ContentLength;
             Int64 iRunningByteTotal = 0;
 
-            dlprogressLabel.Invoke(new MethodInvoker(delegate
-            {
-                dlprogressLabel.Visible = true;
-            }));
-
             using (WebClient DLclient = new WebClient())
             {
-                using (Stream streamRemote = DLclient.OpenRead(new Uri(sUrlToReadFileFrom)))
+                using (Stream streamRemote = DLclient.OpenRead(new Uri(realURL)))
                 {
                     using (Stream streamLocal = new FileStream(sFilePathToWriteFileTo, FileMode.Create, FileAccess.Write, FileShare.None))
                     {
@@ -177,10 +241,10 @@ namespace Trainer_Manager
                             int iProgressPercentage = (int)(dProgressPercentage * 100);
                             if (dIndex > 0 && dTotal > 0)
                             {
-                                    dlprogressLabel.Invoke(new MethodInvoker(delegate
-                                    {
-                                        dlprogressLabel.Text = BytesToString(dIndex).ToString() + "/" + BytesToString(dTotal).ToString() + " (" + iProgressPercentage.ToString() + "%)";
-                                    }));
+                                dlprogressLabel.Invoke(new MethodInvoker(delegate
+                                {
+                                    dlprogressLabel.Text = BytesToString(dIndex).ToString() + "/" + BytesToString(dTotal).ToString() + " (" + iProgressPercentage.ToString() + "%)";
+                                }));
                             }
                             backgroundWorker2.ReportProgress(iProgressPercentage);
                         }
@@ -191,7 +255,7 @@ namespace Trainer_Manager
             }
             listBox1.Invoke(new MethodInvoker(delegate
             {
-                ExtractFileToDirectory(sFilePathToWriteFileTo, textBox1.Text + "\\" + listBox1.Text);
+                ExtractFileToDirectory(sFilePathToWriteFileTo, trainerDir);
             }));
         }
 
@@ -206,13 +270,11 @@ namespace Trainer_Manager
             FolderBrowserDialog fbd = new FolderBrowserDialog();
             DialogResult result = fbd.ShowDialog();
 
-            string[] files = Directory.GetFiles(fbd.SelectedPath);
-            textBox1.Text = fbd.SelectedPath;
-        }
-
-        private void form1_Closing()
-        {
-
+            if (!String.IsNullOrEmpty(fbd.SelectedPath))
+            {
+                string[] files = Directory.GetFiles(fbd.SelectedPath);
+                textBox1.Text = fbd.SelectedPath;
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
