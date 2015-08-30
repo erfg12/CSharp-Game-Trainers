@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 using System.Xml;
 using System.IO;
 using System.Net;
@@ -84,7 +85,10 @@ namespace Trainer_Manager
         {
             foreach (var file in Directory.GetFiles(trainerDir, "*trainer*.exe", SearchOption.AllDirectories))
             {
-                System.Diagnostics.Process.Start(file);
+                ProcessStartInfo info = new ProcessStartInfo(file);
+                info.UseShellExecute = true;
+                info.Verb = "runas";
+                Process.Start(info);
                 return;
             }
         }

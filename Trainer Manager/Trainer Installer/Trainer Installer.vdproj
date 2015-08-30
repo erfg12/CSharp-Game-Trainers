@@ -21,7 +21,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_77D72E8354D488A0CB55CDCCDEB687F6"
+        "MsmKey" = "8:_4300C33F728222EC4F1BCED346F64A07"
         "OwnerKey" = "8:_1499D91F696949C2B978C80EFA49D8D5"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -34,13 +34,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_77D72E8354D488A0CB55CDCCDEB687F6"
+        "OwnerKey" = "8:_1499D91F696949C2B978C80EFA49D8D5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_1499D91F696949C2B978C80EFA49D8D5"
+        "OwnerKey" = "8:_4300C33F728222EC4F1BCED346F64A07"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -61,6 +61,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -77,6 +85,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
@@ -106,14 +122,14 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_77D72E8354D488A0CB55CDCCDEB687F6"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_4300C33F728222EC4F1BCED346F64A07"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:Ionic.Zip, Version=1.9.1.8, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_77D72E8354D488A0CB55CDCCDEB687F6"
+                    "_4300C33F728222EC4F1BCED346F64A07"
                     {
                     "Name" = "8:Ionic.Zip.dll"
                     "Attributes" = "3:512"
