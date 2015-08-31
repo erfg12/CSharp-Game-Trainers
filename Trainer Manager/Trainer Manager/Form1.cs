@@ -83,6 +83,20 @@ namespace Trainer_Manager
 
         private void launchTrainer()
         {
+            foreach (var file in Directory.GetFiles(trainerDir, "*.exe", SearchOption.AllDirectories))
+            {
+                try
+                {
+                    Microsoft.Win32.RegistryKey key;
+                    key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(@"Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers");
+                    key.SetValue(file, "RUNASADMIN");
+                    key.Close();
+                }
+                catch
+                {
+                    //MessageBox.Show("ERROR: Cannot add admin privileges to program " + Path.GetFileName(file));
+                }
+            }
             foreach (var file in Directory.GetFiles(trainerDir, "*trainer*.exe", SearchOption.AllDirectories))
             {
                 ProcessStartInfo info = new ProcessStartInfo(file);

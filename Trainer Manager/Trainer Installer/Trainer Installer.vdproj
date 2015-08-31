@@ -21,7 +21,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_4300C33F728222EC4F1BCED346F64A07"
+        "MsmKey" = "8:_77D72E8354D488A0CB55CDCCDEB687F6"
         "OwnerKey" = "8:_1499D91F696949C2B978C80EFA49D8D5"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -40,7 +40,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_4300C33F728222EC4F1BCED346F64A07"
+        "OwnerKey" = "8:_77D72E8354D488A0CB55CDCCDEB687F6"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -68,6 +68,19 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.0,Profile=Client"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4 Client Profile (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.0,Profile=Client"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
+                    {
+                    "Name" = "8:Windows Installer 3.1"
+                    "ProductCode" = "8:Microsoft.Windows.Installer.3.1"
+                    }
+                }
             }
         }
         "Release"
@@ -92,6 +105,19 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.0,Profile=Client"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4 Client Profile (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.0,Profile=Client"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
+                    {
+                    "Name" = "8:Windows Installer 3.1"
+                    "ProductCode" = "8:Microsoft.Windows.Installer.3.1"
+                    }
+                }
             }
         }
     }
@@ -122,14 +148,14 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_4300C33F728222EC4F1BCED346F64A07"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_77D72E8354D488A0CB55CDCCDEB687F6"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:Ionic.Zip, Version=1.9.1.8, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_4300C33F728222EC4F1BCED346F64A07"
+                    "_77D72E8354D488A0CB55CDCCDEB687F6"
                     {
                     "Name" = "8:Ionic.Zip.dll"
                     "Attributes" = "3:512"
@@ -251,15 +277,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:New Age Trainer Manager"
-        "ProductCode" = "8:{6F28A1ED-ACEA-4756-8EB8-2A4CBF22F4F5}"
-        "PackageCode" = "8:{B417FD8A-505E-401E-950E-E5F7BA712D19}"
+        "ProductCode" = "8:{169AE117-BDCA-410C-9EA0-3F9D4210CE62}"
+        "PackageCode" = "8:{83C1DA12-599D-4D5D-86C3-4BED023D0C3D}"
         "UpgradeCode" = "8:{57113CAC-5039-42CD-9D65-69B1DE824C04}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
-        "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.0"
+        "InstallAllUsers" = "11:TRUE"
+        "ProductVersion" = "8:1.0.1"
         "Manufacturer" = "8:NewAgeSoldier"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:http://newagesoldier.com"
@@ -269,7 +295,7 @@
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:http://newagesoldier.com"
-        "ARPPRODUCTICON" = "8:"
+        "ARPPRODUCTICON" = "8:_923709A8CC584F849DB4BC4B0B0D4240"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
