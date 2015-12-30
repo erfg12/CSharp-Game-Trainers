@@ -4,15 +4,23 @@
     <CheatEntry>
       <ID>0</ID>
       <Description>"char1 Cur HP"</Description>
-      <LastState Value="999" Activated="1" RealAddress="009AB108"/>
+      <LastState Value="9999" Activated="1" RealAddress="009AB108"/>
       <Color>80000008</Color>
       <VariableType>4 Bytes</VariableType>
       <Address>FF7_EN.exe+5AB108</Address>
     </CheatEntry>
     <CheatEntry>
+      <ID>38</ID>
+      <Description>"char1 Max HP"</Description>
+      <LastState Value="9999" Activated="1" RealAddress="009AB10C"/>
+      <Color>80000008</Color>
+      <VariableType>4 Bytes</VariableType>
+      <Address>ff7_en.exe+5AB10C</Address>
+    </CheatEntry>
+    <CheatEntry>
       <ID>4</ID>
       <Description>"char1 Cur MP"</Description>
-      <LastState Value="10" Activated="0" RealAddress="009AB104"/>
+      <LastState Value="99" Activated="0" RealAddress="009AB104"/>
       <Color>80000008</Color>
       <VariableType>2 Bytes</VariableType>
       <Address>FF7_EN.exe+5AB104</Address>
@@ -20,7 +28,7 @@
     <CheatEntry>
       <ID>30</ID>
       <Description>"char1 Limit (255)"</Description>
-      <LastState Value="255" Activated="1" RealAddress="009A8DC2"/>
+      <LastState Value="179" Activated="0" RealAddress="009A8DC2"/>
       <Color>80000008</Color>
       <VariableType>Byte</VariableType>
       <Address>FF7_EN.exe+5A8DC2</Address>
@@ -28,7 +36,7 @@
     <CheatEntry>
       <ID>22</ID>
       <Description>"char1 Time (255)"</Description>
-      <LastState Value="255" Activated="1" RealAddress="009A8B15"/>
+      <LastState Value="190" Activated="0" RealAddress="009A8B15"/>
       <Color>80000008</Color>
       <VariableType>Byte</VariableType>
       <Address>FF7_EN.exe+5A8B15</Address>
@@ -36,15 +44,23 @@
     <CheatEntry>
       <ID>1</ID>
       <Description>"char2 Cur HP"</Description>
-      <LastState Value="999" Activated="1" RealAddress="009AB170"/>
+      <LastState Value="9999" Activated="1" RealAddress="009AB170"/>
       <Color>80000008</Color>
       <VariableType>4 Bytes</VariableType>
       <Address>FF7_EN.exe+5AB170</Address>
     </CheatEntry>
     <CheatEntry>
+      <ID>39</ID>
+      <Description>"char2 Max HP"</Description>
+      <LastState Value="9999" Activated="1" RealAddress="009AB174"/>
+      <Color>80000008</Color>
+      <VariableType>4 Bytes</VariableType>
+      <Address>ff7_en.exe+5AB174</Address>
+    </CheatEntry>
+    <CheatEntry>
       <ID>12</ID>
       <Description>"char2 Cur MP"</Description>
-      <LastState Value="529" Activated="0" RealAddress="009AB16C"/>
+      <LastState Value="99" Activated="0" RealAddress="009AB16C"/>
       <Color>80000008</Color>
       <VariableType>2 Bytes</VariableType>
       <Address>FF7_EN.exe+5AB16c</Address>
@@ -52,7 +68,7 @@
     <CheatEntry>
       <ID>31</ID>
       <Description>"char2 Limit (255)"</Description>
-      <LastState Value="255" Activated="1" RealAddress="009A8DF4"/>
+      <LastState Value="0" Activated="0" RealAddress="009A8DF4"/>
       <Color>80000008</Color>
       <VariableType>Byte</VariableType>
       <Address>FF7_EN.exe+5A8DF4</Address>
@@ -60,7 +76,7 @@
     <CheatEntry>
       <ID>24</ID>
       <Description>"char2 Time (255)"</Description>
-      <LastState Value="255" Activated="1" RealAddress="009A8B59"/>
+      <LastState Value="255" Activated="0" RealAddress="009A8B59"/>
       <Color>80000008</Color>
       <VariableType>Byte</VariableType>
       <Address>FF7_EN.exe+5A8B59</Address>
@@ -68,15 +84,23 @@
     <CheatEntry>
       <ID>7</ID>
       <Description>"char3 Cur HP"</Description>
-      <LastState Value="999" Activated="1" RealAddress="009AB1D8"/>
+      <LastState Value="9999" Activated="1" RealAddress="009AB1D8"/>
       <Color>80000008</Color>
       <VariableType>4 Bytes</VariableType>
       <Address>FF7_EN.exe+5AB1D8</Address>
     </CheatEntry>
     <CheatEntry>
+      <ID>40</ID>
+      <Description>"char3 Max HP"</Description>
+      <LastState Value="9999" Activated="1" RealAddress="009AB1DC"/>
+      <Color>80000008</Color>
+      <VariableType>4 Bytes</VariableType>
+      <Address>ff7_en.exe+5AB1DC</Address>
+    </CheatEntry>
+    <CheatEntry>
       <ID>11</ID>
       <Description>"char3 Cur MP"</Description>
-      <LastState Value="0" Activated="0" RealAddress="009AB1D4"/>
+      <LastState Value="99" Activated="0" RealAddress="009AB1D4"/>
       <Color>80000008</Color>
       <VariableType>2 Bytes</VariableType>
       <Address>FF7_EN.exe+5AB1D4</Address>
@@ -84,7 +108,7 @@
     <CheatEntry>
       <ID>32</ID>
       <Description>"char3 Limit (255)"</Description>
-      <LastState Value="255" Activated="1" RealAddress="009A8E28"/>
+      <LastState Value="0" Activated="0" RealAddress="009A8E28"/>
       <Color>80000008</Color>
       <VariableType>Byte</VariableType>
       <Address>FF7_EN.exe+5A8E28</Address>
@@ -92,7 +116,7 @@
     <CheatEntry>
       <ID>28</ID>
       <Description>"char3 Time (255)"</Description>
-      <LastState Value="255" Activated="1" RealAddress="009A8B9D"/>
+      <LastState Value="255" Activated="0" RealAddress="009A8B9D"/>
       <Color>80000008</Color>
       <VariableType>Byte</VariableType>
       <Address>FF7_EN.exe+5A8B9D</Address>
@@ -100,7 +124,7 @@
     <CheatEntry>
       <ID>8</ID>
       <Description>"Item SLOT 1 quantity (+6 array)"</Description>
-      <LastState Value="97" Activated="0" RealAddress="009AC356"/>
+      <LastState Value="99" Activated="0" RealAddress="009AC356"/>
       <Color>80000008</Color>
       <VariableType>Byte</VariableType>
       <Address>FF7_EN.exe+5AC356</Address>
@@ -158,7 +182,7 @@
     <CheatEntry>
       <ID>13</ID>
       <Description>"Gil (money)"</Description>
-      <LastState Value="14897" Activated="0" RealAddress="00DC08B4"/>
+      <LastState Value="100370" Activated="0" RealAddress="00DC08B4"/>
       <Color>80000008</Color>
       <VariableType>4 Bytes</VariableType>
       <Address>FF7_EN.exe+9C08B4</Address>

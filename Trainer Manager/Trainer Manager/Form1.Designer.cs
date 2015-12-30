@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
@@ -42,6 +43,8 @@
             this.button3 = new System.Windows.Forms.Button();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.centerNews = new System.Windows.Forms.WebBrowser();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -53,7 +56,7 @@
             this.listBox1.FormattingEnabled = true;
             this.listBox1.Location = new System.Drawing.Point(0, 30);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(259, 615);
+            this.listBox1.Size = new System.Drawing.Size(194, 615);
             this.listBox1.TabIndex = 0;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             this.listBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDoubleClick);
@@ -123,7 +126,7 @@
             this.panel1.Margin = new System.Windows.Forms.Padding(15, 3, 3, 3);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
-            this.panel1.Size = new System.Drawing.Size(1128, 38);
+            this.panel1.Size = new System.Drawing.Size(999, 38);
             this.panel1.TabIndex = 5;
             // 
             // button2
@@ -148,7 +151,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1128, 30);
+            this.panel2.Size = new System.Drawing.Size(999, 30);
             this.panel2.TabIndex = 7;
             // 
             // button3
@@ -167,7 +170,7 @@
             // 
             // webBrowser1
             // 
-            this.webBrowser1.Location = new System.Drawing.Point(868, 9);
+            this.webBrowser1.Location = new System.Drawing.Point(759, 9);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
             this.webBrowser1.ScriptErrorsSuppressed = true;
@@ -179,19 +182,29 @@
             // 
             // centerNews
             // 
-            this.centerNews.Location = new System.Drawing.Point(266, 31);
+            this.centerNews.Location = new System.Drawing.Point(200, 30);
             this.centerNews.MinimumSize = new System.Drawing.Size(20, 20);
             this.centerNews.Name = "centerNews";
             this.centerNews.ScriptErrorsSuppressed = true;
-            this.centerNews.Size = new System.Drawing.Size(596, 622);
+            this.centerNews.Size = new System.Drawing.Size(596, 632);
             this.centerNews.TabIndex = 9;
+            // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.Text = "notifyIcon1";
+            this.notifyIcon1.Visible = true;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 26);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.ClientSize = new System.Drawing.Size(1128, 691);
+            this.ClientSize = new System.Drawing.Size(999, 691);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.centerNews);
             this.Controls.Add(this.panel2);
@@ -227,7 +240,8 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.WebBrowser webBrowser1;
         private System.Windows.Forms.WebBrowser centerNews;
-
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
     }
 }
 
