@@ -29,6 +29,13 @@ namespace Trainer_Manager
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            Process[] p = Process.GetProcessesByName("New Age Trainer Manager");
+            if (p.Count() > 1)
+            {
+                Close();
+                return;
+            }
+
             if (!String.IsNullOrEmpty(Properties.Settings.Default.trainer_folder))
                 textBox1.Text = Properties.Settings.Default.trainer_folder;
             else
@@ -66,7 +73,10 @@ namespace Trainer_Manager
                 try
                 {
                     if (reader.Name == "name")
+                    {
                         listBox1.Invoke(new MethodInvoker(delegate { listBox1.Items.Add(reader.ReadString()); }));
+                        (contextMenuStrip1.Items[0] as ToolStripMenuItem).DropDownItems.Add(reader.ReadString());
+                    }
 
                     if (reader.Name == "last_modified")
                     {
@@ -118,12 +128,17 @@ namespace Trainer_Manager
 
         private void button1_Click(object sender, EventArgs e)
         {
-            trainerDir = textBox1.Text + "\\" + listBox1.Text;
+           getTrainer(listBox1.Text);
+        }
+
+        void getTrainer(string tname)
+        {
+            trainerDir = textBox1.Text + "\\" + tname;
 
             if (!Directory.Exists(textBox1.Text))
                 Directory.CreateDirectory(textBox1.Text);
 
-            string[] dirs = Directory.GetFiles(textBox1.Text, listBox1.Text + @".*");
+            string[] dirs = Directory.GetFiles(textBox1.Text, tname + @".*");
 
             if (Directory.Exists(trainerDir))
             {
@@ -135,7 +150,7 @@ namespace Trainer_Manager
                 }
                 else
                 {
-                    if (Convert.ToDateTime(last_modified[listBox1.SelectedIndex]) > Directory.GetCreationTime(trainerDir))
+                    if (Convert.ToDateTime(last_modified[listBox1.FindString(tname)]) > Directory.GetCreationTime(trainerDir))
                     { //check if we need to upate this trainer
                         //MessageBox.Show(Convert.ToDateTime("DEBUG: " + last_modified[listBox1.SelectedIndex]).ToString() + " > " + Directory.GetCreationTime(trainerDir));
                         Directory.Delete(trainerDir, true);
@@ -308,6 +323,42 @@ namespace Trainer_Manager
         {
             if (listBox1.SelectedIndex != -1)
                 button1.Enabled = true;
+        }
+
+        private void steamSaveBackupToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://newagesoldier.com/steam-save-backup/");
+        }
+
+        private void bingRewardsBotToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://newagesoldier.com/bing-rewards-bot/");
+        }
+
+        private void gameTrainerMemorydllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://newagesoldier.com/memory-hacker/");
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (textBox1.Text != "")
+                Process.Start(textBox1.Text);
+        }
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            if (FormWindowState.Minimized == this.WindowState)
+            {
+                notifyIcon1.Visible = true;
+                this.Hide();
+            }
+        }
+
+        private void notifyIcon_DoubleClick(object sender, MouseEventArgs e)
+        {
+            this.Show();
+            WindowState = FormWindowState.Normal;
         }
     }
 }

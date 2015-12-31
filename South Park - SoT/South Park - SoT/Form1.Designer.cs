@@ -115,11 +115,11 @@
             this.label5.AutoSize = true;
             this.label5.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label5.ForeColor = System.Drawing.Color.DarkSlateBlue;
-            this.label5.Location = new System.Drawing.Point(88, 163);
+            this.label5.Location = new System.Drawing.Point(175, 169);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(163, 13);
+            this.label5.Size = new System.Drawing.Size(86, 13);
             this.label5.TabIndex = 9;
-            this.label5.Text = "Created By The New Age Soldier";
+            this.label5.Text = "New Age Soldier";
             this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // label6
