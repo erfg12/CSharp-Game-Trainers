@@ -75,7 +75,7 @@ namespace Trainer_Manager
                     if (reader.Name == "name")
                     {
                         listBox1.Invoke(new MethodInvoker(delegate { listBox1.Items.Add(reader.ReadString()); }));
-                        (contextMenuStrip1.Items[0] as ToolStripMenuItem).DropDownItems.Add(reader.ReadString());
+                        //(contextMenuStrip1.Items[0] as ToolStripMenuItem).DropDownItems.Add(reader.ReadString());
                     }
 
                     if (reader.Name == "last_modified")

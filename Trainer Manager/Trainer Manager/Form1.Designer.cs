@@ -40,17 +40,16 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.centerNews = new System.Windows.Forms.WebBrowser();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.otherSoftwareToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.steamSaveBackupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bingRewardsBotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gameTrainerMemorydllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button4 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -164,6 +163,20 @@
             this.panel2.Size = new System.Drawing.Size(983, 30);
             this.panel2.TabIndex = 7;
             // 
+            // button4
+            // 
+            this.button4.BackColor = System.Drawing.Color.LightSlateGray;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.ForeColor = System.Drawing.Color.Lavender;
+            this.button4.Location = new System.Drawing.Point(505, 4);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(55, 20);
+            this.button4.TabIndex = 9;
+            this.button4.Text = "OPEN";
+            this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // button3
             // 
             this.button3.BackColor = System.Drawing.Color.LightSlateGray;
@@ -203,23 +216,16 @@
             // 
             this.notifyIcon1.ContextMenuStrip = this.contextMenuStrip1;
             this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
-            this.notifyIcon1.Text = "notifyIcon1";
+            this.notifyIcon1.Text = "Cheat Trainer Manager";
             this.notifyIcon1.Visible = true;
             this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon_DoubleClick);
             // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.testToolStripMenuItem,
             this.otherSoftwareToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(154, 48);
-            // 
-            // testToolStripMenuItem
-            // 
-            this.testToolStripMenuItem.Name = "testToolStripMenuItem";
-            this.testToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
-            this.testToolStripMenuItem.Text = "Trainers";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(154, 26);
             // 
             // otherSoftwareToolStripMenuItem
             // 
@@ -251,20 +257,6 @@
             this.gameTrainerMemorydllToolStripMenuItem.Size = new System.Drawing.Size(208, 22);
             this.gameTrainerMemorydllToolStripMenuItem.Text = "Game Trainer memory.dll";
             this.gameTrainerMemorydllToolStripMenuItem.Click += new System.EventHandler(this.gameTrainerMemorydllToolStripMenuItem_Click);
-            // 
-            // button4
-            // 
-            this.button4.BackColor = System.Drawing.Color.LightSlateGray;
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.ForeColor = System.Drawing.Color.Lavender;
-            this.button4.Location = new System.Drawing.Point(505, 4);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(55, 20);
-            this.button4.TabIndex = 9;
-            this.button4.Text = "OPEN";
-            this.button4.UseVisualStyleBackColor = false;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // groupBox1
             // 
@@ -323,7 +315,6 @@
         private System.Windows.Forms.WebBrowser centerNews;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem otherSoftwareToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem steamSaveBackupToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bingRewardsBotToolStripMenuItem;

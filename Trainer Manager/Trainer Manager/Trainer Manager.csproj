@@ -91,7 +91,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="test.pfx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
