@@ -51,10 +51,15 @@
             this.bingRewardsBotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gameTrainerMemorydllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button5 = new System.Windows.Forms.Button();
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.browseFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.closeSoftwareToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.contextMenuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // listBox1
@@ -68,6 +73,7 @@
             this.listBox1.TabIndex = 0;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             this.listBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDoubleClick);
+            this.listBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ct_MouseDown);
             // 
             // backgroundWorker1
             // 
@@ -153,6 +159,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.button5);
             this.panel2.Controls.Add(this.button4);
             this.panel2.Controls.Add(this.button3);
             this.panel2.Controls.Add(this.textBox1);
@@ -171,7 +178,7 @@
             this.button4.ForeColor = System.Drawing.Color.Lavender;
             this.button4.Location = new System.Drawing.Point(505, 4);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(55, 20);
+            this.button4.Size = new System.Drawing.Size(52, 20);
             this.button4.TabIndex = 9;
             this.button4.Text = "OPEN";
             this.button4.UseVisualStyleBackColor = false;
@@ -183,7 +190,7 @@
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.ForeColor = System.Drawing.Color.Lavender;
-            this.button3.Location = new System.Drawing.Point(563, 4);
+            this.button3.Location = new System.Drawing.Point(560, 4);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(20, 20);
             this.button3.TabIndex = 8;
@@ -193,12 +200,12 @@
             // 
             // webBrowser1
             // 
-            this.webBrowser1.Location = new System.Drawing.Point(759, 9);
+            this.webBrowser1.Location = new System.Drawing.Point(355, 12);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
             this.webBrowser1.ScriptErrorsSuppressed = true;
             this.webBrowser1.ScrollBarsEnabled = false;
-            this.webBrowser1.Size = new System.Drawing.Size(260, 760);
+            this.webBrowser1.Size = new System.Drawing.Size(628, 760);
             this.webBrowser1.TabIndex = 8;
             this.webBrowser1.Url = new System.Uri("https://newagesoldier.com/thanks-for-using-new-age-soldier-cheat-trainers/", System.UriKind.Absolute);
             this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.WebDocumentCompleted);
@@ -223,9 +230,10 @@
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.otherSoftwareToolStripMenuItem});
+            this.otherSoftwareToolStripMenuItem,
+            this.closeSoftwareToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(154, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(154, 48);
             // 
             // otherSoftwareToolStripMenuItem
             // 
@@ -268,6 +276,41 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Available Cheat Trainers";
             // 
+            // button5
+            // 
+            this.button5.BackColor = System.Drawing.Color.LightSlateGray;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button5.ForeColor = System.Drawing.Color.Lavender;
+            this.button5.Location = new System.Drawing.Point(904, 4);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 20);
+            this.button5.TabIndex = 10;
+            this.button5.Text = "ABOUT";
+            this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // contextMenuStrip2
+            // 
+            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.browseFolderToolStripMenuItem});
+            this.contextMenuStrip2.Name = "contextMenuStrip2";
+            this.contextMenuStrip2.Size = new System.Drawing.Size(149, 26);
+            // 
+            // browseFolderToolStripMenuItem
+            // 
+            this.browseFolderToolStripMenuItem.Name = "browseFolderToolStripMenuItem";
+            this.browseFolderToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.browseFolderToolStripMenuItem.Text = "Browse Folder";
+            this.browseFolderToolStripMenuItem.Click += new System.EventHandler(this.browseFolderToolStripMenuItem_Click);
+            // 
+            // closeSoftwareToolStripMenuItem
+            // 
+            this.closeSoftwareToolStripMenuItem.Name = "closeSoftwareToolStripMenuItem";
+            this.closeSoftwareToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.closeSoftwareToolStripMenuItem.Text = "Close Program";
+            this.closeSoftwareToolStripMenuItem.Click += new System.EventHandler(this.closeSoftwareToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -294,6 +337,7 @@
             this.panel2.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
+            this.contextMenuStrip2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -321,6 +365,10 @@
         private System.Windows.Forms.ToolStripMenuItem gameTrainerMemorydllToolStripMenuItem;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem browseFolderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem closeSoftwareToolStripMenuItem;
     }
 }
 

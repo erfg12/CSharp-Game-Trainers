@@ -29,20 +29,25 @@ namespace Trainer_Manager
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Process[] p = Process.GetProcessesByName("New Age Trainer Manager");
-            if (p.Count() > 1)
+            try {
+                Process[] p = Process.GetProcessesByName("New Age Trainer Manager");
+                if (p.Count() > 1)
+                {
+                    Close();
+                    return;
+                }
+
+                if (!String.IsNullOrEmpty(Properties.Settings.Default.trainer_folder))
+                    textBox1.Text = Properties.Settings.Default.trainer_folder;
+                else
+                    textBox1.Text = defaultDir;
+
+                if (!backgroundWorker1.IsBusy)
+                    backgroundWorker1.RunWorkerAsync();
+            } catch
             {
-                Close();
-                return;
+                MessageBox.Show("ERROR starting program");
             }
-
-            if (!String.IsNullOrEmpty(Properties.Settings.Default.trainer_folder))
-                textBox1.Text = Properties.Settings.Default.trainer_folder;
-            else
-                textBox1.Text = defaultDir;
-
-            if (!backgroundWorker1.IsBusy)
-                backgroundWorker1.RunWorkerAsync();
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -359,6 +364,39 @@ namespace Trainer_Manager
         {
             this.Show();
             WindowState = FormWindowState.Normal;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            AboutBox1 aboutbox = new AboutBox1();
+            aboutbox.Show();
+        }
+
+        private void ct_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                listBox1.SelectedIndex = listBox1.IndexFromPoint(e.Location);
+                if (listBox1.SelectedIndex != -1)
+                    contextMenuStrip2.Show(Cursor.Position);
+            }
+        }
+
+        private void browseFolderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndex != -1)
+            {
+                string trainerDir = textBox1.Text + "\\" + listBox1.Text;
+                if (Directory.Exists(trainerDir))
+                    Process.Start(trainerDir);
+                else
+                    MessageBox.Show("No directory for this trainer. Please download first.");
+            }
+        }
+
+        private void closeSoftwareToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
