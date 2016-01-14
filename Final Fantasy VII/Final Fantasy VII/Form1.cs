@@ -87,7 +87,7 @@ namespace Final_Fantasy_VII
                             for (int i = 0; i < 40; i++)
                             {
                                 int sNum = i * 6;
-                                MemLib.writeMove("item_slot1_qty", codeFile, sNum, "byte", "99"); //requires v1.0.3
+                                MemLib.writeMove("item_slot1_qty", codeFile, "byte", "99", sNum); //requires v1.0.3 (newer)
                             }
                         }
                     } catch

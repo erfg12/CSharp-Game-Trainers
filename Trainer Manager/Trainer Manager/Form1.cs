@@ -23,7 +23,7 @@ namespace Trainer_Manager
             InitializeComponent();
         }
 
-        private string defaultDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\cheat_trainers";
+        private string defaultDir;
         Dictionary<int, string> last_modified = new Dictionary<int, string>();
         private string trainerDir = null;
 
@@ -224,6 +224,7 @@ namespace Trainer_Manager
         async void WebDocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             await PutTaskDelay();
+            defaultDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\cheat_trainers";
             adBrowser.Document.Window.ScrollTo(0, 9999);
         }
 
