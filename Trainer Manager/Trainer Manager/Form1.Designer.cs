@@ -40,9 +40,10 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.adBrowser = new System.Windows.Forms.WebBrowser();
             this.centerNews = new System.Windows.Forms.WebBrowser();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -50,11 +51,10 @@
             this.steamSaveBackupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bingRewardsBotToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gameTrainerMemorydllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.closeSoftwareToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button5 = new System.Windows.Forms.Button();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.browseFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.closeSoftwareToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -170,6 +170,20 @@
             this.panel2.Size = new System.Drawing.Size(983, 30);
             this.panel2.TabIndex = 7;
             // 
+            // button5
+            // 
+            this.button5.BackColor = System.Drawing.Color.LightSlateGray;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button5.ForeColor = System.Drawing.Color.Lavender;
+            this.button5.Location = new System.Drawing.Point(904, 4);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 20);
+            this.button5.TabIndex = 10;
+            this.button5.Text = "ABOUT";
+            this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
             // button4
             // 
             this.button4.BackColor = System.Drawing.Color.LightSlateGray;
@@ -198,17 +212,17 @@
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // webBrowser1
+            // adBrowser
             // 
-            this.webBrowser1.Location = new System.Drawing.Point(355, 12);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.ScriptErrorsSuppressed = true;
-            this.webBrowser1.ScrollBarsEnabled = false;
-            this.webBrowser1.Size = new System.Drawing.Size(628, 760);
-            this.webBrowser1.TabIndex = 8;
-            this.webBrowser1.Url = new System.Uri("https://newagesoldier.com/thanks-for-using-new-age-soldier-cheat-trainers/", System.UriKind.Absolute);
-            this.webBrowser1.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.WebDocumentCompleted);
+            this.adBrowser.Location = new System.Drawing.Point(355, 12);
+            this.adBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.adBrowser.Name = "adBrowser";
+            this.adBrowser.ScriptErrorsSuppressed = true;
+            this.adBrowser.ScrollBarsEnabled = false;
+            this.adBrowser.Size = new System.Drawing.Size(628, 760);
+            this.adBrowser.TabIndex = 8;
+            this.adBrowser.Url = new System.Uri("https://newagesoldier.com/thanks-for-using-new-age-soldier-cheat-trainers/", System.UriKind.Absolute);
+            this.adBrowser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.WebDocumentCompleted);
             // 
             // centerNews
             // 
@@ -266,6 +280,13 @@
             this.gameTrainerMemorydllToolStripMenuItem.Text = "Game Trainer memory.dll";
             this.gameTrainerMemorydllToolStripMenuItem.Click += new System.EventHandler(this.gameTrainerMemorydllToolStripMenuItem_Click);
             // 
+            // closeSoftwareToolStripMenuItem
+            // 
+            this.closeSoftwareToolStripMenuItem.Name = "closeSoftwareToolStripMenuItem";
+            this.closeSoftwareToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.closeSoftwareToolStripMenuItem.Text = "Close Program";
+            this.closeSoftwareToolStripMenuItem.Click += new System.EventHandler(this.closeSoftwareToolStripMenuItem_Click);
+            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.listBox1);
@@ -275,20 +296,6 @@
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Available Cheat Trainers";
-            // 
-            // button5
-            // 
-            this.button5.BackColor = System.Drawing.Color.LightSlateGray;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.ForeColor = System.Drawing.Color.Lavender;
-            this.button5.Location = new System.Drawing.Point(904, 4);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 20);
-            this.button5.TabIndex = 10;
-            this.button5.Text = "ABOUT";
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // contextMenuStrip2
             // 
@@ -304,13 +311,6 @@
             this.browseFolderToolStripMenuItem.Text = "Browse Folder";
             this.browseFolderToolStripMenuItem.Click += new System.EventHandler(this.browseFolderToolStripMenuItem_Click);
             // 
-            // closeSoftwareToolStripMenuItem
-            // 
-            this.closeSoftwareToolStripMenuItem.Name = "closeSoftwareToolStripMenuItem";
-            this.closeSoftwareToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
-            this.closeSoftwareToolStripMenuItem.Text = "Close Program";
-            this.closeSoftwareToolStripMenuItem.Click += new System.EventHandler(this.closeSoftwareToolStripMenuItem_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -321,7 +321,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.centerNews);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.webBrowser1);
+            this.Controls.Add(this.adBrowser);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -355,7 +355,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.WebBrowser webBrowser1;
+        private System.Windows.Forms.WebBrowser adBrowser;
         private System.Windows.Forms.WebBrowser centerNews;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;

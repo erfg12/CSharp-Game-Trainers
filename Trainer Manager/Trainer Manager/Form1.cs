@@ -216,9 +216,15 @@ namespace Trainer_Manager
             progressBar1.Value = 0;
         }
 
-        void WebDocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        async Task PutTaskDelay()
         {
-            webBrowser1.Document.Window.ScrollTo(0, 9999);
+            await Task.Delay(2000);
+        }
+
+        async void WebDocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            await PutTaskDelay();
+            adBrowser.Document.Window.ScrollTo(0, 9999);
         }
 
         void listBox1_MouseDoubleClick(object sender, MouseEventArgs e)
