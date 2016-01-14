@@ -214,7 +214,7 @@
             // 
             // adBrowser
             // 
-            this.adBrowser.Location = new System.Drawing.Point(355, 12);
+            this.adBrowser.Location = new System.Drawing.Point(369, -36);
             this.adBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.adBrowser.Name = "adBrowser";
             this.adBrowser.ScriptErrorsSuppressed = true;
