@@ -40,7 +40,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button5 = new System.Windows.Forms.Button();
+            this.aboutButton = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.adBrowser = new System.Windows.Forms.WebBrowser();
@@ -55,6 +55,10 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.browseFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.closeButton = new System.Windows.Forms.Button();
+            this.minimizeButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.visitWeb = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -82,10 +86,10 @@
             // textBox1
             // 
             this.textBox1.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.textBox1.Location = new System.Drawing.Point(7, 4);
+            this.textBox1.Location = new System.Drawing.Point(200, 5);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(421, 20);
-            this.textBox1.TabIndex = 1;
+            this.textBox1.Size = new System.Drawing.Size(441, 20);
+            this.textBox1.TabIndex = 99;
             // 
             // button1
             // 
@@ -98,7 +102,6 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(188, 25);
             this.button1.TabIndex = 2;
-            this.button1.Text = "OPEN TRAINER";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -115,7 +118,7 @@
             this.progressBar1.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.progressBar1.Location = new System.Drawing.Point(200, 6);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(596, 25);
+            this.progressBar1.Size = new System.Drawing.Size(512, 25);
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.progressBar1.TabIndex = 3;
             // 
@@ -123,15 +126,15 @@
             // 
             this.dlprogressLabel.AutoSize = true;
             this.dlprogressLabel.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.dlprogressLabel.Location = new System.Drawing.Point(802, 12);
+            this.dlprogressLabel.Location = new System.Drawing.Point(718, 12);
             this.dlprogressLabel.Name = "dlprogressLabel";
-            this.dlprogressLabel.Size = new System.Drawing.Size(78, 13);
+            this.dlprogressLabel.Size = new System.Drawing.Size(80, 13);
             this.dlprogressLabel.TabIndex = 4;
-            this.dlprogressLabel.Text = "Downloading...";
-            this.dlprogressLabel.Visible = false;
+            this.dlprogressLabel.Text = "Nothing to do...";
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.visitWeb);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.dlprogressLabel);
             this.panel1.Controls.Add(this.progressBar1);
@@ -146,10 +149,11 @@
             // button2
             // 
             this.button2.BackColor = System.Drawing.Color.LightSlateGray;
+            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.ForeColor = System.Drawing.Color.Lavender;
-            this.button2.Location = new System.Drawing.Point(431, 4);
+            this.button2.Location = new System.Drawing.Point(647, 5);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(71, 20);
             this.button2.TabIndex = 6;
@@ -159,38 +163,47 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.button5);
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.minimizeButton);
+            this.panel2.Controls.Add(this.closeButton);
+            this.panel2.Controls.Add(this.aboutButton);
             this.panel2.Controls.Add(this.button4);
             this.panel2.Controls.Add(this.button3);
             this.panel2.Controls.Add(this.textBox1);
             this.panel2.Controls.Add(this.button2);
+            this.panel2.Cursor = System.Windows.Forms.Cursors.SizeAll;
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(983, 30);
             this.panel2.TabIndex = 7;
+            this.panel2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseMove);
             // 
-            // button5
+            // aboutButton
             // 
-            this.button5.BackColor = System.Drawing.Color.LightSlateGray;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.ForeColor = System.Drawing.Color.Lavender;
-            this.button5.Location = new System.Drawing.Point(904, 4);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 20);
-            this.button5.TabIndex = 10;
-            this.button5.Text = "ABOUT";
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.aboutButton.AccessibleDescription = "About Trainer Manager";
+            this.aboutButton.AccessibleName = "About Button";
+            this.aboutButton.BackColor = System.Drawing.Color.DarkKhaki;
+            this.aboutButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.aboutButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.aboutButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.aboutButton.ForeColor = System.Drawing.Color.Lavender;
+            this.aboutButton.Location = new System.Drawing.Point(855, 4);
+            this.aboutButton.Name = "aboutButton";
+            this.aboutButton.Size = new System.Drawing.Size(40, 23);
+            this.aboutButton.TabIndex = 10;
+            this.aboutButton.Text = "?";
+            this.aboutButton.UseVisualStyleBackColor = false;
+            this.aboutButton.Click += new System.EventHandler(this.button5_Click);
             // 
             // button4
             // 
             this.button4.BackColor = System.Drawing.Color.LightSlateGray;
+            this.button4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button4.ForeColor = System.Drawing.Color.Lavender;
-            this.button4.Location = new System.Drawing.Point(505, 4);
+            this.button4.Location = new System.Drawing.Point(721, 5);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(52, 20);
             this.button4.TabIndex = 9;
@@ -201,10 +214,11 @@
             // button3
             // 
             this.button3.BackColor = System.Drawing.Color.LightSlateGray;
+            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.ForeColor = System.Drawing.Color.Lavender;
-            this.button3.Location = new System.Drawing.Point(560, 4);
+            this.button3.Location = new System.Drawing.Point(776, 5);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(20, 20);
             this.button3.TabIndex = 8;
@@ -231,7 +245,7 @@
             this.centerNews.Name = "centerNews";
             this.centerNews.ScriptErrorsSuppressed = true;
             this.centerNews.Size = new System.Drawing.Size(596, 632);
-            this.centerNews.TabIndex = 9;
+            this.centerNews.TabIndex = 1;
             // 
             // notifyIcon1
             // 
@@ -295,7 +309,7 @@
             this.groupBox1.Size = new System.Drawing.Size(191, 630);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Available Cheat Trainers";
+            this.groupBox1.Text = "Available Game Cheat Trainers";
             // 
             // contextMenuStrip2
             // 
@@ -311,6 +325,66 @@
             this.browseFolderToolStripMenuItem.Text = "Browse Folder";
             this.browseFolderToolStripMenuItem.Click += new System.EventHandler(this.browseFolderToolStripMenuItem_Click);
             // 
+            // closeButton
+            // 
+            this.closeButton.AccessibleDescription = "Close Trainer Manager";
+            this.closeButton.AccessibleName = "Close Button";
+            this.closeButton.BackColor = System.Drawing.Color.RosyBrown;
+            this.closeButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.closeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.closeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.closeButton.ForeColor = System.Drawing.Color.Transparent;
+            this.closeButton.Location = new System.Drawing.Point(939, 4);
+            this.closeButton.Name = "closeButton";
+            this.closeButton.Size = new System.Drawing.Size(40, 23);
+            this.closeButton.TabIndex = 11;
+            this.closeButton.Text = "X";
+            this.closeButton.UseVisualStyleBackColor = false;
+            this.closeButton.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // minimizeButton
+            // 
+            this.minimizeButton.AccessibleDescription = "Minimize Trainer Manager";
+            this.minimizeButton.AccessibleName = "Minimize Button";
+            this.minimizeButton.BackColor = System.Drawing.Color.LightSlateGray;
+            this.minimizeButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.minimizeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.minimizeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.minimizeButton.ForeColor = System.Drawing.Color.Lavender;
+            this.minimizeButton.Location = new System.Drawing.Point(897, 4);
+            this.minimizeButton.Name = "minimizeButton";
+            this.minimizeButton.Size = new System.Drawing.Size(40, 23);
+            this.minimizeButton.TabIndex = 12;
+            this.minimizeButton.Tag = "";
+            this.minimizeButton.Text = "_";
+            this.minimizeButton.UseVisualStyleBackColor = false;
+            this.minimizeButton.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(3, 5);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(168, 16);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Game Trainer Manager";
+            this.label1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.label_MouseMove);
+            // 
+            // visitWeb
+            // 
+            this.visitWeb.BackColor = System.Drawing.Color.SteelBlue;
+            this.visitWeb.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.visitWeb.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.visitWeb.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.visitWeb.Location = new System.Drawing.Point(815, 6);
+            this.visitWeb.Name = "visitWeb";
+            this.visitWeb.Size = new System.Drawing.Size(162, 25);
+            this.visitWeb.TabIndex = 5;
+            this.visitWeb.Text = "visit newagesoldier.com";
+            this.visitWeb.UseVisualStyleBackColor = false;
+            this.visitWeb.Click += new System.EventHandler(this.visitWeb_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -322,12 +396,12 @@
             this.Controls.Add(this.centerNews);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.adBrowser);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Cheat Trainer Manager :: http://newagesoldier.com";
-            this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.form1_Closing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.SizeChanged += new System.EventHandler(this.Form1_Resize);
@@ -365,10 +439,14 @@
         private System.Windows.Forms.ToolStripMenuItem gameTrainerMemorydllToolStripMenuItem;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button aboutButton;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
         private System.Windows.Forms.ToolStripMenuItem browseFolderToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeSoftwareToolStripMenuItem;
+        private System.Windows.Forms.Button closeButton;
+        private System.Windows.Forms.Button minimizeButton;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button visitWeb;
     }
 }
 

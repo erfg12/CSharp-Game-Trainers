@@ -13,6 +13,7 @@ using System.IO;
 using System.Net;
 using System.Web;
 using Ionic.Zip;
+using System.Runtime.InteropServices;
 
 namespace Trainer_Manager
 {
@@ -27,6 +28,14 @@ namespace Trainer_Manager
         Dictionary<int, string> last_modified = new Dictionary<int, string>();
         private string trainerDir = null;
 
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
+
+        [DllImportAttribute("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [DllImportAttribute("user32.dll")]
+        public static extern bool ReleaseCapture();
+
         private void Form1_Load(object sender, EventArgs e)
         {
             try {
@@ -36,7 +45,7 @@ namespace Trainer_Manager
                     Close();
                     return;
                 }
-
+                defaultDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\cheat_trainers";
                 if (!String.IsNullOrEmpty(Properties.Settings.Default.trainer_folder))
                     textBox1.Text = Properties.Settings.Default.trainer_folder;
                 else
@@ -124,7 +133,7 @@ namespace Trainer_Manager
 
         private void startDownload()
         {
-            dlprogressLabel.Visible = true;
+            //dlprogressLabel.Visible = true;
             progressBar1.Value = 0;
             dlprogressLabel.Text = "Downloading...";
             if (!backgroundWorker2.IsBusy)
@@ -139,8 +148,8 @@ namespace Trainer_Manager
         void getTrainer(string tname)
         {
             trainerDir = textBox1.Text + "\\" + tname;
-
-            if (!Directory.Exists(textBox1.Text))
+            
+            if (!Directory.Exists(textBox1.Text) && textBox1.Text != "")
                 Directory.CreateDirectory(textBox1.Text);
 
             string[] dirs = Directory.GetFiles(textBox1.Text, tname + @".*");
@@ -200,7 +209,8 @@ namespace Trainer_Manager
             fs.Close();
 
             File.Delete(tmpFile);
-            dlprogressLabel.Visible = false;
+            //dlprogressLabel.Visible = false;
+            dlprogressLabel.Text = "Nothing to do...";
             backgroundWorker2.CancelAsync();
         }
 
@@ -224,7 +234,6 @@ namespace Trainer_Manager
         async void WebDocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             await PutTaskDelay();
-            defaultDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\cheat_trainers";
             adBrowser.Document.Window.ScrollTo(0, 9999);
         }
 
@@ -334,7 +343,13 @@ namespace Trainer_Manager
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listBox1.SelectedIndex != -1)
+            {
                 button1.Enabled = true;
+                if (!Directory.Exists(textBox1.Text + "//" + listBox1.Text))
+                    button1.Text = "DOWNLOAD && EXECUTE";
+                else
+                    button1.Text = "EXECUTE TRAINER";
+            }
         }
 
         private void steamSaveBackupToolStripMenuItem_Click(object sender, EventArgs e)
@@ -404,6 +419,39 @@ namespace Trainer_Manager
         private void closeSoftwareToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void panel2_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void visitWeb_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://newagesoldier.com");
+        }
+
+        private void label_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
         }
     }
 }
