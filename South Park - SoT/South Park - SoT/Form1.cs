@@ -53,10 +53,10 @@ namespace South_Park___SoT
             {
                 if (gameProcId > 0)
                 {
-                    MemLib.writeMemory("combatHP", codeFile, "int", "99999");
-                    MemLib.writeMemory("combatMP", codeFile, "int", "20");
-                    MemLib.writeMemory("buddyCombatHP", codeFile, "int", "99999");
-                    MemLib.writeMemory("buddyCombatMP", codeFile, "int", "20");
+                    MemLib.writeMemory("combatHP", "int", "99999", codeFile);
+                    MemLib.writeMemory("combatMP", "int", "20", codeFile);
+                    MemLib.writeMemory("buddyCombatHP", "int", "99999", codeFile);
+                    MemLib.writeMemory("buddyCombatMP", "int", "20", codeFile);
 
                     if (!String.ReferenceEquals(expBox.Text, exp))
                         expBox.Text = exp;
@@ -73,7 +73,7 @@ namespace South_Park___SoT
             if (gameProcId > 0)
             {
                 if (!String.IsNullOrEmpty(levelBox.Text))
-                    MemLib.writeMemory("level", codeFile, "int", levelBox.Text);
+                    MemLib.writeMemory("level", "int", levelBox.Text, codeFile);
             }
         }
 
@@ -82,7 +82,7 @@ namespace South_Park___SoT
             if (gameProcId > 0)
             {
                 if (!String.IsNullOrEmpty(expBox.Text))
-                    MemLib.writeMemory("experience", codeFile, "int", expBox.Text);
+                    MemLib.writeMemory("experience", "int", expBox.Text, codeFile);
             }
         }
 

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="14">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>1</ID>
+      <Description>"Jump Height"</Description>
+      <Color>80000008</Color>
+      <VariableType>Float</VariableType>
+      <Address>iw5sp.exe+185E0A8</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"Primary Clip"</Description>
+      <Color>80000008</Color>
+      <VariableType>4 Bytes</VariableType>
+      <Address>iw5sp.exe+F820A0</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>5</ID>
+      <Description>"Primary Clip"</Description>
+      <Color>80000008</Color>
+      <VariableType>4 Bytes</VariableType>
+      <Address>iw5sp.exe+F82118</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"Secondary Clip"</Description>
+      <ShowAsHex>1</ShowAsHex>
+      <Color>80000008</Color>
+      <VariableType>4 Bytes</VariableType>
+      <Address>iw5sp.exe+F820B8</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"Secondary Ammo"</Description>
+      <Color>80000008</Color>
+      <VariableType>4 Bytes</VariableType>
+      <Address>iw5sp.exe+F8213C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>80</ID>
+      <Description>"Knock Back"</Description>
+      <Color>80000008</Color>
+      <VariableType>Float</VariableType>
+      <Address>iw5sp.exe+185F784</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>82</ID>
+      <Description>"Lethal"</Description>
+      <Color>80000008</Color>
+      <VariableType>4 Bytes</VariableType>
+      <Address>iw5sp.exe+F82124</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>83</ID>
+      <Description>"Field Of View"</Description>
+      <Color>80000008</Color>
+      <VariableType>Float</VariableType>
+      <Address>iw5sp.exe+185757C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>84</ID>
+      <Description>"Health"</Description>
+      <Color>80000008</Color>
+      <VariableType>4 Bytes</VariableType>
+      <Address>iw5sp.exe+D97C28</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>85</ID>
+      <Description>"Aim Down Sight"</Description>
+      <Color>80000008</Color>
+      <VariableType>4 Bytes</VariableType>
+      <Address>iw5sp.exe+7363B0</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>95</ID>
+      <Description>"Gravity"</Description>
+      <Color>80000008</Color>
+      <VariableType>Float</VariableType>
+      <Address>iw5sp.exe+185DBE8</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>109</ID>
+      <Description>"Use Things Radius"</Description>
+      <Color>80000008</Color>
+      <VariableType>Float</VariableType>
+      <Address>iw5sp.exe+185F608</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>110</ID>
+      <Description>"Tactical"</Description>
+      <Color>80000008</Color>
+      <VariableType>4 Bytes</VariableType>
+      <Address>iw5sp.exe+F82130</Address>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>

@@ -60,9 +60,9 @@ namespace MW2_Trainer
                 if (id == 1)
                 {
                     if (MemLib.readInt("noClip", codeFile) == 1)
-                        MemLib.writeMemory("noClip", codeFile, "int", "0");
+                        MemLib.writeMemory("noClip", "int", "0", codeFile);
                     else
-                        MemLib.writeMemory("noClip", codeFile, "int", "1");
+                        MemLib.writeMemory("noClip", "int", "1", codeFile);
                 }
                 else if (id == 2)
                 {
@@ -107,23 +107,23 @@ namespace MW2_Trainer
                 }
 
                 if (godmode_checkbox.Checked) //make sure we keep this
-                    MemLib.writeMemory("godMode", codeFile, "int", "1");
+                    MemLib.writeMemory("godMode", "int", "1", codeFile);
 
                 if (infammo_checkbox.Checked) //since backgroundworker stays running, this will lock our ammo/magazine values
                 {
-                    MemLib.writeMemory("grenades", codeFile, "int", "4");
-                    MemLib.writeMemory("flashGrenades", codeFile, "int", "4");
+                    MemLib.writeMemory("grenades", "int", "4", codeFile);
+                    MemLib.writeMemory("flashGrenades", "int", "4", codeFile);
 
                     //sometimes the game switches these around, so I want to set them all to 50 for now
-                    MemLib.writeMemory("RPG", codeFile, "int", "50");
-                    MemLib.writeMemory("grenadeLauncher", codeFile, "int", "50"); //can be picked up weapons ammo too sometimes
-                    MemLib.writeMemory("primaryAmmo", codeFile, "int", "50");
-                    MemLib.writeMemory("primaryWieldedMagazine", codeFile, "int", "50");
-                    MemLib.writeMemory("primaryWieldedMagazine2", codeFile, "int", "50");
-                    MemLib.writeMemory("secondaryWieldedMagazine", codeFile, "int", "50");
-                    MemLib.writeMemory("primaryMagazine", codeFile, "int", "50");
-                    MemLib.writeMemory("secondaryAmmo", codeFile, "int", "50");
-                    MemLib.writeMemory("secondaryMagazine", codeFile, "int", "50");
+                    MemLib.writeMemory("RPG", "int", "50", codeFile);
+                    MemLib.writeMemory("grenadeLauncher", "int", "50", codeFile); //can be picked up weapons ammo too sometimes
+                    MemLib.writeMemory("primaryAmmo", "int", "50", codeFile);
+                    MemLib.writeMemory("primaryWieldedMagazine", "int", "50", codeFile);
+                    MemLib.writeMemory("primaryWieldedMagazine2", "int", "50", codeFile);
+                    MemLib.writeMemory("secondaryWieldedMagazine", "int", "50", codeFile);
+                    MemLib.writeMemory("primaryMagazine", "int", "50", codeFile);
+                    MemLib.writeMemory("secondaryAmmo", "int", "50", codeFile);
+                    MemLib.writeMemory("secondaryMagazine", "int", "50", codeFile);
                 }
             }
         }
@@ -131,29 +131,29 @@ namespace MW2_Trainer
         private void godmode_checkbox_CheckedChanged(object sender, EventArgs e)
         {
             if (godmode_checkbox.Checked)
-                MemLib.writeMemory("godMode", codeFile, "int", "1");
+                MemLib.writeMemory("godMode", "int", "1", codeFile);
             else
-                MemLib.writeMemory("godMode", codeFile, "int", "0");
+                MemLib.writeMemory("godMode", "int", "0", codeFile);
         }
 
         private void noClip(bool enabled)
         {
             if (enabled)
-                MemLib.writeMemory("noClip", codeFile, "int", "1");
+                MemLib.writeMemory("noClip", "int", "1", codeFile);
             else
-                MemLib.writeMemory("noClip", codeFile, "int", "0");
+                MemLib.writeMemory("noClip", "int", "0", codeFile);
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             double timeScale = timescale_trackbar.Value * 0.2;
-            MemLib.writeMemory("timescale", codeFile, "float", timeScale.ToString());
+            MemLib.writeMemory("timescale", "float", timeScale.ToString(), codeFile);
         }
 
         private void resetBtn_Click(object sender, EventArgs e)
         {
             timescale_trackbar.Value = 5; //5 * 0.2 = 1.0 (normal speed) See trackBar1_Scroll function for example
-            MemLib.writeMemory("timescale", codeFile, "float", "1");
+            MemLib.writeMemory("timescale", "float", "1", codeFile);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -162,7 +162,7 @@ namespace MW2_Trainer
                 return;
 
             timescale_trackbar.Value = timescale_trackbar.Value + 1;
-            MemLib.writeMemory("timescale", codeFile, "float", (timescale_trackbar.Value * 0.2).ToString());
+            MemLib.writeMemory("timescale", "float", (timescale_trackbar.Value * 0.2).ToString(), codeFile);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -171,7 +171,7 @@ namespace MW2_Trainer
                 return;
 
             timescale_trackbar.Value = timescale_trackbar.Value - 1;
-            MemLib.writeMemory("timescale", codeFile, "float", (timescale_trackbar.Value * 0.2).ToString());
+            MemLib.writeMemory("timescale", "float", (timescale_trackbar.Value * 0.2).ToString(), codeFile);
         }
 
         private void label6_Click(object sender, EventArgs e)

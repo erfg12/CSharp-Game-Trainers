@@ -46,40 +46,40 @@ namespace Final_Fantasy_VII
                 {
                     try {
                         if (char1_infHP.Checked)
-                            MemLib.writeMemory("char1_HP", codeFile, "int", "9999");
+                            MemLib.writeMemory("char1_HP", "int", "9999", codeFile);
                         if (char1_infMP.Checked)
-                            MemLib.writeMemory("char1_MP", codeFile, "int", "99");
+                            MemLib.writeMemory("char1_MP", "int", "99", codeFile);
                         if (char1_maxLimit.Checked)
-                            MemLib.writeMemory("char1_limit", codeFile, "byte", "255");
+                            MemLib.writeMemory("char1_limit", "byte", "255", codeFile);
                         if (char1_maxTime.Checked)
-                            MemLib.writeMemory("char1_time", codeFile, "byte", "255");
+                            MemLib.writeMemory("char1_time", "byte", "255", codeFile);
 
                         if (char2_infHP.Checked)
-                            MemLib.writeMemory("char2_HP", codeFile, "int", "9999");
+                            MemLib.writeMemory("char2_HP", "int", "9999", codeFile);
                         if (char2_infMP.Checked)
-                            MemLib.writeMemory("char2_MP", codeFile, "int", "99");
+                            MemLib.writeMemory("char2_MP", "int", "99", codeFile);
                         if (char2_maxLimit.Checked)
-                            MemLib.writeMemory("char2_limit", codeFile, "byte", "255");
+                            MemLib.writeMemory("char2_limit", "byte", "255", codeFile);
                         if (char2_maxTime.Checked)
-                            MemLib.writeMemory("char2_time", codeFile, "byte", "255");
+                            MemLib.writeMemory("char2_time", "byte", "255", codeFile);
 
                         if (char3_infHP.Checked)
-                            MemLib.writeMemory("char3_HP", codeFile, "int", "9999");
+                            MemLib.writeMemory("char3_HP", "int", "9999", codeFile);
                         if (char3_infMP.Checked)
-                            MemLib.writeMemory("char3_MP", codeFile, "int", "99");
+                            MemLib.writeMemory("char3_MP", "int", "99", codeFile);
                         if (char3_maxLimit.Checked)
-                            MemLib.writeMemory("char3_limit", codeFile, "byte", "255");
+                            MemLib.writeMemory("char3_limit", "byte", "255", codeFile);
                         if (char3_maxTime.Checked)
-                            MemLib.writeMemory("char3_time", codeFile, "byte", "255");
+                            MemLib.writeMemory("char3_time", "byte", "255", codeFile);
 
                         if (maxGil.Checked)
-                            MemLib.writeMemory("gil", codeFile, "int", "99999");
+                            MemLib.writeMemory("gil", "int", "99999", codeFile);
 
                         if (maxHP.Checked)
                         {
-                            MemLib.writeMemory("char1_maxHP", codeFile, "int", "9999");
-                            MemLib.writeMemory("char2_maxHP", codeFile, "int", "9999");
-                            MemLib.writeMemory("char3_maxHP", codeFile, "int", "9999");
+                            MemLib.writeMemory("char1_maxHP", "int", "9999", codeFile);
+                            MemLib.writeMemory("char2_maxHP", "int", "9999", codeFile);
+                            MemLib.writeMemory("char3_maxHP", "int", "9999", codeFile);
                         }
 
                         if (maxQty.Checked)
@@ -87,7 +87,7 @@ namespace Final_Fantasy_VII
                             for (int i = 0; i < 40; i++)
                             {
                                 int sNum = i * 6;
-                                MemLib.writeMove("item_slot1_qty", codeFile, "byte", "99", sNum); //requires v1.0.3 (newer)
+                                MemLib.writeMove("item_slot1_qty", "byte", "99", sNum, codeFile); //requires v1.0.3 (newer)
                             }
                         }
                     } catch

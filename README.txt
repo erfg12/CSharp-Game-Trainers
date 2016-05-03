@@ -1,13 +1,11 @@
-Created by The New Age Soldier
-
-http://newagesoldier.com
+Created by The New Age Soldier - http://newagesoldier.com
 
 These programs were built using the memory.dll program found at https://newagesoldier.com/memory-hacker/
 
-These programs may require administrative privileges. Execute the GrantAdmin.bat file.
+When creating a new trainer project with the memory.dll you need to have the program run as admin.
 
-If you do not feel safe using the program, you may use Cheat Engine with the tables provided.
+In Visual Studio right click Project > Add New Item > "Application Manifest File".
 
-Any questions visit the newagesoldier website and post in our forums.
+Change <requestedExecutionLevel> element to:
 
-Thanks for downloading and ENJOY!
+<requestedExecutionLevel level="requireAdministrator" uiAccess="false" />
