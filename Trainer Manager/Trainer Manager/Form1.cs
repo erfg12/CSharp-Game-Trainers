@@ -64,6 +64,8 @@ namespace Trainer_Manager
             }
         }
 
+        Process tProc = null;
+
         private Bitmap LoadPicture(string url)
         {
             HttpWebRequest wreq;
@@ -186,14 +188,20 @@ namespace Trainer_Manager
                 //Process.Start(info);
                 try
                 {
-                    Process p = Process.Start(file);
-                    while (string.IsNullOrEmpty(p.MainWindowTitle))
+                    if (tProc != null) //close old trainer
+                    {
+                        tProc.CloseMainWindow();
+                        tProc.Close();
+                    }
+
+                    tProc = Process.Start(file);
+                    while (string.IsNullOrEmpty(tProc.MainWindowTitle))
                     {
                         System.Threading.Thread.Sleep(100);
-                        p.Refresh();
+                        tProc.Refresh();
                     }
-                    SetParent(p.MainWindowHandle, panel3.Handle);
-                    ShowWindow(p.MainWindowHandle, SW_SHOWMAXIMIZED);
+                    SetParent(tProc.MainWindowHandle, panel3.Handle);
+                    ShowWindow(tProc.MainWindowHandle, SW_SHOWMAXIMIZED);
                 } catch
                 {
 
