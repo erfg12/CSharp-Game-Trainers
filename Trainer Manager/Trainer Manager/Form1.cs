@@ -14,6 +14,7 @@ using System.Net;
 using System.Web;
 using Ionic.Zip;
 using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace Trainer_Manager
 {
@@ -23,8 +24,7 @@ namespace Trainer_Manager
         {
             InitializeComponent();
         }
-
-        private string defaultDir;
+        
         Dictionary<int, string> last_modified = new Dictionary<int, string>();
         private string trainerDir = null;
 
@@ -35,9 +35,19 @@ namespace Trainer_Manager
         public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
         [DllImportAttribute("user32.dll")]
         public static extern bool ReleaseCapture();
+        [DllImport("user32.dll")]
+        static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
+
+        private const int SW_SHOWMAXIMIZED = 3;
+
+        [DllImport("user32.dll")]
+        static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+
+        string saveDir = Properties.Settings.Default.trainer_folder;
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            listView1.LargeImageList = imageList1;
             try {
                 Process[] p = Process.GetProcessesByName("New Age Trainer Manager");
                 if (p.Count() > 1)
@@ -45,11 +55,6 @@ namespace Trainer_Manager
                     Close();
                     return;
                 }
-                defaultDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\cheat_trainers";
-                if (!String.IsNullOrEmpty(Properties.Settings.Default.trainer_folder))
-                    textBox1.Text = Properties.Settings.Default.trainer_folder;
-                else
-                    textBox1.Text = defaultDir;
 
                 if (!backgroundWorker1.IsBusy)
                     backgroundWorker1.RunWorkerAsync();
@@ -59,37 +64,88 @@ namespace Trainer_Manager
             }
         }
 
+        private Bitmap LoadPicture(string url)
+        {
+            HttpWebRequest wreq;
+            HttpWebResponse wresp;
+            Stream mystream;
+            Bitmap bmp;
+
+            bmp = null;
+            mystream = null;
+            wresp = null;
+            try
+            {
+                try
+                {
+                    wreq = (HttpWebRequest)WebRequest.Create(url);
+                    wreq.AllowWriteStreamBuffering = true;
+                    wresp = (HttpWebResponse)wreq.GetResponse();
+                    if ((mystream = wresp.GetResponseStream()) != null)
+                        bmp = new Bitmap(mystream);
+                }
+                catch
+                {
+                    using (Stream BitmapStream = System.IO.File.Open("header.jpg", System.IO.FileMode.Open))
+                    {
+                        System.Drawing.Image img = System.Drawing.Image.FromStream(BitmapStream);
+                        bmp = new Bitmap(img);
+                    }
+                }
+            }
+            finally
+            {
+                if (mystream != null)
+                    mystream.Close();
+
+                if (wresp != null)
+                    wresp.Close();
+            }
+            return (bmp);
+        }
+
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            listBox1.Invoke(new MethodInvoker(delegate { listBox1.Items.Clear(); }));
+            listView1.Invoke(new MethodInvoker(delegate { listView1.Items.Clear(); }));
 
             try
             {
                 HttpWebRequest myHttpWebRequest = (HttpWebRequest)WebRequest.Create("https://newagesoldier.com/myfiles/trainers/tscan.php");
                 HttpWebResponse myHttpWebResponse = (HttpWebResponse)myHttpWebRequest.GetResponse();
-                if (myHttpWebResponse.StatusCode != HttpStatusCode.OK)
-                    listBox1.Invoke(new MethodInvoker(delegate { listBox1.Items.Add("ERROR: There was a problem pulling the XML data."); }));
+                //if (myHttpWebResponse.StatusCode != HttpStatusCode.OK)
+                    //listView1.Invoke(new MethodInvoker(delegate { listView1.Items.Add("ERROR: There was a problem pulling the XML data."); }));
             }
             catch {
-                listBox1.Invoke(new MethodInvoker(delegate { listBox1.Items.Add("ERROR: Cant connect to the internet."); }));
+                //listView1.Invoke(new MethodInvoker(delegate { listView1.Items.Add("ERROR: Cant connect to the internet."); }));
                 return;
             }
 
             using (WebClient client = new WebClient())
             {
-                centerNews.DocumentText = client.DownloadString("https://newagesoldier.com/myfiles/trainers/news.php");
+                //centerNews.DocumentText = client.DownloadString("https://newagesoldier.com/myfiles/trainers/news.php");
             }
 
             XmlTextReader reader = new XmlTextReader("https://newagesoldier.com/myfiles/trainers/tscan.php");
             int i = 0;
+            int count = 0;
             while (reader.Read()) //read line by line
             {
                 try
                 {
                     if (reader.Name == "name")
                     {
-                        listBox1.Invoke(new MethodInvoker(delegate { listBox1.Items.Add(reader.ReadString()); }));
+                        //listBox1.Invoke(new MethodInvoker(delegate { listBox1.Items.Add(reader.ReadString()); }));
                         //(contextMenuStrip1.Items[0] as ToolStripMenuItem).DropDownItems.Add(reader.ReadString());
+                        string[] words = reader.ReadString().Split('-');
+                        //MessageBox.Show("http://cdn.akamai.steamstatic.com/steam/apps/" + words[0] + "/header.jpg");
+                        ListViewItem lst = new ListViewItem();
+                        //AppendOutputText("[DEBUG] Banner path = " + "http://cdn.akamai.steamstatic.com/steam/apps/" + appID + "/header.jpg");
+                        //AppendOutputText("[DEBUG] gamedir2:" + gameDir2 + " tag:" + tag + " count:" + count);
+                        lst.Tag = words[0];
+                        lst.Text = words[1];
+                        lst.ImageIndex = count;
+                        listView1.Invoke(new MethodInvoker(delegate { imageList1.Images.Add(LoadPicture("http://cdn.akamai.steamstatic.com/steam/apps/" + words[0] + "/header.jpg")); listView1.Items.Add(lst); }));
+                        count++;
                     }
 
                     if (reader.Name == "last_modified")
@@ -107,6 +163,7 @@ namespace Trainer_Manager
 
         private void launchTrainer()
         {
+            //MessageBox.Show("DEBUG: Launching Trainer - Dir:" + trainerDir);
             foreach (var file in Directory.GetFiles(trainerDir, "*.exe", SearchOption.AllDirectories))
             {
                 try
@@ -123,36 +180,52 @@ namespace Trainer_Manager
             }
             foreach (var file in Directory.GetFiles(trainerDir, "*trainer*.exe", SearchOption.AllDirectories))
             {
-                ProcessStartInfo info = new ProcessStartInfo(file);
-                info.UseShellExecute = true;
-                info.Verb = "runas";
-                Process.Start(info);
+                //ProcessStartInfo info = new ProcessStartInfo(file);
+                //info.UseShellExecute = true;
+                //info.Verb = "runas";
+                //Process.Start(info);
+                try
+                {
+                    Process p = Process.Start(file);
+                    while (string.IsNullOrEmpty(p.MainWindowTitle))
+                    {
+                        System.Threading.Thread.Sleep(100);
+                        p.Refresh();
+                    }
+                    SetParent(p.MainWindowHandle, panel3.Handle);
+                    ShowWindow(p.MainWindowHandle, SW_SHOWMAXIMIZED);
+                } catch
+                {
+
+                }
                 return;
             }
         }
 
         private void startDownload()
         {
+            //MessageBox.Show("DEBUG: starting download...");
             //dlprogressLabel.Visible = true;
             progressBar1.Value = 0;
-            dlprogressLabel.Text = "Downloading...";
+            //dlprogressLabel.Text = "Downloading...";
+            downloadBox.Visible = true;
             if (!backgroundWorker2.IsBusy)
                 backgroundWorker2.RunWorkerAsync();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-           getTrainer(listBox1.Text);
+           
         }
 
         void getTrainer(string tname)
         {
-            trainerDir = textBox1.Text + "\\" + tname;
+            trainerDir = saveDir + "\\" + tname;
             
-            if (!Directory.Exists(textBox1.Text) && textBox1.Text != "")
-                Directory.CreateDirectory(textBox1.Text);
+            if (!Directory.Exists(saveDir) && saveDir != "")
+                Directory.CreateDirectory(saveDir);
 
-            string[] dirs = Directory.GetFiles(textBox1.Text, tname + @".*");
+            string[] dirs = Directory.GetFiles(saveDir, tname + @".*");
 
             if (Directory.Exists(trainerDir))
             {
@@ -164,7 +237,7 @@ namespace Trainer_Manager
                 }
                 else
                 {
-                    if (Convert.ToDateTime(last_modified[listBox1.FindString(tname)]) > Directory.GetCreationTime(trainerDir))
+                    if (Convert.ToDateTime(last_modified[listView1.Items.IndexOf(listView1.FindItemWithText(tname))]) > Directory.GetCreationTime(trainerDir))
                     { //check if we need to upate this trainer
                         //MessageBox.Show(Convert.ToDateTime("DEBUG: " + last_modified[listBox1.SelectedIndex]).ToString() + " > " + Directory.GetCreationTime(trainerDir));
                         Directory.Delete(trainerDir, true);
@@ -192,7 +265,7 @@ namespace Trainer_Manager
         public void ExtractFileToDirectory(string zipFileName, string outputDirectory)
         {
             progressBar1.Value = 100;
-            dlprogressLabel.Invoke(new MethodInvoker(delegate { dlprogressLabel.Text = "Unzipping files..."; }));
+            //dlprogressLabel.Invoke(new MethodInvoker(delegate { dlprogressLabel.Text = "Unzipping files..."; }));
 
             FileStream fs = File.OpenRead(zipFileName);
             string tmpFile = null;
@@ -209,21 +282,23 @@ namespace Trainer_Manager
             fs.Close();
 
             File.Delete(tmpFile);
+
             //dlprogressLabel.Visible = false;
-            dlprogressLabel.Text = "Nothing to do...";
+            //dlprogressLabel.Text = "Nothing to do...";
             backgroundWorker2.CancelAsync();
         }
 
         private void backgroundWorker2_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             progressBar1.Invoke(new MethodInvoker(delegate{ progressBar1.Value = e.ProgressPercentage; }));
-            dlprogressLabel.Invoke(new MethodInvoker(delegate { dlprogressLabel.Text = e.ProgressPercentage.ToString() + "%"; }));
+            //dlprogressLabel.Invoke(new MethodInvoker(delegate { dlprogressLabel.Text = e.ProgressPercentage.ToString() + "%"; }));
         }
 
         private void backgroundWorker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             launchTrainer();
             progressBar1.Value = 0;
+            downloadBox.Visible = false;
         }
 
         async Task PutTaskDelay()
@@ -231,15 +306,9 @@ namespace Trainer_Manager
             await Task.Delay(2000);
         }
 
-        async void WebDocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
-        {
-            await PutTaskDelay();
-            adBrowser.Document.Window.ScrollTo(0, 9999);
-        }
-
         void listBox1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            button1.PerformClick();
+            
         }
 
         private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
@@ -247,20 +316,21 @@ namespace Trainer_Manager
             string realURL = null;
             string sFilePathToWriteFileTo = null;
 
-            listBox1.Invoke(new MethodInvoker(delegate
+            listView1.Invoke(new MethodInvoker(delegate
             {
-                realURL = HttpUtility.HtmlDecode("https://newagesoldier.com/myfiles/trainers/" + listBox1.Text + ".zip");
-
-                if (!Directory.Exists(trainerDir))
-                    Directory.CreateDirectory(trainerDir);
-
-                Directory.SetCreationTime(trainerDir, Convert.ToDateTime(last_modified[listBox1.SelectedIndex])); //server time can be different, so let's update the folder create time to match
-
-                sFilePathToWriteFileTo = trainerDir + @"\tmp.zip";
+            realURL = HttpUtility.HtmlDecode("https://newagesoldier.com/myfiles/trainers/" + listView1.SelectedItems[0].Tag + "-" + listView1.SelectedItems[0].Text + ".zip");
+            //MessageBox.Show("DEBUG: Downloading URL:" + realURL);
+            if (!Directory.Exists(trainerDir))
+                Directory.CreateDirectory(trainerDir);
+            sFilePathToWriteFileTo = trainerDir + @"\tmp.zip";
+            //MessageBox.Show("Preparing to write to " + sFilePathToWriteFileTo);
+            Directory.SetCreationTime(trainerDir, Convert.ToDateTime(last_modified[listView1.SelectedItems[0].Index])); //server time can be different, so let's update the folder create time to match
             }));
 
             Uri url = new Uri(realURL);
+            
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
             if (response.StatusCode != HttpStatusCode.OK)
@@ -268,6 +338,8 @@ namespace Trainer_Manager
                 MessageBox.Show("ERROR: There was a problem pulling the zip file. Check internet connection.");
                 return;
             }
+
+            //MessageBox.Show("DEBUG: Creating tmp file: " + sFilePathToWriteFileTo);
 
             response.Close();
             long iSize = response.ContentLength;
@@ -293,17 +365,18 @@ namespace Trainer_Manager
                                 break;
                             }
 
-                            double dIndex = (double)(iRunningByteTotal);
-                            double dTotal = (double)byteBuffer.Length;
-                            double dProgressPercentage = (dIndex / dTotal);
-                            int iProgressPercentage = (int)(dProgressPercentage * 100);
-                            if (dIndex > 0 && dTotal > 0)
+                            double bytesIn = double.Parse(iRunningByteTotal.ToString());
+                            double totalBytes = double.Parse(byteBuffer.Length.ToString());
+                            double percentage = bytesIn / totalBytes * 100;
+
+                            int iProgressPercentage = int.Parse(Math.Truncate(percentage).ToString());
+                            /*if (dIndex > 0 && dTotal > 0)
                             {
                                 dlprogressLabel.Invoke(new MethodInvoker(delegate
                                 {
                                     dlprogressLabel.Text = BytesToString(dIndex).ToString() + "/" + BytesToString(dTotal).ToString() + " (" + iProgressPercentage.ToString() + "%)";
                                 }));
-                            }
+                            }*/
                             backgroundWorker2.ReportProgress(iProgressPercentage);
                         }
                         streamLocal.Close();
@@ -311,45 +384,27 @@ namespace Trainer_Manager
                     streamRemote.Close();
                 }
             }
-            listBox1.Invoke(new MethodInvoker(delegate
-            {
-                ExtractFileToDirectory(sFilePathToWriteFileTo, trainerDir);
-            }));
+            ExtractFileToDirectory(sFilePathToWriteFileTo, trainerDir);
         }
 
         private void form1_Closing(object sender, FormClosingEventArgs e)
         {
-            Properties.Settings.Default.trainer_folder = textBox1.Text;
-            Properties.Settings.Default.Save();
+            
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog fbd = new FolderBrowserDialog();
-            DialogResult result = fbd.ShowDialog();
 
-            if (!String.IsNullOrEmpty(fbd.SelectedPath))
-            {
-                string[] files = Directory.GetFiles(fbd.SelectedPath);
-                textBox1.Text = fbd.SelectedPath;
-            }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            textBox1.Text = defaultDir;
+
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listBox1.SelectedIndex != -1)
-            {
-                button1.Enabled = true;
-                if (!Directory.Exists(textBox1.Text + "//" + listBox1.Text))
-                    button1.Text = "DOWNLOAD && EXECUTE";
-                else
-                    button1.Text = "EXECUTE TRAINER";
-            }
+            
         }
 
         private void steamSaveBackupToolStripMenuItem_Click(object sender, EventArgs e)
@@ -369,8 +424,8 @@ namespace Trainer_Manager
 
         private void button4_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text != "")
-                Process.Start(textBox1.Text);
+            if (saveDir != "")
+                Process.Start(saveDir);
         }
 
         private void Form1_Resize(object sender, EventArgs e)
@@ -398,17 +453,17 @@ namespace Trainer_Manager
         {
             if (e.Button == MouseButtons.Right)
             {
-                listBox1.SelectedIndex = listBox1.IndexFromPoint(e.Location);
+                /*listView1.FocusedItem.Index = listBox1.IndexFromPoint(e.Location);
                 if (listBox1.SelectedIndex != -1)
-                    contextMenuStrip2.Show(Cursor.Position);
+                    contextMenuStrip2.Show(Cursor.Position);*/
             }
         }
 
         private void browseFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (listBox1.SelectedIndex != -1)
+            if (listView1.FocusedItem.Index != -1)
             {
-                string trainerDir = textBox1.Text + "\\" + listBox1.Text;
+                string trainerDir = saveDir + "\\" + listView1.SelectedItems[0].Text;
                 if (Directory.Exists(trainerDir))
                     Process.Start(trainerDir);
                 else
@@ -452,6 +507,44 @@ namespace Trainer_Manager
                 ReleaseCapture();
                 SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
             }
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void settingsButton_Click(object sender, EventArgs e)
+        {
+            settings settings = new settings();
+            settings.Show();
+        }
+
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            /*if (listView1.SelectedItems.Count > 0)
+            {
+                button1.Enabled = true;
+                if (!Directory.Exists(saveDir + "//" + listView1.SelectedItems[0].Text))
+                    button1.Text = "START";
+                else
+                    button1.Text = "START";
+            }*/
+        }
+
+        private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            
+        }
+
+        private void listView1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (listView1.SelectedItems.Count > 0)
+                getTrainer(listView1.SelectedItems[0].Text);
         }
     }
 }
