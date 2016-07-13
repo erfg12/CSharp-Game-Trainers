@@ -186,26 +186,29 @@ namespace Trainer_Manager
                 //info.UseShellExecute = true;
                 //info.Verb = "runas";
                 //Process.Start(info);
-                try
+                //try
+                //{
+                if (tProc != null) //close old trainer
                 {
-                    if (tProc != null) //close old trainer
-                    {
-                        tProc.CloseMainWindow();
-                        tProc.Close();
-                    }
-
-                    tProc = Process.Start(file);
-                    while (string.IsNullOrEmpty(tProc.MainWindowTitle))
-                    {
-                        System.Threading.Thread.Sleep(100);
-                        tProc.Refresh();
-                    }
-                    SetParent(tProc.MainWindowHandle, panel3.Handle);
-                    ShowWindow(tProc.MainWindowHandle, SW_SHOWMAXIMIZED);
-                } catch
-                {
-
+                    tProc.CloseMainWindow();
+                    tProc.Close();
                 }
+                tProc = new Process();
+                //tProc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                tProc.StartInfo.FileName = file;
+                tProc.Start();
+                while (string.IsNullOrEmpty(tProc.MainWindowTitle))
+                {
+                    //System.Threading.Thread.Sleep(100);
+                    tProc.Refresh();
+                }
+                SetParent(tProc.MainWindowHandle, panel3.Handle);
+                ShowWindow(tProc.MainWindowHandle, SW_SHOWMAXIMIZED);
+
+                /*} catch
+                {
+
+                }*/
                 return;
             }
         }

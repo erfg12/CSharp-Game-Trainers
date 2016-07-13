@@ -33,7 +33,7 @@ namespace Final_Fantasy_VII
             gameProcId = MemLib.getProcIDFromName("ff7_en"); //use task manager to find game name. For CoD MW2 it is iw4sp. Do not add .exe extension
             if (gameProcId > 0)
             {
-                ProcessID.Text = "Proc: " + gameProcId.ToString();
+                ProcessID.Text = "Process ID: " + gameProcId.ToString();
                 MemLib.OpenGameProcess(gameProcId);
             }
         }
