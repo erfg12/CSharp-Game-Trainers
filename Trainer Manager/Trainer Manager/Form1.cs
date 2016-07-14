@@ -43,8 +43,6 @@ namespace Trainer_Manager
         [DllImport("user32.dll")]
         static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
 
-        string saveDir = Properties.Settings.Default.trainer_folder;
-
         private void Form1_Load(object sender, EventArgs e)
         {
             listView1.LargeImageList = imageList1;
@@ -127,89 +125,101 @@ namespace Trainer_Manager
                 //centerNews.DocumentText = client.DownloadString("https://newagesoldier.com/myfiles/trainers/news.php");
             }
 
-            XmlTextReader reader = new XmlTextReader("https://newagesoldier.com/myfiles/trainers/tscan.php");
-            int i = 0;
-            int count = 0;
-            while (reader.Read()) //read line by line
+            try
             {
-                try
+                XmlTextReader reader = new XmlTextReader("https://newagesoldier.com/myfiles/trainers/tscan.php");
+                int i = 0;
+                int count = 0;
+                while (reader.Read()) //read line by line
                 {
-                    if (reader.Name == "name")
+                    try
                     {
-                        //listBox1.Invoke(new MethodInvoker(delegate { listBox1.Items.Add(reader.ReadString()); }));
-                        //(contextMenuStrip1.Items[0] as ToolStripMenuItem).DropDownItems.Add(reader.ReadString());
-                        string[] words = reader.ReadString().Split('-');
-                        //MessageBox.Show("http://cdn.akamai.steamstatic.com/steam/apps/" + words[0] + "/header.jpg");
-                        ListViewItem lst = new ListViewItem();
-                        //AppendOutputText("[DEBUG] Banner path = " + "http://cdn.akamai.steamstatic.com/steam/apps/" + appID + "/header.jpg");
-                        //AppendOutputText("[DEBUG] gamedir2:" + gameDir2 + " tag:" + tag + " count:" + count);
-                        lst.Tag = words[0];
-                        lst.Text = words[1];
-                        lst.ImageIndex = count;
-                        listView1.Invoke(new MethodInvoker(delegate { imageList1.Images.Add(LoadPicture("http://cdn.akamai.steamstatic.com/steam/apps/" + words[0] + "/header.jpg")); listView1.Items.Add(lst); }));
-                        count++;
-                    }
+                        if (reader.Name == "name")
+                        {
+                            //listBox1.Invoke(new MethodInvoker(delegate { listBox1.Items.Add(reader.ReadString()); }));
+                            //(contextMenuStrip1.Items[0] as ToolStripMenuItem).DropDownItems.Add(reader.ReadString());
+                            string[] words = reader.ReadString().Split('-');
+                            //MessageBox.Show("http://cdn.akamai.steamstatic.com/steam/apps/" + words[0] + "/header.jpg");
+                            ListViewItem lst = new ListViewItem();
+                            //AppendOutputText("[DEBUG] Banner path = " + "http://cdn.akamai.steamstatic.com/steam/apps/" + appID + "/header.jpg");
+                            //AppendOutputText("[DEBUG] gamedir2:" + gameDir2 + " tag:" + tag + " count:" + count);
+                            lst.Tag = words[0];
+                            lst.Text = words[1];
+                            lst.ImageIndex = count;
+                            listView1.Invoke(new MethodInvoker(delegate { imageList1.Images.Add(LoadPicture("http://cdn.akamai.steamstatic.com/steam/apps/" + words[0] + "/header.jpg")); listView1.Items.Add(lst); }));
+                            count++;
+                        }
 
-                    if (reader.Name == "last_modified")
+                        if (reader.Name == "last_modified")
+                        {
+                            last_modified.Add(i, reader.ReadString());
+                            i++;
+                        }
+                    }
+                    catch
                     {
-                        last_modified.Add(i, reader.ReadString());
-                        i++;
+                        MessageBox.Show("ERROR: Your internet connection may have been interrupted.");
                     }
                 }
-                catch
-                {
-                    MessageBox.Show("ERROR: Your internet connection may have been interrupted.");
-                }
+            }
+            catch {
+                MessageBox.Show("ERROR: Downloading tscan.php failed!");
             }
         }
 
         private void launchTrainer()
         {
             //MessageBox.Show("DEBUG: Launching Trainer - Dir:" + trainerDir);
-            foreach (var file in Directory.GetFiles(trainerDir, "*.exe", SearchOption.AllDirectories))
+            try
             {
-                try
+                foreach (var file in Directory.GetFiles(trainerDir, "*.exe", SearchOption.AllDirectories))
                 {
-                    Microsoft.Win32.RegistryKey key;
-                    key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(@"Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers");
-                    key.SetValue(file, "RUNASADMIN");
-                    key.Close();
+                    try
+                    {
+                        Microsoft.Win32.RegistryKey key;
+                        key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(@"Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers");
+                        key.SetValue(file, "RUNASADMIN");
+                        key.Close();
+                    }
+                    catch
+                    {
+                        //MessageBox.Show("ERROR: Cannot add admin privileges to program " + Path.GetFileName(file));
+                    }
                 }
-                catch
+                foreach (var file in Directory.GetFiles(trainerDir, "*trainer*.exe", SearchOption.AllDirectories))
                 {
-                    //MessageBox.Show("ERROR: Cannot add admin privileges to program " + Path.GetFileName(file));
+                    //ProcessStartInfo info = new ProcessStartInfo(file);
+                    //info.UseShellExecute = true;
+                    //info.Verb = "runas";
+                    //Process.Start(info);
+                    //try
+                    //{
+                    if (tProc != null) //close old trainer
+                    {
+                        tProc.CloseMainWindow();
+                        tProc.Close();
+                    }
+                    tProc = new Process();
+                    //tProc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                    tProc.StartInfo.FileName = file;
+                    tProc.Start();
+                    while (string.IsNullOrEmpty(tProc.MainWindowTitle))
+                    {
+                        //System.Threading.Thread.Sleep(100);
+                        tProc.Refresh();
+                    }
+                    SetParent(tProc.MainWindowHandle, panel3.Handle);
+                    ShowWindow(tProc.MainWindowHandle, SW_SHOWMAXIMIZED);
+
+                    /*} catch
+                    {
+
+                    }*/
+                    return;
                 }
-            }
-            foreach (var file in Directory.GetFiles(trainerDir, "*trainer*.exe", SearchOption.AllDirectories))
+            } catch
             {
-                //ProcessStartInfo info = new ProcessStartInfo(file);
-                //info.UseShellExecute = true;
-                //info.Verb = "runas";
-                //Process.Start(info);
-                //try
-                //{
-                if (tProc != null) //close old trainer
-                {
-                    tProc.CloseMainWindow();
-                    tProc.Close();
-                }
-                tProc = new Process();
-                //tProc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                tProc.StartInfo.FileName = file;
-                tProc.Start();
-                while (string.IsNullOrEmpty(tProc.MainWindowTitle))
-                {
-                    //System.Threading.Thread.Sleep(100);
-                    tProc.Refresh();
-                }
-                SetParent(tProc.MainWindowHandle, panel3.Handle);
-                ShowWindow(tProc.MainWindowHandle, SW_SHOWMAXIMIZED);
-
-                /*} catch
-                {
-
-                }*/
-                return;
+                MessageBox.Show("ERROR: Issue launching trainer application.");
             }
         }
 
@@ -231,35 +241,42 @@ namespace Trainer_Manager
 
         void getTrainer(string tname)
         {
-            trainerDir = saveDir + "\\" + tname;
-            
-            if (!Directory.Exists(saveDir) && saveDir != "")
-                Directory.CreateDirectory(saveDir);
-
-            string[] dirs = Directory.GetFiles(saveDir, tname + @".*");
-
-            if (Directory.Exists(trainerDir))
+            try
             {
-                if (Directory.GetFiles(trainerDir, "*trainer*.exe").Length == 0) //directory is empty? I guess it could happen...
+                string saveDir = Properties.Settings.Default.trainer_folder;
+                trainerDir = saveDir + "\\" + tname;
+
+                if (!Directory.Exists(saveDir) && saveDir != "")
+                    Directory.CreateDirectory(saveDir);
+
+                string[] dirs = Directory.GetFiles(saveDir, tname + @".*");
+
+                if (Directory.Exists(trainerDir))
                 {
-                    Directory.Delete(trainerDir, true);
-                    startDownload();
-                    return;
-                }
-                else
-                {
-                    if (Convert.ToDateTime(last_modified[listView1.Items.IndexOf(listView1.FindItemWithText(tname))]) > Directory.GetCreationTime(trainerDir))
-                    { //check if we need to upate this trainer
-                        //MessageBox.Show(Convert.ToDateTime("DEBUG: " + last_modified[listBox1.SelectedIndex]).ToString() + " > " + Directory.GetCreationTime(trainerDir));
+                    if (Directory.GetFiles(trainerDir, "*trainer*.exe").Length == 0) //directory is empty? I guess it could happen...
+                    {
                         Directory.Delete(trainerDir, true);
                         startDownload();
+                        return;
                     }
                     else
-                        launchTrainer();
+                    {
+                        if (Convert.ToDateTime(last_modified[listView1.Items.IndexOf(listView1.FindItemWithText(tname))]) > Directory.GetCreationTime(trainerDir))
+                        { //check if we need to upate this trainer
+                          //MessageBox.Show(Convert.ToDateTime("DEBUG: " + last_modified[listBox1.SelectedIndex]).ToString() + " > " + Directory.GetCreationTime(trainerDir));
+                            Directory.Delete(trainerDir, true);
+                            startDownload();
+                        }
+                        else
+                            launchTrainer();
+                    }
                 }
+                else
+                    startDownload();
+            } catch
+            {
+                MessageBox.Show("ERROR: Issue with getTrainer function. trainerDir:" + trainerDir);
             }
-            else
-                startDownload();
         }
 
         static String BytesToString(double byteCount)
@@ -324,78 +341,84 @@ namespace Trainer_Manager
 
         private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
         {
-            string realURL = null;
-            string sFilePathToWriteFileTo = null;
-
-            listView1.Invoke(new MethodInvoker(delegate
+            try
             {
-            realURL = HttpUtility.HtmlDecode("https://newagesoldier.com/myfiles/trainers/" + listView1.SelectedItems[0].Tag + "-" + listView1.SelectedItems[0].Text + ".zip");
-            //MessageBox.Show("DEBUG: Downloading URL:" + realURL);
-            if (!Directory.Exists(trainerDir))
-                Directory.CreateDirectory(trainerDir);
-            sFilePathToWriteFileTo = trainerDir + @"\tmp.zip";
-            //MessageBox.Show("Preparing to write to " + sFilePathToWriteFileTo);
-            Directory.SetCreationTime(trainerDir, Convert.ToDateTime(last_modified[listView1.SelectedItems[0].Index])); //server time can be different, so let's update the folder create time to match
+                string realURL = null;
+                string sFilePathToWriteFileTo = null;
+
+                listView1.Invoke(new MethodInvoker(delegate
+                {
+                    realURL = HttpUtility.HtmlDecode("https://newagesoldier.com/myfiles/trainers/" + listView1.SelectedItems[0].Tag + "-" + listView1.SelectedItems[0].Text + ".zip");
+                //MessageBox.Show("DEBUG: Downloading URL:" + realURL);
+                if (!Directory.Exists(trainerDir))
+                        Directory.CreateDirectory(trainerDir);
+                    sFilePathToWriteFileTo = trainerDir + @"\tmp.zip";
+                //MessageBox.Show("Preparing to write to " + sFilePathToWriteFileTo);
+                Directory.SetCreationTime(trainerDir, Convert.ToDateTime(last_modified[listView1.SelectedItems[0].Index])); //server time can be different, so let's update the folder create time to match
             }));
 
-            Uri url = new Uri(realURL);
-            
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                Uri url = new Uri(realURL);
 
-            if (response.StatusCode != HttpStatusCode.OK)
-            {
-                MessageBox.Show("ERROR: There was a problem pulling the zip file. Check internet connection.");
-                return;
-            }
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
 
-            //MessageBox.Show("DEBUG: Creating tmp file: " + sFilePathToWriteFileTo);
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
-            response.Close();
-            long iSize = response.ContentLength;
-            Int64 iRunningByteTotal = 0;
-
-            using (WebClient DLclient = new WebClient())
-            {
-                using (Stream streamRemote = DLclient.OpenRead(new Uri(realURL)))
+                if (response.StatusCode != HttpStatusCode.OK)
                 {
-                    using (Stream streamLocal = new FileStream(sFilePathToWriteFileTo, FileMode.Create, FileAccess.Write, FileShare.None))
-                    {
-                        int iByteSize = 0;
-                        byte[] byteBuffer;
-                        byteBuffer = new byte[iSize];
-                        while ((iByteSize = streamRemote.Read(byteBuffer, 0, byteBuffer.Length)) > 0)
-                        {
-                            streamLocal.Write(byteBuffer, 0, iByteSize);
-                            iRunningByteTotal += iByteSize;
-
-                            if (backgroundWorker2.CancellationPending == true)
-                            {
-                                e.Cancel = true;
-                                break;
-                            }
-
-                            double bytesIn = double.Parse(iRunningByteTotal.ToString());
-                            double totalBytes = double.Parse(byteBuffer.Length.ToString());
-                            double percentage = bytesIn / totalBytes * 100;
-
-                            int iProgressPercentage = int.Parse(Math.Truncate(percentage).ToString());
-                            /*if (dIndex > 0 && dTotal > 0)
-                            {
-                                dlprogressLabel.Invoke(new MethodInvoker(delegate
-                                {
-                                    dlprogressLabel.Text = BytesToString(dIndex).ToString() + "/" + BytesToString(dTotal).ToString() + " (" + iProgressPercentage.ToString() + "%)";
-                                }));
-                            }*/
-                            backgroundWorker2.ReportProgress(iProgressPercentage);
-                        }
-                        streamLocal.Close();
-                    }
-                    streamRemote.Close();
+                    MessageBox.Show("ERROR: There was a problem pulling the zip file. Check internet connection.");
+                    return;
                 }
+
+                //MessageBox.Show("DEBUG: Creating tmp file: " + sFilePathToWriteFileTo);
+
+                response.Close();
+                long iSize = response.ContentLength;
+                Int64 iRunningByteTotal = 0;
+
+                using (WebClient DLclient = new WebClient())
+                {
+                    using (Stream streamRemote = DLclient.OpenRead(new Uri(realURL)))
+                    {
+                        using (Stream streamLocal = new FileStream(sFilePathToWriteFileTo, FileMode.Create, FileAccess.Write, FileShare.None))
+                        {
+                            int iByteSize = 0;
+                            byte[] byteBuffer;
+                            byteBuffer = new byte[iSize];
+                            while ((iByteSize = streamRemote.Read(byteBuffer, 0, byteBuffer.Length)) > 0)
+                            {
+                                streamLocal.Write(byteBuffer, 0, iByteSize);
+                                iRunningByteTotal += iByteSize;
+
+                                if (backgroundWorker2.CancellationPending == true)
+                                {
+                                    e.Cancel = true;
+                                    break;
+                                }
+
+                                double bytesIn = double.Parse(iRunningByteTotal.ToString());
+                                double totalBytes = double.Parse(byteBuffer.Length.ToString());
+                                double percentage = bytesIn / totalBytes * 100;
+
+                                int iProgressPercentage = int.Parse(Math.Truncate(percentage).ToString());
+                                /*if (dIndex > 0 && dTotal > 0)
+                                {
+                                    dlprogressLabel.Invoke(new MethodInvoker(delegate
+                                    {
+                                        dlprogressLabel.Text = BytesToString(dIndex).ToString() + "/" + BytesToString(dTotal).ToString() + " (" + iProgressPercentage.ToString() + "%)";
+                                    }));
+                                }*/
+                                backgroundWorker2.ReportProgress(iProgressPercentage);
+                            }
+                            streamLocal.Close();
+                        }
+                        streamRemote.Close();
+                    }
+                }
+                ExtractFileToDirectory(sFilePathToWriteFileTo, trainerDir);
+            } catch
+            {
+                MessageBox.Show("ERROR: Trainer downloading issue. URL:" + "https://newagesoldier.com/myfiles/trainers/" + listView1.SelectedItems[0].Tag + "-" + listView1.SelectedItems[0].Text + ".zip");
             }
-            ExtractFileToDirectory(sFilePathToWriteFileTo, trainerDir);
         }
 
         private void form1_Closing(object sender, FormClosingEventArgs e)
@@ -435,8 +458,8 @@ namespace Trainer_Manager
 
         private void button4_Click(object sender, EventArgs e)
         {
-            if (saveDir != "")
-                Process.Start(saveDir);
+            //if (saveDir != "")
+            //    Process.Start(saveDir);
         }
 
         private void Form1_Resize(object sender, EventArgs e)
@@ -474,6 +497,7 @@ namespace Trainer_Manager
         {
             if (listView1.FocusedItem.Index != -1)
             {
+                string saveDir = Properties.Settings.Default.trainer_folder;
                 string trainerDir = saveDir + "\\" + listView1.SelectedItems[0].Text;
                 if (Directory.Exists(trainerDir))
                     Process.Start(trainerDir);

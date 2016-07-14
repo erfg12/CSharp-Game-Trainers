@@ -15,32 +15,32 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_101F6D0360364A1D88012EEF32154E6E"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_1499D91F696949C2B978C80EFA49D8D5"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_923709A8CC584F849DB4BC4B0B0D4240"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_F2158D5F96A59129FB1A255EDE04DAFF"
+        "MsmKey" = "8:_77D72E8354D488A0CB55CDCCDEB687F6"
         "OwnerKey" = "8:_1499D91F696949C2B978C80EFA49D8D5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F2158D5F96A59129FB1A255EDE04DAFF"
+        "OwnerKey" = "8:_1499D91F696949C2B978C80EFA49D8D5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_1499D91F696949C2B978C80EFA49D8D5"
+        "OwnerKey" = "8:_77D72E8354D488A0CB55CDCCDEB687F6"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -148,10 +148,10 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_923709A8CC584F849DB4BC4B0B0D4240"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_101F6D0360364A1D88012EEF32154E6E"
             {
-            "SourcePath" = "8:..\\icon.ico"
-            "TargetName" = "8:icon.ico"
+            "SourcePath" = "8:..\\trainer-manager.ico"
+            "TargetName" = "8:trainer-manager.ico"
             "Tag" = "8:"
             "Folder" = "8:_30FFBB81534D4A198B913C5D0A6C733E"
             "Condition" = "8:"
@@ -168,14 +168,14 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F2158D5F96A59129FB1A255EDE04DAFF"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_77D72E8354D488A0CB55CDCCDEB687F6"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:Ionic.Zip, Version=1.9.1.8, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_F2158D5F96A59129FB1A255EDE04DAFF"
+                    "_77D72E8354D488A0CB55CDCCDEB687F6"
                     {
                     "Name" = "8:Ionic.Zip.dll"
                     "Attributes" = "3:512"
@@ -277,15 +277,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Trainer Manager"
-        "ProductCode" = "8:{96A62767-E4CB-4598-BA4C-3B364881F9A1}"
-        "PackageCode" = "8:{0596FBE5-428A-4C6D-AC37-B45A7A103227}"
+        "ProductCode" = "8:{795013DB-5BE2-41B2-9319-A480EA0A202F}"
+        "PackageCode" = "8:{9774AC23-9B0E-4139-BBF7-D2A6D54AB13C}"
         "UpgradeCode" = "8:{57113CAC-5039-42CD-9D65-69B1DE824C04}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.3"
+        "ProductVersion" = "8:1.1.0"
         "Manufacturer" = "8:NewAgeSoldier"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:http://newagesoldier.com"
@@ -295,7 +295,7 @@
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:"
         "ARPURLINFOABOUT" = "8:http://newagesoldier.com"
-        "ARPPRODUCTICON" = "8:_923709A8CC584F849DB4BC4B0B0D4240"
+        "ARPPRODUCTICON" = "8:_101F6D0360364A1D88012EEF32154E6E"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
@@ -409,7 +409,7 @@
             "Target" = "8:_1499D91F696949C2B978C80EFA49D8D5"
             "Folder" = "8:_923D2CFC0204463CA268065EC912A767"
             "WorkingFolder" = "8:_30FFBB81534D4A198B913C5D0A6C733E"
-            "Icon" = "8:_923709A8CC584F849DB4BC4B0B0D4240"
+            "Icon" = "8:_101F6D0360364A1D88012EEF32154E6E"
             "Feature" = "8:"
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_FC12FD9A48364827875CABF3CF1673E7"
@@ -423,7 +423,7 @@
             "Target" = "8:_1499D91F696949C2B978C80EFA49D8D5"
             "Folder" = "8:_920C9ADCD5884215BE86F0F41280CB04"
             "WorkingFolder" = "8:_30FFBB81534D4A198B913C5D0A6C733E"
-            "Icon" = "8:_923709A8CC584F849DB4BC4B0B0D4240"
+            "Icon" = "8:_101F6D0360364A1D88012EEF32154E6E"
             "Feature" = "8:"
             }
         }
