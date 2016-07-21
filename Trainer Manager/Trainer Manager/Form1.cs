@@ -43,9 +43,11 @@ namespace Trainer_Manager
         [DllImport("user32.dll")]
         static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
 
+        string saveDir = Properties.Settings.Default.trainer_folder + "/pc";
+
         private void Form1_Load(object sender, EventArgs e)
         {
-            listView1.LargeImageList = imageList1;
+            //listView1.LargeImageList = imageList1;
             try {
                 Process[] p = Process.GetProcessesByName("New Age Trainer Manager");
                 if (p.Count() > 1)
@@ -59,6 +61,13 @@ namespace Trainer_Manager
             } catch
             {
                 MessageBox.Show("ERROR starting program");
+            }
+
+            if (String.IsNullOrEmpty(saveDir))
+            {
+                saveDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\cheat_trainers";
+                Properties.Settings.Default.trainer_folder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\cheat_trainers";
+                Properties.Settings.Default.Save();
             }
         }
 
@@ -104,30 +113,48 @@ namespace Trainer_Manager
             return (bmp);
         }
 
+        public HttpStatusCode GetHeaders(string url)
+        {
+            HttpStatusCode result = default(HttpStatusCode);
+
+            var request = HttpWebRequest.Create(url);
+            request.Method = "HEAD";
+            using (var response = request.GetResponse() as HttpWebResponse)
+            {
+                if (response != null)
+                {
+                    result = response.StatusCode;
+                    response.Close();
+                }
+            }
+
+            return result;
+        }
+
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            listView1.Invoke(new MethodInvoker(delegate { listView1.Items.Clear(); }));
+            if (tabControl1.Controls[0] == tabControl1.SelectedTab) //PC
+                listView1.Invoke(new MethodInvoker(delegate { listView1.Items.Clear(); }));
+            else if (tabControl1.Controls[1] == tabControl1.SelectedTab) //PS3
+                listView2.Invoke(new MethodInvoker(delegate { listView2.Items.Clear(); }));
+            else if (tabControl1.Controls[2] == tabControl1.SelectedTab) //xbox360
+                listView3.Invoke(new MethodInvoker(delegate { listView3.Items.Clear(); }));
+            else if (tabControl1.Controls[3] == tabControl1.SelectedTab) //wiiu
+                listView4.Invoke(new MethodInvoker(delegate { listView4.Items.Clear(); }));
 
             try
             {
-                HttpWebRequest myHttpWebRequest = (HttpWebRequest)WebRequest.Create("https://newagesoldier.com/myfiles/trainers/tscan.php");
-                HttpWebResponse myHttpWebResponse = (HttpWebResponse)myHttpWebRequest.GetResponse();
-                //if (myHttpWebResponse.StatusCode != HttpStatusCode.OK)
-                    //listView1.Invoke(new MethodInvoker(delegate { listView1.Items.Add("ERROR: There was a problem pulling the XML data."); }));
-            }
-            catch {
-                //listView1.Invoke(new MethodInvoker(delegate { listView1.Items.Add("ERROR: Cant connect to the internet."); }));
-                return;
-            }
+                string tscanURL = "https://newagesoldier.com/myfiles/trainers/tscan.php";
+                if (tabControl1.Controls[0] == tabControl1.SelectedTab) //PC
+                    tscanURL = "https://newagesoldier.com/myfiles/trainers/tscan.php";
+                else if (tabControl1.Controls[1] == tabControl1.SelectedTab) //PS3
+                    tscanURL = "https://newagesoldier.com/myfiles/trainers/ps3/tscan.php";
+                else if (tabControl1.Controls[2] == tabControl1.SelectedTab) //xbox360
+                    tscanURL = "https://newagesoldier.com/myfiles/trainers/xbox360/tscan.php";
+                else if (tabControl1.Controls[3] == tabControl1.SelectedTab) //wiiu
+                    tscanURL = "https://newagesoldier.com/myfiles/trainers/wiiu/tscan.php";
 
-            using (WebClient client = new WebClient())
-            {
-                //centerNews.DocumentText = client.DownloadString("https://newagesoldier.com/myfiles/trainers/news.php");
-            }
-
-            try
-            {
-                XmlTextReader reader = new XmlTextReader("https://newagesoldier.com/myfiles/trainers/tscan.php");
+                XmlTextReader reader = new XmlTextReader(tscanURL);
                 int i = 0;
                 int count = 0;
                 while (reader.Read()) //read line by line
@@ -136,20 +163,57 @@ namespace Trainer_Manager
                     {
                         if (reader.Name == "name")
                         {
-                            //listBox1.Invoke(new MethodInvoker(delegate { listBox1.Items.Add(reader.ReadString()); }));
-                            //(contextMenuStrip1.Items[0] as ToolStripMenuItem).DropDownItems.Add(reader.ReadString());
-                            string[] words = reader.ReadString().Split('-');
-                            //MessageBox.Show("http://cdn.akamai.steamstatic.com/steam/apps/" + words[0] + "/header.jpg");
-                            ListViewItem lst = new ListViewItem();
-                            //AppendOutputText("[DEBUG] Banner path = " + "http://cdn.akamai.steamstatic.com/steam/apps/" + appID + "/header.jpg");
-                            //AppendOutputText("[DEBUG] gamedir2:" + gameDir2 + " tag:" + tag + " count:" + count);
-                            lst.Tag = words[0];
-                            lst.Text = words[1];
-                            lst.ImageIndex = count;
-                            listView1.Invoke(new MethodInvoker(delegate { imageList1.Images.Add(LoadPicture("http://cdn.akamai.steamstatic.com/steam/apps/" + words[0] + "/header.jpg")); listView1.Items.Add(lst); }));
-                            count++;
+                            if (tabControl1.Controls[0] == tabControl1.SelectedTab) //PC
+                            {
+                                string[] words = reader.ReadString().Split('-');
+                                ListViewItem lst = new ListViewItem();
+                                lst.Tag = words[0];
+                                lst.Text = words[1];
+                                lst.ImageIndex = count;
+                                listView1.Invoke(new MethodInvoker(delegate { imageList1.Images.Add(LoadPicture("http://cdn.akamai.steamstatic.com/steam/apps/" + words[0] + "/header.jpg")); listView1.Items.Add(lst); }));
+                                count++;
+                            }
+                            else if (tabControl1.Controls[1] == tabControl1.SelectedTab) //PS3
+                            {
+                                string[] words = reader.ReadString().Split('-');
+                                ListViewItem lst = new ListViewItem();
+                                lst.Tag = words[0];
+                                lst.Text = words[1];
+                                lst.ImageIndex = count;
+                                string url = "http://art.gametdb.com/ps3/cover/EN/" + words[0] + ".jpg";
+                                //MessageBox.Show(GetHeaders(url).ToString());
+                                listView2.Invoke(new MethodInvoker(delegate {
+                                    try
+                                    {
+                                        imageList2.Images.Add(LoadPicture("http://art.gametdb.com/ps3/cover/EN/" + words[0] + ".jpg")); listView2.Items.Add(lst);
+                                    } catch
+                                    {
+                                        imageList2.Images.Add(LoadPicture("http://tshop.r10s.com/5b9259d0-c352-11e4-a81b-005056ae31af/ps3/ps3_new_case_1.JPG")); listView2.Items.Add(lst);
+                                    }
+                                }));
+                                count++;
+                            }
+                            else if (tabControl1.Controls[2] == tabControl1.SelectedTab) //xbox360
+                            {
+                                string[] words = reader.ReadString().Split('-');
+                                ListViewItem lst = new ListViewItem();
+                                lst.Tag = words[0];
+                                lst.Text = words[1];
+                                lst.ImageIndex = count;
+                                listView3.Invoke(new MethodInvoker(delegate { imageList3.Images.Add(LoadPicture("http://www.freecovers.net/preview/0/" + words[0] + "/big.jpg")); listView3.Items.Add(lst); }));
+                                count++;
+                            }
+                            else if (tabControl1.Controls[3] == tabControl1.SelectedTab) //wiiu
+                            {
+                                string[] words = reader.ReadString().Split('-');
+                                ListViewItem lst = new ListViewItem();
+                                lst.Tag = words[0];
+                                lst.Text = words[1];
+                                lst.ImageIndex = count;
+                                listView4.Invoke(new MethodInvoker(delegate { imageList4.Images.Add(LoadPicture("http://art.gametdb.com/wiiu/cover/EN/" + words[0] + ".jpg")); listView4.Items.Add(lst); }));
+                                count++;
+                            }
                         }
-
                         if (reader.Name == "last_modified")
                         {
                             last_modified.Add(i, reader.ReadString());
@@ -158,7 +222,7 @@ namespace Trainer_Manager
                     }
                     catch
                     {
-                        MessageBox.Show("ERROR: Your internet connection may have been interrupted.");
+                        //MessageBox.Show("ERROR: Your internet connection may have been interrupted.");
                     }
                 }
             }
@@ -200,7 +264,6 @@ namespace Trainer_Manager
                         tProc.Close();
                     }
                     tProc = new Process();
-                    //tProc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                     tProc.StartInfo.FileName = file;
                     tProc.Start();
                     while (string.IsNullOrEmpty(tProc.MainWindowTitle))
@@ -208,9 +271,9 @@ namespace Trainer_Manager
                         //System.Threading.Thread.Sleep(100);
                         tProc.Refresh();
                     }
+                    ShowWindow(tProc.MainWindowHandle, 0);
                     SetParent(tProc.MainWindowHandle, panel3.Handle);
                     ShowWindow(tProc.MainWindowHandle, SW_SHOWMAXIMIZED);
-
                     /*} catch
                     {
 
@@ -243,9 +306,7 @@ namespace Trainer_Manager
         {
             try
             {
-                string saveDir = Properties.Settings.Default.trainer_folder;
                 trainerDir = saveDir + "\\" + tname;
-
                 if (!Directory.Exists(saveDir) && saveDir != "")
                     Directory.CreateDirectory(saveDir);
 
@@ -261,9 +322,17 @@ namespace Trainer_Manager
                     }
                     else
                     {
-                        if (Convert.ToDateTime(last_modified[listView1.Items.IndexOf(listView1.FindItemWithText(tname))]) > Directory.GetCreationTime(trainerDir))
+                        int lastmod = 0;
+                        if (tabControl1.Controls[0] == tabControl1.SelectedTab) //PC
+                            lastmod = listView1.Items.IndexOf(listView1.FindItemWithText(tname));
+                        else if (tabControl1.Controls[1] == tabControl1.SelectedTab) //PS3
+                            lastmod = listView2.Items.IndexOf(listView2.FindItemWithText(tname));
+                        else if (tabControl1.Controls[1] == tabControl1.SelectedTab) //xbox360
+                            lastmod = listView3.Items.IndexOf(listView3.FindItemWithText(tname));
+                        else if (tabControl1.Controls[1] == tabControl1.SelectedTab) //wiiu
+                            lastmod = listView4.Items.IndexOf(listView4.FindItemWithText(tname));
+                        if (Convert.ToDateTime(last_modified[lastmod]) > Directory.GetCreationTime(trainerDir))
                         { //check if we need to upate this trainer
-                          //MessageBox.Show(Convert.ToDateTime("DEBUG: " + last_modified[listBox1.SelectedIndex]).ToString() + " > " + Directory.GetCreationTime(trainerDir));
                             Directory.Delete(trainerDir, true);
                             startDownload();
                         }
@@ -348,14 +417,27 @@ namespace Trainer_Manager
 
                 listView1.Invoke(new MethodInvoker(delegate
                 {
-                    realURL = HttpUtility.HtmlDecode("https://newagesoldier.com/myfiles/trainers/" + listView1.SelectedItems[0].Tag + "-" + listView1.SelectedItems[0].Text + ".zip");
-                //MessageBox.Show("DEBUG: Downloading URL:" + realURL);
-                if (!Directory.Exists(trainerDir))
+                    if (tabControl1.Controls[0] == tabControl1.SelectedTab) //PC
+                        realURL = HttpUtility.HtmlDecode("https://newagesoldier.com/myfiles/trainers/" + listView1.SelectedItems[0].Tag + "-" + listView1.SelectedItems[0].Text + ".zip");
+                    if (tabControl1.Controls[1] == tabControl1.SelectedTab) //PS3
+                        realURL = HttpUtility.HtmlDecode("https://newagesoldier.com/myfiles/trainers/ps3/" + listView2.SelectedItems[0].Tag + "-" + listView2.SelectedItems[0].Text + ".zip");
+                    if (tabControl1.Controls[2] == tabControl1.SelectedTab) //xbox360
+                        realURL = HttpUtility.HtmlDecode("https://newagesoldier.com/myfiles/trainers/xbox360/" + listView3.SelectedItems[0].Tag + "-" + listView3.SelectedItems[0].Text + ".zip");
+                    if (tabControl1.Controls[3] == tabControl1.SelectedTab) //wiiu
+                        realURL = HttpUtility.HtmlDecode("https://newagesoldier.com/myfiles/trainers/wiiu/" + listView4.SelectedItems[0].Tag + "-" + listView4.SelectedItems[0].Text + ".zip");
+                    if (!Directory.Exists(trainerDir))
                         Directory.CreateDirectory(trainerDir);
                     sFilePathToWriteFileTo = trainerDir + @"\tmp.zip";
-                //MessageBox.Show("Preparing to write to " + sFilePathToWriteFileTo);
-                Directory.SetCreationTime(trainerDir, Convert.ToDateTime(last_modified[listView1.SelectedItems[0].Index])); //server time can be different, so let's update the folder create time to match
-            }));
+                    //MessageBox.Show("Preparing to write to " + sFilePathToWriteFileTo);
+                    if (tabControl1.Controls[0] == tabControl1.SelectedTab) //PC
+                        Directory.SetCreationTime(trainerDir, Convert.ToDateTime(last_modified[listView1.SelectedItems[0].Index])); //server time can be different, so let's update the folder create time to match
+                    if (tabControl1.Controls[1] == tabControl1.SelectedTab) //PS3
+                        Directory.SetCreationTime(trainerDir, Convert.ToDateTime(last_modified[listView2.SelectedItems[0].Index]));
+                    if (tabControl1.Controls[2] == tabControl1.SelectedTab) //xbox360
+                        Directory.SetCreationTime(trainerDir, Convert.ToDateTime(last_modified[listView3.SelectedItems[0].Index]));
+                    if (tabControl1.Controls[3] == tabControl1.SelectedTab) //wiiu
+                        Directory.SetCreationTime(trainerDir, Convert.ToDateTime(last_modified[listView4.SelectedItems[0].Index]));
+                }));
 
                 Uri url = new Uri(realURL);
 
@@ -464,11 +546,11 @@ namespace Trainer_Manager
 
         private void Form1_Resize(object sender, EventArgs e)
         {
-            if (FormWindowState.Minimized == this.WindowState)
+            /*if (FormWindowState.Minimized == this.WindowState)
             {
                 notifyIcon1.Visible = true;
                 this.Hide();
-            }
+            }*/
         }
 
         private void notifyIcon_DoubleClick(object sender, MouseEventArgs e)
@@ -580,6 +662,26 @@ namespace Trainer_Manager
         {
             if (listView1.SelectedItems.Count > 0)
                 getTrainer(listView1.SelectedItems[0].Text);
+        }
+
+        private void tabControl1_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            if (tabControl1.Controls[0] == tabControl1.SelectedTab)
+                saveDir = Properties.Settings.Default.trainer_folder + "/pc";
+            else if (tabControl1.Controls[1] == tabControl1.SelectedTab)
+                saveDir = Properties.Settings.Default.trainer_folder + "/ps3";
+            else if(tabControl1.Controls[2] == tabControl1.SelectedTab)
+                saveDir = Properties.Settings.Default.trainer_folder + "/xbo360";
+            else if (tabControl1.Controls[3] == tabControl1.SelectedTab)
+                saveDir = Properties.Settings.Default.trainer_folder + "/wiiu";
+            if (!backgroundWorker1.IsBusy)
+                backgroundWorker1.RunWorkerAsync();
+        }
+
+        private void listView2_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (listView2.SelectedItems.Count > 0)
+                getTrainer(listView2.SelectedItems[0].Text);
         }
     }
 }
