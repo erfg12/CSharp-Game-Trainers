@@ -155,6 +155,7 @@ namespace Trainer_Manager
                     tscanURL = "https://newagesoldier.com/myfiles/trainers/wiiu/tscan.php";
 
                 XmlTextReader reader = new XmlTextReader(tscanURL);
+                last_modified.Clear();
                 int i = 0;
                 int count = 0;
                 while (reader.Read()) //read line by line
@@ -216,6 +217,7 @@ namespace Trainer_Manager
                         }
                         if (reader.Name == "last_modified")
                         {
+                            //MessageBox.Show("i:" + i.ToString() + " " + reader.ReadString());
                             last_modified.Add(i, reader.ReadString());
                             i++;
                         }
@@ -292,6 +294,23 @@ namespace Trainer_Manager
             //dlprogressLabel.Visible = true;
             progressBar1.Value = 0;
             //dlprogressLabel.Text = "Downloading...";
+            if (!Directory.Exists(trainerDir))
+            {
+                //MessageBox.Show("[DEBUG] Making trainerDir:" + trainerDir);
+                Directory.CreateDirectory(trainerDir);
+            }
+
+            //MessageBox.Show("[DEBUG] Modify this... " + last_modified[listView2.SelectedItems[0].Index]);
+
+            if (tabControl1.Controls[0] == tabControl1.SelectedTab) //PC
+                Directory.SetCreationTime(trainerDir, Convert.ToDateTime(last_modified[listView1.SelectedItems[0].Index])); //server time can be different, so let's update the folder create time to match
+            else if (tabControl1.Controls[1] == tabControl1.SelectedTab) //PS3
+                Directory.SetCreationTime(trainerDir, Convert.ToDateTime(last_modified[listView2.SelectedItems[0].Index]));
+            else if (tabControl1.Controls[2] == tabControl1.SelectedTab) //xbox360
+                Directory.SetCreationTime(trainerDir, Convert.ToDateTime(last_modified[listView3.SelectedItems[0].Index]));
+            else if (tabControl1.Controls[3] == tabControl1.SelectedTab) //wiiu
+                Directory.SetCreationTime(trainerDir, Convert.ToDateTime(last_modified[listView4.SelectedItems[0].Index]));
+
             downloadBox.Visible = true;
             if (!backgroundWorker2.IsBusy)
                 backgroundWorker2.RunWorkerAsync();
@@ -312,16 +331,20 @@ namespace Trainer_Manager
 
                 string[] dirs = Directory.GetFiles(saveDir, tname + @".*");
 
+                //MessageBox.Show("[DEBUG] tname:" + tname + " trainerDir:" + trainerDir);
+
                 if (Directory.Exists(trainerDir))
                 {
+                    //MessageBox.Show("[DEBUG] dir exists! trainerDir:" + trainerDir);
                     if (Directory.GetFiles(trainerDir, "*trainer*.exe").Length == 0) //directory is empty? I guess it could happen...
                     {
-                        Directory.Delete(trainerDir, true);
+                        //Directory.Delete(trainerDir, true);
                         startDownload();
                         return;
                     }
                     else
                     {
+                        //MessageBox.Show("[DEBUG] cant find trainer.exe! trainerDir:" + trainerDir);
                         int lastmod = 0;
                         if (tabControl1.Controls[0] == tabControl1.SelectedTab) //PC
                             lastmod = listView1.Items.IndexOf(listView1.FindItemWithText(tname));
@@ -341,7 +364,10 @@ namespace Trainer_Manager
                     }
                 }
                 else
+                {
+                    //MessageBox.Show("[DEBUG] dir doesnt exist! Downloading trainerDir:" + trainerDir);
                     startDownload();
+                }
             } catch
             {
                 MessageBox.Show("ERROR: Issue with getTrainer function. trainerDir:" + trainerDir);
@@ -379,7 +405,7 @@ namespace Trainer_Manager
             fs.Close();
 
             File.Delete(tmpFile);
-
+            //MessageBox.Show("zipfilename:" + zipFileName + " outputdir:" + outputDirectory);
             //dlprogressLabel.Visible = false;
             //dlprogressLabel.Text = "Nothing to do...";
             backgroundWorker2.CancelAsync();
@@ -414,37 +440,23 @@ namespace Trainer_Manager
             {
                 string realURL = null;
                 string sFilePathToWriteFileTo = null;
+                sFilePathToWriteFileTo = trainerDir + @"\tmp.zip";
 
-                listView1.Invoke(new MethodInvoker(delegate
-                {
+                //listView1.Invoke(new MethodInvoker(delegate
+                //{
                     if (tabControl1.Controls[0] == tabControl1.SelectedTab) //PC
                         realURL = HttpUtility.HtmlDecode("https://newagesoldier.com/myfiles/trainers/" + listView1.SelectedItems[0].Tag + "-" + listView1.SelectedItems[0].Text + ".zip");
-                    if (tabControl1.Controls[1] == tabControl1.SelectedTab) //PS3
+                    else if (tabControl1.Controls[1] == tabControl1.SelectedTab) //PS3
                         realURL = HttpUtility.HtmlDecode("https://newagesoldier.com/myfiles/trainers/ps3/" + listView2.SelectedItems[0].Tag + "-" + listView2.SelectedItems[0].Text + ".zip");
-                    if (tabControl1.Controls[2] == tabControl1.SelectedTab) //xbox360
+                    else if(tabControl1.Controls[2] == tabControl1.SelectedTab) //xbox360
                         realURL = HttpUtility.HtmlDecode("https://newagesoldier.com/myfiles/trainers/xbox360/" + listView3.SelectedItems[0].Tag + "-" + listView3.SelectedItems[0].Text + ".zip");
-                    if (tabControl1.Controls[3] == tabControl1.SelectedTab) //wiiu
+                    else if(tabControl1.Controls[3] == tabControl1.SelectedTab) //wiiu
                         realURL = HttpUtility.HtmlDecode("https://newagesoldier.com/myfiles/trainers/wiiu/" + listView4.SelectedItems[0].Tag + "-" + listView4.SelectedItems[0].Text + ".zip");
-                    if (!Directory.Exists(trainerDir))
-                        Directory.CreateDirectory(trainerDir);
-                    sFilePathToWriteFileTo = trainerDir + @"\tmp.zip";
-                    //MessageBox.Show("Preparing to write to " + sFilePathToWriteFileTo);
-                    if (tabControl1.Controls[0] == tabControl1.SelectedTab) //PC
-                        Directory.SetCreationTime(trainerDir, Convert.ToDateTime(last_modified[listView1.SelectedItems[0].Index])); //server time can be different, so let's update the folder create time to match
-                    if (tabControl1.Controls[1] == tabControl1.SelectedTab) //PS3
-                        Directory.SetCreationTime(trainerDir, Convert.ToDateTime(last_modified[listView2.SelectedItems[0].Index]));
-                    if (tabControl1.Controls[2] == tabControl1.SelectedTab) //xbox360
-                        Directory.SetCreationTime(trainerDir, Convert.ToDateTime(last_modified[listView3.SelectedItems[0].Index]));
-                    if (tabControl1.Controls[3] == tabControl1.SelectedTab) //wiiu
-                        Directory.SetCreationTime(trainerDir, Convert.ToDateTime(last_modified[listView4.SelectedItems[0].Index]));
-                }));
-
+                //}));
+                
                 Uri url = new Uri(realURL);
-
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-
                 if (response.StatusCode != HttpStatusCode.OK)
                 {
                     MessageBox.Show("ERROR: There was a problem pulling the zip file. Check internet connection.");
@@ -482,13 +494,6 @@ namespace Trainer_Manager
                                 double percentage = bytesIn / totalBytes * 100;
 
                                 int iProgressPercentage = int.Parse(Math.Truncate(percentage).ToString());
-                                /*if (dIndex > 0 && dTotal > 0)
-                                {
-                                    dlprogressLabel.Invoke(new MethodInvoker(delegate
-                                    {
-                                        dlprogressLabel.Text = BytesToString(dIndex).ToString() + "/" + BytesToString(dTotal).ToString() + " (" + iProgressPercentage.ToString() + "%)";
-                                    }));
-                                }*/
                                 backgroundWorker2.ReportProgress(iProgressPercentage);
                             }
                             streamLocal.Close();
