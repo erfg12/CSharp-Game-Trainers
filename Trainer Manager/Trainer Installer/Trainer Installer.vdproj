@@ -15,6 +15,12 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_03F985CBD038414B86264564AE9E0F53"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_101F6D0360364A1D88012EEF32154E6E"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -27,20 +33,44 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_21C2226C92B94A2DA766FE5301A78C75"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_352B833365C0436DAA1197E3315EDEFA"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_4C9B70F2C5F547FABFB8C9670C9FD1E5"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_77D72E8354D488A0CB55CDCCDEB687F6"
         "OwnerKey" = "8:_1499D91F696949C2B978C80EFA49D8D5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_1499D91F696949C2B978C80EFA49D8D5"
+        "MsmKey" = "8:_EECA04CC40E6489BB1BC4D538358DDA1"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_77D72E8354D488A0CB55CDCCDEB687F6"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_1499D91F696949C2B978C80EFA49D8D5"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -148,10 +178,90 @@
         }
         "File"
         {
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_03F985CBD038414B86264564AE9E0F53"
+            {
+            "SourcePath" = "8:..\\Trainer Manager\\wiiu.png"
+            "TargetName" = "8:wiiu.png"
+            "Tag" = "8:"
+            "Folder" = "8:_30FFBB81534D4A198B913C5D0A6C733E"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_101F6D0360364A1D88012EEF32154E6E"
             {
             "SourcePath" = "8:..\\trainer-manager.ico"
             "TargetName" = "8:trainer-manager.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_30FFBB81534D4A198B913C5D0A6C733E"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_21C2226C92B94A2DA766FE5301A78C75"
+            {
+            "SourcePath" = "8:..\\Trainer Manager\\xbox360.png"
+            "TargetName" = "8:xbox360.png"
+            "Tag" = "8:"
+            "Folder" = "8:_30FFBB81534D4A198B913C5D0A6C733E"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_352B833365C0436DAA1197E3315EDEFA"
+            {
+            "SourcePath" = "8:..\\Trainer Manager\\ps3_empty.jpg"
+            "TargetName" = "8:ps3_empty.jpg"
+            "Tag" = "8:"
+            "Folder" = "8:_30FFBB81534D4A198B913C5D0A6C733E"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4C9B70F2C5F547FABFB8C9670C9FD1E5"
+            {
+            "SourcePath" = "8:..\\Trainer Manager\\playstation.png"
+            "TargetName" = "8:playstation.png"
             "Tag" = "8:"
             "Folder" = "8:_30FFBB81534D4A198B913C5D0A6C733E"
             "Condition" = "8:"
@@ -197,6 +307,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_EECA04CC40E6489BB1BC4D538358DDA1"
+            {
+            "SourcePath" = "8:..\\Trainer Manager\\pc.jpg"
+            "TargetName" = "8:pc.jpg"
+            "Tag" = "8:"
+            "Folder" = "8:_30FFBB81534D4A198B913C5D0A6C733E"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
         }
@@ -277,15 +407,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Trainer Manager"
-        "ProductCode" = "8:{8D0213BB-6778-418F-B73F-E48984A6C8AA}"
-        "PackageCode" = "8:{3B27B57F-D241-4126-818A-F704AC4001B4}"
+        "ProductCode" = "8:{6EB6C5D5-CF45-441B-8278-65E7E63FA3BB}"
+        "PackageCode" = "8:{D01536D6-D503-4784-9EFE-F7B0455E6C47}"
         "UpgradeCode" = "8:{57113CAC-5039-42CD-9D65-69B1DE824C04}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.1.1"
+        "ProductVersion" = "8:1.1.2"
         "Manufacturer" = "8:NewAgeSoldier"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:http://newagesoldier.com"

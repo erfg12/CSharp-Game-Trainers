@@ -35,6 +35,7 @@
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.visitWeb = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
             this.settingsButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.minimizeButton = new System.Windows.Forms.Button();
@@ -49,24 +50,21 @@
             this.closeSoftwareToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listView1 = new System.Windows.Forms.ListView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.browseFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3 = new System.Windows.Forms.Panel();
             this.downloadBox = new System.Windows.Forms.GroupBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.imageList2 = new System.Windows.Forms.ImageList(this.components);
             this.listView2 = new System.Windows.Forms.ListView();
+            this.imageList2 = new System.Windows.Forms.ImageList(this.components);
+            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.listView3 = new System.Windows.Forms.ListView();
-            this.listView4 = new System.Windows.Forms.ListView();
             this.imageList3 = new System.Windows.Forms.ImageList(this.components);
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.listView4 = new System.Windows.Forms.ListView();
             this.imageList4 = new System.Windows.Forms.ImageList(this.components);
             this.panel2.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
-            this.contextMenuStrip2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.downloadBox.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -79,6 +77,7 @@
             // backgroundWorker1
             // 
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
             // backgroundWorker2
             // 
@@ -114,6 +113,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.LightSlateGray;
+            this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.visitWeb);
             this.panel2.Controls.Add(this.settingsButton);
             this.panel2.Controls.Add(this.label1);
@@ -128,6 +128,17 @@
             this.panel2.TabIndex = 7;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             this.panel2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel2_MouseMove);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.Lime;
+            this.label2.Location = new System.Drawing.Point(197, 10);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(188, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "DOWNLOADING COVER ART...";
             // 
             // settingsButton
             // 
@@ -277,6 +288,7 @@
             this.listView1.LargeImageList = this.imageList1;
             this.listView1.Location = new System.Drawing.Point(0, 0);
             this.listView1.Name = "listView1";
+            this.listView1.ShowItemToolTips = true;
             this.listView1.Size = new System.Drawing.Size(182, 625);
             this.listView1.SmallImageList = this.imageList1;
             this.listView1.TabIndex = 1;
@@ -292,20 +304,6 @@
             this.imageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
             this.imageList1.ImageSize = new System.Drawing.Size(160, 68);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            // 
-            // contextMenuStrip2
-            // 
-            this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.browseFolderToolStripMenuItem});
-            this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(149, 26);
-            // 
-            // browseFolderToolStripMenuItem
-            // 
-            this.browseFolderToolStripMenuItem.Name = "browseFolderToolStripMenuItem";
-            this.browseFolderToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.browseFolderToolStripMenuItem.Text = "Browse Folder";
-            this.browseFolderToolStripMenuItem.Click += new System.EventHandler(this.browseFolderToolStripMenuItem_Click);
             // 
             // panel3
             // 
@@ -349,7 +347,7 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(182, 625);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "PC";
+            this.tabPage1.ToolTipText = "PC";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
@@ -360,34 +358,8 @@
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(182, 625);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "PS3";
+            this.tabPage2.ToolTipText = "Playstation 3";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.listView3);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(182, 625);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Xbox 360";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Controls.Add(this.listView4);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(182, 625);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Wii U";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // imageList2
-            // 
-            this.imageList2.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
-            this.imageList2.ImageSize = new System.Drawing.Size(80, 120);
-            this.imageList2.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // listView2
             // 
@@ -400,12 +372,29 @@
             this.listView2.LargeImageList = this.imageList2;
             this.listView2.Location = new System.Drawing.Point(0, 0);
             this.listView2.Name = "listView2";
+            this.listView2.ShowItemToolTips = true;
             this.listView2.Size = new System.Drawing.Size(182, 629);
             this.listView2.TabIndex = 0;
             this.listView2.TileSize = new System.Drawing.Size(80, 120);
             this.listView2.UseCompatibleStateImageBehavior = false;
             this.listView2.View = System.Windows.Forms.View.Tile;
             this.listView2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listView2_MouseClick);
+            // 
+            // imageList2
+            // 
+            this.imageList2.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+            this.imageList2.ImageSize = new System.Drawing.Size(80, 120);
+            this.imageList2.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.listView3);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(182, 625);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.ToolTipText = "Xbox 360";
+            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // listView3
             // 
@@ -418,11 +407,28 @@
             this.listView3.LargeImageList = this.imageList3;
             this.listView3.Location = new System.Drawing.Point(0, -2);
             this.listView3.Name = "listView3";
+            this.listView3.ShowItemToolTips = true;
             this.listView3.Size = new System.Drawing.Size(182, 629);
             this.listView3.TabIndex = 1;
             this.listView3.TileSize = new System.Drawing.Size(80, 120);
             this.listView3.UseCompatibleStateImageBehavior = false;
             this.listView3.View = System.Windows.Forms.View.Tile;
+            // 
+            // imageList3
+            // 
+            this.imageList3.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imageList3.ImageSize = new System.Drawing.Size(16, 16);
+            this.imageList3.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.listView4);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(182, 625);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.ToolTipText = "Wii U";
+            this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // listView4
             // 
@@ -435,17 +441,12 @@
             this.listView4.LargeImageList = this.imageList4;
             this.listView4.Location = new System.Drawing.Point(0, -2);
             this.listView4.Name = "listView4";
+            this.listView4.ShowItemToolTips = true;
             this.listView4.Size = new System.Drawing.Size(182, 629);
             this.listView4.TabIndex = 1;
             this.listView4.TileSize = new System.Drawing.Size(80, 120);
             this.listView4.UseCompatibleStateImageBehavior = false;
             this.listView4.View = System.Windows.Forms.View.Tile;
-            // 
-            // imageList3
-            // 
-            this.imageList3.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList3.ImageSize = new System.Drawing.Size(16, 16);
-            this.imageList3.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // imageList4
             // 
@@ -473,8 +474,8 @@
             this.Shown += new System.EventHandler(this.Form1_Shown);
             this.SizeChanged += new System.EventHandler(this.Form1_Resize);
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
-            this.contextMenuStrip2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.downloadBox.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
@@ -498,7 +499,6 @@
         private System.Windows.Forms.ToolStripMenuItem bingRewardsBotToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gameTrainerMemorydllToolStripMenuItem;
         private System.Windows.Forms.Button aboutButton;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
         private System.Windows.Forms.ToolStripMenuItem browseFolderToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeSoftwareToolStripMenuItem;
         private System.Windows.Forms.Button closeButton;
@@ -521,6 +521,7 @@
         private System.Windows.Forms.ListView listView4;
         private System.Windows.Forms.ImageList imageList3;
         private System.Windows.Forms.ImageList imageList4;
+        private System.Windows.Forms.Label label2;
     }
 }
 

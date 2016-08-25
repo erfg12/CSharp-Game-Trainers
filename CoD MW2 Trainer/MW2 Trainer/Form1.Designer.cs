@@ -243,20 +243,22 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Meiryo", 35F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(21, 19);
+            this.label7.Font = new System.Drawing.Font("Octapost NBP", 35F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.MintCream;
+            this.label7.Location = new System.Drawing.Point(21, 30);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(338, 71);
+            this.label7.Size = new System.Drawing.Size(423, 41);
             this.label7.TabIndex = 16;
             this.label7.Text = "Call of Duty:";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Meiryo", 35F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(21, 90);
+            this.label8.Font = new System.Drawing.Font("Octapost NBP", 35F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.MintCream;
+            this.label8.Location = new System.Drawing.Point(21, 80);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(481, 71);
+            this.label8.Size = new System.Drawing.Size(548, 41);
             this.label8.TabIndex = 17;
             this.label8.Text = "Modern Warfare 2";
             // 

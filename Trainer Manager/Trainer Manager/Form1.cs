@@ -15,6 +15,7 @@ using System.Web;
 using Ionic.Zip;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.Reflection;
 
 namespace Trainer_Manager
 {
@@ -43,7 +44,7 @@ namespace Trainer_Manager
         [DllImport("user32.dll")]
         static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
 
-        string saveDir = Properties.Settings.Default.trainer_folder + "/pc";
+        string saveDir = null;
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -69,6 +70,7 @@ namespace Trainer_Manager
                 Properties.Settings.Default.trainer_folder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\cheat_trainers";
                 Properties.Settings.Default.Save();
             }
+            saveDir = Properties.Settings.Default.trainer_folder + "/pc";
         }
 
         Process tProc = null;
@@ -111,6 +113,40 @@ namespace Trainer_Manager
                     wresp.Close();
             }
             return (bmp);
+        }
+
+        private void versionCheck()
+        {
+            try
+            {
+                string line;
+                WebClient client = new WebClient();
+                Stream stream = client.OpenRead("http://newagesoldier.com/myfiles/versions.txt");
+                using (StreamReader file = new StreamReader(stream))
+                {
+                    while ((line = file.ReadLine()) != null)
+                    {
+                        if (line.Contains("trainer_manager"))
+                        {
+                            string[] words = line.Split('=');
+                            //MessageBox.Show("DEBUG: " + "Online:" + words[1] + " Current:" + Assembly.GetExecutingAssembly().GetName().Version.ToString());
+                            int result = String.CompareOrdinal(words[1], Assembly.GetExecutingAssembly().GetName().Version.ToString());
+                            //MessageBox.Show("DEBUG: " + ((result < 0) ? "less than" : ((result > 0) ? "greater than" : "equal to")));\
+                            if (result > 0)
+                            {
+                                update updatebox = new update();
+                                updatebox.Show();
+                            }
+                        }
+                        else
+                            MessageBox.Show("Update function couldn't find version number online.");
+                    }
+                }
+                
+            } catch
+            {
+                MessageBox.Show("Update checking function crashed.");
+            }
         }
 
         public HttpStatusCode GetHeaders(string url)
@@ -170,6 +206,7 @@ namespace Trainer_Manager
                                 ListViewItem lst = new ListViewItem();
                                 lst.Tag = words[0];
                                 lst.Text = words[1];
+                                lst.ToolTipText = lst.Text;
                                 lst.ImageIndex = count;
                                 listView1.Invoke(new MethodInvoker(delegate { imageList1.Images.Add(LoadPicture("http://cdn.akamai.steamstatic.com/steam/apps/" + words[0] + "/header.jpg")); listView1.Items.Add(lst); }));
                                 count++;
@@ -180,6 +217,7 @@ namespace Trainer_Manager
                                 ListViewItem lst = new ListViewItem();
                                 lst.Tag = words[0];
                                 lst.Text = words[1];
+                                lst.ToolTipText = lst.Text;
                                 lst.ImageIndex = count;
                                 string url = "http://art.gametdb.com/ps3/cover/EN/" + words[0] + ".jpg";
                                 //MessageBox.Show(GetHeaders(url).ToString());
@@ -189,7 +227,7 @@ namespace Trainer_Manager
                                         imageList2.Images.Add(LoadPicture("http://art.gametdb.com/ps3/cover/EN/" + words[0] + ".jpg")); listView2.Items.Add(lst);
                                     } catch
                                     {
-                                        imageList2.Images.Add(LoadPicture("http://tshop.r10s.com/5b9259d0-c352-11e4-a81b-005056ae31af/ps3/ps3_new_case_1.JPG")); listView2.Items.Add(lst);
+                                        imageList2.Images.Add(Image.FromFile("ps3_empty.jpg")); listView2.Items.Add(lst);
                                     }
                                 }));
                                 count++;
@@ -200,6 +238,7 @@ namespace Trainer_Manager
                                 ListViewItem lst = new ListViewItem();
                                 lst.Tag = words[0];
                                 lst.Text = words[1];
+                                lst.ToolTipText = lst.Text;
                                 lst.ImageIndex = count;
                                 listView3.Invoke(new MethodInvoker(delegate { imageList3.Images.Add(LoadPicture("http://www.freecovers.net/preview/0/" + words[0] + "/big.jpg")); listView3.Items.Add(lst); }));
                                 count++;
@@ -210,6 +249,7 @@ namespace Trainer_Manager
                                 ListViewItem lst = new ListViewItem();
                                 lst.Tag = words[0];
                                 lst.Text = words[1];
+                                lst.ToolTipText = lst.Text;
                                 lst.ImageIndex = count;
                                 listView4.Invoke(new MethodInvoker(delegate { imageList4.Images.Add(LoadPicture("http://art.gametdb.com/wiiu/cover/EN/" + words[0] + ".jpg")); listView4.Items.Add(lst); }));
                                 count++;
@@ -238,7 +278,7 @@ namespace Trainer_Manager
             //MessageBox.Show("DEBUG: Launching Trainer - Dir:" + trainerDir);
             try
             {
-                foreach (var file in Directory.GetFiles(trainerDir, "*.exe", SearchOption.AllDirectories))
+                /*foreach (var file in Directory.GetFiles(trainerDir, "*.exe", SearchOption.AllDirectories))
                 {
                     try
                     {
@@ -251,7 +291,7 @@ namespace Trainer_Manager
                     {
                         //MessageBox.Show("ERROR: Cannot add admin privileges to program " + Path.GetFileName(file));
                     }
-                }
+                }*/
                 foreach (var file in Directory.GetFiles(trainerDir, "*trainer*.exe", SearchOption.AllDirectories))
                 {
                     //ProcessStartInfo info = new ProcessStartInfo(file);
@@ -580,19 +620,6 @@ namespace Trainer_Manager
             }
         }
 
-        private void browseFolderToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (listView1.FocusedItem.Index != -1)
-            {
-                string saveDir = Properties.Settings.Default.trainer_folder;
-                string trainerDir = saveDir + "\\" + listView1.SelectedItems[0].Text;
-                if (Directory.Exists(trainerDir))
-                    Process.Start(trainerDir);
-                else
-                    MessageBox.Show("No directory for this trainer. Please download first.");
-            }
-        }
-
         private void closeSoftwareToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -644,6 +671,21 @@ namespace Trainer_Manager
 
         private void Form1_Shown(object sender, EventArgs e)
         {
+            ImageList iconsList = new ImageList();
+            iconsList.TransparentColor = Color.Blue;
+            iconsList.ColorDepth = ColorDepth.Depth32Bit;
+            iconsList.ImageSize = new Size(15, 15);
+            iconsList.Images.Add(Image.FromFile(@"pc.jpg"));
+            iconsList.Images.Add(Image.FromFile(@"playstation.png"));
+            iconsList.Images.Add(Image.FromFile(@"xbox360.png"));
+            iconsList.Images.Add(Image.FromFile(@"wiiu.png"));
+            tabControl1.ImageList = iconsList;
+            tabControl1.ShowToolTips = true;
+            tabPage1.ImageIndex = 0;
+            tabPage2.ImageIndex = 1;
+            tabPage3.ImageIndex = 2;
+            tabPage4.ImageIndex = 3;
+            versionCheck();
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -676,9 +718,10 @@ namespace Trainer_Manager
             else if (tabControl1.Controls[1] == tabControl1.SelectedTab)
                 saveDir = Properties.Settings.Default.trainer_folder + "/ps3";
             else if(tabControl1.Controls[2] == tabControl1.SelectedTab)
-                saveDir = Properties.Settings.Default.trainer_folder + "/xbo360";
+                saveDir = Properties.Settings.Default.trainer_folder + "/xbox360";
             else if (tabControl1.Controls[3] == tabControl1.SelectedTab)
                 saveDir = Properties.Settings.Default.trainer_folder + "/wiiu";
+            label2.Visible = true;
             if (!backgroundWorker1.IsBusy)
                 backgroundWorker1.RunWorkerAsync();
         }
@@ -687,6 +730,11 @@ namespace Trainer_Manager
         {
             if (listView2.SelectedItems.Count > 0)
                 getTrainer(listView2.SelectedItems[0].Text);
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            label2.Visible = false;
         }
     }
 }

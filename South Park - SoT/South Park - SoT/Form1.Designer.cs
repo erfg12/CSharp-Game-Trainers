@@ -43,6 +43,7 @@
             this.procID_label = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // expBox
@@ -166,12 +167,24 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Old English Text MT", 35F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(8, 9);
+            this.label7.Font = new System.Drawing.Font("Octapost NBP", 35F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.MintCream;
+            this.label7.Location = new System.Drawing.Point(27, 29);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(746, 56);
+            this.label7.Size = new System.Drawing.Size(372, 41);
             this.label7.TabIndex = 12;
-            this.label7.Text = "South Park™: The Stick of Truth™";
+            this.label7.Text = "South Park™";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Octapost NBP", 35F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.MintCream;
+            this.label8.Location = new System.Drawing.Point(64, 86);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(579, 41);
+            this.label8.TabIndex = 13;
+            this.label8.Text = "The Stick Of Truth";
             // 
             // Form1
             // 
@@ -179,6 +192,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.ClientSize = new System.Drawing.Size(759, 641);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.procID_label);
             this.Controls.Add(this.label6);
@@ -216,6 +230,7 @@
         private System.Windows.Forms.Label procID_label;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
     }
 }
 
