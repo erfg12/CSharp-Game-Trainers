@@ -307,6 +307,7 @@ namespace Trainer_Manager
                     }
                     tProc = new Process();
                     tProc.StartInfo.FileName = file;
+                    tProc.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
                     tProc.Start();
                     while (string.IsNullOrEmpty(tProc.MainWindowTitle))
                     {
@@ -671,20 +672,23 @@ namespace Trainer_Manager
 
         private void Form1_Shown(object sender, EventArgs e)
         {
-            ImageList iconsList = new ImageList();
-            iconsList.TransparentColor = Color.Blue;
-            iconsList.ColorDepth = ColorDepth.Depth32Bit;
-            iconsList.ImageSize = new Size(15, 15);
-            iconsList.Images.Add(Image.FromFile(@"pc.jpg"));
-            iconsList.Images.Add(Image.FromFile(@"playstation.png"));
-            iconsList.Images.Add(Image.FromFile(@"xbox360.png"));
-            iconsList.Images.Add(Image.FromFile(@"wiiu.png"));
-            tabControl1.ImageList = iconsList;
-            tabControl1.ShowToolTips = true;
-            tabPage1.ImageIndex = 0;
-            tabPage2.ImageIndex = 1;
-            tabPage3.ImageIndex = 2;
-            tabPage4.ImageIndex = 3;
+            try
+            {
+                ImageList iconsList = new ImageList();
+                iconsList.TransparentColor = Color.Blue;
+                iconsList.ColorDepth = ColorDepth.Depth32Bit;
+                iconsList.ImageSize = new Size(15, 15);
+                iconsList.Images.Add(Image.FromFile(@"pc.jpg"));
+                iconsList.Images.Add(Image.FromFile(@"playstation.png"));
+                iconsList.Images.Add(Image.FromFile(@"xbox360.png"));
+                iconsList.Images.Add(Image.FromFile(@"wiiu.png"));
+                tabControl1.ImageList = iconsList;
+                tabControl1.ShowToolTips = true;
+                tabPage1.ImageIndex = 0;
+                tabPage2.ImageIndex = 1;
+                tabPage3.ImageIndex = 2;
+                tabPage4.ImageIndex = 3;
+            } catch { }
             versionCheck();
         }
 
