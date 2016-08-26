@@ -726,6 +726,10 @@ namespace Trainer_Manager
             else if (tabControl1.Controls[3] == tabControl1.SelectedTab)
                 saveDir = Properties.Settings.Default.trainer_folder + "/wiiu";
             label2.Visible = true;
+            listView1.Cursor = Cursors.WaitCursor;
+            listView2.Cursor = Cursors.WaitCursor;
+            listView3.Cursor = Cursors.WaitCursor;
+            listView4.Cursor = Cursors.WaitCursor;
             if (!backgroundWorker1.IsBusy)
                 backgroundWorker1.RunWorkerAsync();
         }
@@ -738,6 +742,10 @@ namespace Trainer_Manager
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            listView1.Cursor = Cursors.Hand;
+            listView2.Cursor = Cursors.Hand;
+            listView3.Cursor = Cursors.Hand;
+            listView4.Cursor = Cursors.Hand;
             label2.Visible = false;
         }
     }
