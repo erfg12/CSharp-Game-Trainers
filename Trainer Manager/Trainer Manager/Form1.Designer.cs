@@ -51,6 +51,7 @@
             this.listView1 = new System.Windows.Forms.ListView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.panel3 = new System.Windows.Forms.Panel();
+            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.downloadBox = new System.Windows.Forms.GroupBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -63,7 +64,6 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.listView4 = new System.Windows.Forms.ListView();
             this.imageList4 = new System.Windows.Forms.ImageList(this.components);
-            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.panel2.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -316,6 +316,17 @@
             this.panel3.Size = new System.Drawing.Size(784, 684);
             this.panel3.TabIndex = 11;
             // 
+            // webBrowser1
+            // 
+            this.webBrowser1.Location = new System.Drawing.Point(-1, 27);
+            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.ScriptErrorsSuppressed = true;
+            this.webBrowser1.ScrollBarsEnabled = false;
+            this.webBrowser1.Size = new System.Drawing.Size(785, 656);
+            this.webBrowser1.TabIndex = 1;
+            this.webBrowser1.Url = new System.Uri("http://newagesoldier.com/tm_news.php", System.UriKind.Absolute);
+            // 
             // downloadBox
             // 
             this.downloadBox.BackColor = System.Drawing.SystemColors.Control;
@@ -415,11 +426,12 @@
             this.listView3.TileSize = new System.Drawing.Size(80, 120);
             this.listView3.UseCompatibleStateImageBehavior = false;
             this.listView3.View = System.Windows.Forms.View.Tile;
+            this.listView3.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listView3_MouseClick);
             // 
             // imageList3
             // 
-            this.imageList3.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
-            this.imageList3.ImageSize = new System.Drawing.Size(16, 16);
+            this.imageList3.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+            this.imageList3.ImageSize = new System.Drawing.Size(160, 85);
             this.imageList3.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // tabPage4
@@ -449,23 +461,13 @@
             this.listView4.TileSize = new System.Drawing.Size(80, 120);
             this.listView4.UseCompatibleStateImageBehavior = false;
             this.listView4.View = System.Windows.Forms.View.Tile;
+            this.listView4.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listView4_MouseClick);
             // 
             // imageList4
             // 
             this.imageList4.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
             this.imageList4.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList4.TransparentColor = System.Drawing.Color.Transparent;
-            // 
-            // webBrowser1
-            // 
-            this.webBrowser1.Location = new System.Drawing.Point(-1, 27);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.ScriptErrorsSuppressed = true;
-            this.webBrowser1.ScrollBarsEnabled = false;
-            this.webBrowser1.Size = new System.Drawing.Size(785, 656);
-            this.webBrowser1.TabIndex = 1;
-            this.webBrowser1.Url = new System.Uri("http://newagesoldier.com/tm_news.php", System.UriKind.Absolute);
             // 
             // Form1
             // 

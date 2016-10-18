@@ -748,5 +748,17 @@ namespace Trainer_Manager
             listView4.Cursor = Cursors.Hand;
             label2.Visible = false;
         }
+
+        private void listView3_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (listView3.SelectedItems.Count > 0)
+                getTrainer(listView3.SelectedItems[0].Text);
+        }
+
+        private void listView4_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (listView4.SelectedItems.Count > 0)
+                getTrainer(listView4.SelectedItems[0].Text);
+        }
     }
 }
