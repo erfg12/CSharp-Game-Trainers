@@ -107,7 +107,7 @@
             this.visitWeb.Name = "visitWeb";
             this.visitWeb.Size = new System.Drawing.Size(108, 23);
             this.visitWeb.TabIndex = 5;
-            this.visitWeb.Text = "newagesoldier.com";
+            this.visitWeb.Text = "newage.software";
             this.visitWeb.UseVisualStyleBackColor = false;
             this.visitWeb.Click += new System.EventHandler(this.visitWeb_Click);
             // 
@@ -483,7 +483,7 @@
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Cheat Trainer Manager :: http://newagesoldier.com";
+            this.Text = "Cheat Trainer Manager :: http://newage.software";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.form1_Closing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Shown += new System.EventHandler(this.Form1_Shown);

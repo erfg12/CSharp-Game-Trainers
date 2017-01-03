@@ -57,6 +57,15 @@ namespace Trainer_Manager
                     return;
                 }
 
+                if (tabControl1.Controls[0] == tabControl1.SelectedTab) //PC
+                    listView1.Invoke(new MethodInvoker(delegate { listView1.Items.Clear(); }));
+                else if (tabControl1.Controls[1] == tabControl1.SelectedTab) //PS3
+                    listView2.Invoke(new MethodInvoker(delegate { listView2.Items.Clear(); }));
+                else if (tabControl1.Controls[2] == tabControl1.SelectedTab) //xbox360
+                    listView3.Invoke(new MethodInvoker(delegate { listView3.Items.Clear(); }));
+                else if (tabControl1.Controls[3] == tabControl1.SelectedTab) //wiiu
+                    listView4.Invoke(new MethodInvoker(delegate { listView4.Items.Clear(); }));
+
                 if (!backgroundWorker1.IsBusy)
                     backgroundWorker1.RunWorkerAsync();
             } catch
@@ -169,15 +178,6 @@ namespace Trainer_Manager
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            if (tabControl1.Controls[0] == tabControl1.SelectedTab) //PC
-                listView1.Invoke(new MethodInvoker(delegate { listView1.Items.Clear(); }));
-            else if (tabControl1.Controls[1] == tabControl1.SelectedTab) //PS3
-                listView2.Invoke(new MethodInvoker(delegate { listView2.Items.Clear(); }));
-            else if (tabControl1.Controls[2] == tabControl1.SelectedTab) //xbox360
-                listView3.Invoke(new MethodInvoker(delegate { listView3.Items.Clear(); }));
-            else if (tabControl1.Controls[3] == tabControl1.SelectedTab) //wiiu
-                listView4.Invoke(new MethodInvoker(delegate { listView4.Items.Clear(); }));
-
             try
             {
                 string tscanURL = "https://newagesoldier.com/myfiles/trainers/tscan.php";
@@ -647,7 +647,7 @@ namespace Trainer_Manager
 
         private void visitWeb_Click(object sender, EventArgs e)
         {
-            Process.Start("http://newagesoldier.com");
+            Process.Start("http://newage.software");
         }
 
         private void label_MouseMove(object sender, MouseEventArgs e)
@@ -725,11 +725,22 @@ namespace Trainer_Manager
                 saveDir = Properties.Settings.Default.trainer_folder + "/xbox360";
             else if (tabControl1.Controls[3] == tabControl1.SelectedTab)
                 saveDir = Properties.Settings.Default.trainer_folder + "/wiiu";
+
             label2.Visible = true;
             listView1.Cursor = Cursors.WaitCursor;
             listView2.Cursor = Cursors.WaitCursor;
             listView3.Cursor = Cursors.WaitCursor;
             listView4.Cursor = Cursors.WaitCursor;
+
+            if (tabControl1.Controls[0] == tabControl1.SelectedTab) //PC
+                listView1.Invoke(new MethodInvoker(delegate { listView1.Items.Clear(); }));
+            else if (tabControl1.Controls[1] == tabControl1.SelectedTab) //PS3
+                listView2.Invoke(new MethodInvoker(delegate { listView2.Items.Clear(); }));
+            else if (tabControl1.Controls[2] == tabControl1.SelectedTab) //xbox360
+                listView3.Invoke(new MethodInvoker(delegate { listView3.Items.Clear(); }));
+            else if (tabControl1.Controls[3] == tabControl1.SelectedTab) //wiiu
+                listView4.Invoke(new MethodInvoker(delegate { listView4.Items.Clear(); }));
+
             if (!backgroundWorker1.IsBusy)
                 backgroundWorker1.RunWorkerAsync();
         }

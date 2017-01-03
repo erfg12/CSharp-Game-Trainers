@@ -6,12 +6,12 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Trainer Manager")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Software manager for video game cheat programs")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("newagesoldier.com")]
+[assembly: AssemblyCompany("www.newage.software")]
 [assembly: AssemblyProduct("Trainer Manager")]
-[assembly: AssemblyCopyright("Copyright New Age Soldier ©  2016")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCopyright("Copyright © 2017 New Age Software, LLC")]
+[assembly: AssemblyTrademark("New Age Software, LLC")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
