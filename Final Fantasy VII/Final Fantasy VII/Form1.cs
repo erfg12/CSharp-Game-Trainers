@@ -34,7 +34,7 @@ namespace Final_Fantasy_VII
             if (gameProcId > 0)
             {
                 ProcessID.Text = "Process ID: " + gameProcId.ToString();
-                MemLib.OpenGameProcess(gameProcId);
+                MemLib.OpenProcess(gameProcId);
             }
         }
 

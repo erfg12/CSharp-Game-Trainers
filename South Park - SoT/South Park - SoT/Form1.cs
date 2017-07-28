@@ -31,7 +31,7 @@ namespace South_Park___SoT
             if (gameProcId > 0)
             {
                 procID_label.Text = gameProcId.ToString();
-                MemLib.OpenGameProcess(gameProcId);
+                MemLib.OpenProcess(gameProcId);
                 toggleHP.Text = "ON";
             }
         }
