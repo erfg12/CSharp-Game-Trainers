@@ -1,6 +1,6 @@
 Created by The New Age Soldier - http://newagesoldier.com
 
-These programs were built using the memory.dll program found at https://newagesoldier.com/memory-hacker/
+These programs were built using the memory.dll program found at https://github.com/erfg12/memory.dll
 
 When creating a new trainer project with the memory.dll you need to have the program run as admin.
 
