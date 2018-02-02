@@ -41,7 +41,7 @@ namespace MW2_Trainer
             {
                 loaded = true;
                 ProcessID.Text = gameProcId.ToString();
-                MemLib.OpenProcess(gameProcId);
+                MemLib.OpenProcess(gameProcId.ToString());
 
                 int godMode = MemLib.readInt("godMode", codeFile);
 

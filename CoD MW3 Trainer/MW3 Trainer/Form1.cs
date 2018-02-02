@@ -45,7 +45,7 @@ namespace MW3_Trainer
                 {
                     ProcessID.Text = gameProcId.ToString();
                 }));
-                MemLib.OpenProcess(gameProcId);
+                MemLib.OpenProcess(gameProcId.ToString());
                 loaded = true;
             }
         }
