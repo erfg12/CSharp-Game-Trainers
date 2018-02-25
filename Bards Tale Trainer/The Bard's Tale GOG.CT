@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="24">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>0</ID>
+      <Description>"Overhead Damage"</Description>
+      <VariableType>Float</VariableType>
+      <Address>"The Bard's Tale.exe"+8FC8FC</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>27</ID>
+      <Description>"Health"</Description>
+      <VariableType>2 Bytes</VariableType>
+      <Address>"The Bard's Tale.exe"+8703C4</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>15</ID>
+      <Description>"Level"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"The Bard's Tale.exe"+870400</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>6</ID>
+      <Description>"Experience"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"The Bard's Tale.exe"+87030C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>11</ID>
+      <Description>"Max Experience"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"The Bard's Tale.exe"+870310</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>10</ID>
+      <Description>"Silver"</Description>
+      <VariableType>4 Bytes</VariableType>
+      <Address>"The Bard's Tale.exe"+87031C</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>28</ID>
+      <Description>"Adderstones"</Description>
+      <VariableType>Byte</VariableType>
+      <Address>"The Bard's Tale.exe"+8703CA</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>20</ID>
+      <Description>"Strength (Max 127)"</Description>
+      <VariableType>Byte</VariableType>
+      <Address>"The Bard's Tale.exe"+87044d</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>21</ID>
+      <Description>"Vitality (Max 127)"</Description>
+      <VariableType>Byte</VariableType>
+      <Address>"The Bard's Tale.exe"+87044e</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>22</ID>
+      <Description>"Luck (Max 54)"</Description>
+      <VariableType>Byte</VariableType>
+      <Address>"The Bard's Tale.exe"+87044f</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>23</ID>
+      <Description>"Dexterity (Max 127)"</Description>
+      <VariableType>Byte</VariableType>
+      <Address>"The Bard's Tale.exe"+870450</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>24</ID>
+      <Description>"Charisma (Max 127)"</Description>
+      <VariableType>Byte</VariableType>
+      <Address>"The Bard's Tale.exe"+870451</Address>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>25</ID>
+      <Description>"Rhythm (Max 127)"</Description>
+      <VariableType>Byte</VariableType>
+      <Address>"The Bard's Tale.exe"+870452</Address>
+    </CheatEntry>
+  </CheatEntries>
+  <CheatCodes>
+    <CodeEntry>
+      <Description>Change of fstp dword ptr [eax+58]</Description>
+      <Address>0048A841</Address>
+      <ModuleName>The Bard's Tale.exe</ModuleName>
+      <ModuleNameOffset>8A841</ModuleNameOffset>
+      <Before>
+        <Byte>58</Byte>
+        <Byte>89</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>18</Byte>
+      </Before>
+      <Actual>
+        <Byte>D9</Byte>
+        <Byte>58</Byte>
+        <Byte>58</Byte>
+      </Actual>
+      <After>
+        <Byte>75</Byte>
+        <Byte>03</Byte>
+        <Byte>89</Byte>
+        <Byte>70</Byte>
+        <Byte>38</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of fadd dword ptr [eax+58]</Description>
+      <Address>0048A83A</Address>
+      <ModuleName>The Bard's Tale.exe</ModuleName>
+      <ModuleNameOffset>8A83A</ModuleNameOffset>
+      <Before>
+        <Byte>48</Byte>
+        <Byte>40</Byte>
+        <Byte>83</Byte>
+        <Byte>F9</Byte>
+        <Byte>01</Byte>
+      </Before>
+      <Actual>
+        <Byte>D8</Byte>
+        <Byte>40</Byte>
+        <Byte>58</Byte>
+      </Actual>
+      <After>
+        <Byte>89</Byte>
+        <Byte>44</Byte>
+        <Byte>24</Byte>
+        <Byte>18</Byte>
+        <Byte>D9</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov [esi+6C],eax</Description>
+      <Address>00435747</Address>
+      <ModuleName>The Bard's Tale.exe</ModuleName>
+      <ModuleNameOffset>35747</ModuleNameOffset>
+      <Before>
+        <Byte>24</Byte>
+        <Byte>04</Byte>
+        <Byte>56</Byte>
+        <Byte>8B</Byte>
+        <Byte>F1</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>46</Byte>
+        <Byte>6C</Byte>
+      </Actual>
+      <After>
+        <Byte>A0</Byte>
+        <Byte>65</Byte>
+        <Byte>FF</Byte>
+        <Byte>C6</Byte>
+        <Byte>00</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Code :mov [edi+2C],eax</Description>
+      <Address>004AED96</Address>
+      <ModuleName>The Bard's Tale.exe</ModuleName>
+      <ModuleNameOffset>AED96</ModuleNameOffset>
+      <Before>
+        <Byte>E8</Byte>
+        <Byte>2A</Byte>
+        <Byte>4F</Byte>
+        <Byte>F5</Byte>
+        <Byte>FF</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>47</Byte>
+        <Byte>2C</Byte>
+      </Actual>
+      <After>
+        <Byte>8B</Byte>
+        <Byte>47</Byte>
+        <Byte>48</Byte>
+        <Byte>85</Byte>
+        <Byte>C0</Byte>
+      </After>
+    </CodeEntry>
+    <CodeEntry>
+      <Description>Change of mov [edi+00000080],eax</Description>
+      <Address>004AEDB5</Address>
+      <ModuleName>The Bard's Tale.exe</ModuleName>
+      <ModuleNameOffset>AEDB5</ModuleNameOffset>
+      <Before>
+        <Byte>F5</Byte>
+        <Byte>FF</Byte>
+        <Byte>83</Byte>
+        <Byte>FE</Byte>
+        <Byte>76</Byte>
+      </Before>
+      <Actual>
+        <Byte>89</Byte>
+        <Byte>87</Byte>
+        <Byte>80</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+        <Byte>00</Byte>
+      </Actual>
+      <After>
+        <Byte>7C</Byte>
+        <Byte>16</Byte>
+        <Byte>83</Byte>
+        <Byte>FE</Byte>
+        <Byte>7B</Byte>
+      </After>
+    </CodeEntry>
+  </CheatCodes>
+  <UserdefinedSymbols/>
+</CheatTable>
