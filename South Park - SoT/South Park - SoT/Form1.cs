@@ -22,16 +22,15 @@ namespace South_Park___SoT
         public string codeFile = Application.StartupPath + @"\codes.ini";
         public Mem MemLib = new Mem();
 
-        int gameProcId;
+        bool gameProc;
 
         private void openGame()
         {
-            gameProcId = MemLib.getProcIDFromName("South Park - The Stick of Truth");
+            gameProc = MemLib.OpenProcess("South Park - The Stick of Truth");
 
-            if (gameProcId > 0)
+            if (gameProc)
             {
-                procID_label.Text = gameProcId.ToString();
-                MemLib.OpenProcess(gameProcId.ToString());
+                procID_label.Text = gameProc.ToString();
                 toggleHP.Text = "ON";
             }
         }
@@ -51,12 +50,12 @@ namespace South_Park___SoT
         {
             while (true)
             {
-                if (gameProcId > 0)
+                if (gameProc)
                 {
-                    MemLib.writeMemory("combatHP", "int", "99999", codeFile);
-                    MemLib.writeMemory("combatMP", "int", "20", codeFile);
-                    MemLib.writeMemory("buddyCombatHP", "int", "99999", codeFile);
-                    MemLib.writeMemory("buddyCombatMP", "int", "20", codeFile);
+                    MemLib.WriteMemory("combatHP", "int", "99999", codeFile);
+                    MemLib.WriteMemory("combatMP", "int", "20", codeFile);
+                    MemLib.WriteMemory("buddyCombatHP", "int", "99999", codeFile);
+                    MemLib.WriteMemory("buddyCombatMP", "int", "20", codeFile);
 
                     if (!String.ReferenceEquals(expBox.Text, exp))
                         expBox.Text = exp;
@@ -70,33 +69,33 @@ namespace South_Park___SoT
 
         private void levelBox_TextChanged(object sender, EventArgs e)
         {
-            if (gameProcId > 0)
+            if (gameProc)
             {
                 if (!String.IsNullOrEmpty(levelBox.Text))
-                    MemLib.writeMemory("level", "int", levelBox.Text, codeFile);
+                    MemLib.WriteMemory("level", "int", levelBox.Text, codeFile);
             }
         }
 
         private void expBox_TextChanged(object sender, EventArgs e)
         {
-            if (gameProcId > 0)
+            if (gameProc)
             {
                 if (!String.IsNullOrEmpty(expBox.Text))
-                    MemLib.writeMemory("experience", "int", expBox.Text, codeFile);
+                    MemLib.WriteMemory("experience", "int", expBox.Text, codeFile);
             }
         }
 
         private void label5_Click(object sender, EventArgs e)
         {
-            Process.Start("http://newagesoldier.com");
+            Process.Start("https://newagesoldier.com");
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (gameProcId > 0)
+            if (gameProc)
             {
-                exp = MemLib.readString("experience", codeFile);
-                LVL = MemLib.readString("level", codeFile);
+                exp = MemLib.ReadString("experience", codeFile);
+                LVL = MemLib.ReadString("level", codeFile);
             }
         }
     }

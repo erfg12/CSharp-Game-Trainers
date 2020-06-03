@@ -35,7 +35,7 @@ namespace MW2_Trainer
                 return;
 
             //new memory.dll 1.0.2 function
-            int gameProcId = MemLib.getProcIDFromName("iw4sp"); //use task manager to find game name. For CoD MW2 it is iw4sp. Do not add .exe extension
+            int gameProcId = MemLib.GetProcIdFromName("iw4sp"); //use task manager to find game name. For CoD MW2 it is iw4sp. Do not add .exe extension
 
             if (gameProcId != 0)
             {
@@ -43,7 +43,7 @@ namespace MW2_Trainer
                 ProcessID.Text = gameProcId.ToString();
                 MemLib.OpenProcess(gameProcId.ToString());
 
-                int godMode = MemLib.readInt("godMode", codeFile);
+                int godMode = MemLib.ReadInt("godMode", codeFile);
 
                 if (godMode == 1)
                     godmode_checkbox.Checked = true;
@@ -59,10 +59,10 @@ namespace MW2_Trainer
                 int id = m.WParam.ToInt32();
                 if (id == 1)
                 {
-                    if (MemLib.readInt("noClip", codeFile) == 1)
-                        MemLib.writeMemory("noClip", "int", "0", codeFile);
+                    if (MemLib.ReadInt("noClip", codeFile) == 1)
+                        MemLib.WriteMemory("noClip", "int", "0", codeFile);
                     else
-                        MemLib.writeMemory("noClip", "int", "1", codeFile);
+                        MemLib.WriteMemory("noClip", "int", "1", codeFile);
                 }
                 else if (id == 2)
                 {
@@ -96,7 +96,7 @@ namespace MW2_Trainer
                 openGame();
                 //because we are working on a seperate thread from the UI, we need to use invoke on our UI elements.
                 //start reading our values
-                int noClip = MemLib.readInt("noClip", codeFile);
+                int noClip = MemLib.ReadInt("noClip", codeFile);
                 if (noClip == 1)
                 {
                     noclip_toggle.Invoke(new MethodInvoker(delegate { noclip_toggle.Text = "Enabled"; noclip_toggle.ForeColor = System.Drawing.Color.DarkGreen; }));
@@ -107,23 +107,23 @@ namespace MW2_Trainer
                 }
 
                 if (godmode_checkbox.Checked) //make sure we keep this
-                    MemLib.writeMemory("godMode", "int", "1", codeFile);
+                    MemLib.WriteMemory("godMode", "int", "1", codeFile);
 
                 if (infammo_checkbox.Checked) //since backgroundworker stays running, this will lock our ammo/magazine values
                 {
-                    MemLib.writeMemory("grenades", "int", "4", codeFile);
-                    MemLib.writeMemory("flashGrenades", "int", "4", codeFile);
+                    MemLib.WriteMemory("grenades", "int", "4", codeFile);
+                    MemLib.WriteMemory("flashGrenades", "int", "4", codeFile);
 
                     //sometimes the game switches these around, so I want to set them all to 50 for now
-                    MemLib.writeMemory("RPG", "int", "50", codeFile);
-                    MemLib.writeMemory("grenadeLauncher", "int", "50", codeFile); //can be picked up weapons ammo too sometimes
-                    MemLib.writeMemory("primaryAmmo", "int", "50", codeFile);
-                    MemLib.writeMemory("primaryWieldedMagazine", "int", "50", codeFile);
-                    MemLib.writeMemory("primaryWieldedMagazine2", "int", "50", codeFile);
-                    MemLib.writeMemory("secondaryWieldedMagazine", "int", "50", codeFile);
-                    MemLib.writeMemory("primaryMagazine", "int", "50", codeFile);
-                    MemLib.writeMemory("secondaryAmmo", "int", "50", codeFile);
-                    MemLib.writeMemory("secondaryMagazine", "int", "50", codeFile);
+                    MemLib.WriteMemory("RPG", "int", "50", codeFile);
+                    MemLib.WriteMemory("grenadeLauncher", "int", "50", codeFile); //can be picked up weapons ammo too sometimes
+                    MemLib.WriteMemory("primaryAmmo", "int", "50", codeFile);
+                    MemLib.WriteMemory("primaryWieldedMagazine", "int", "50", codeFile);
+                    MemLib.WriteMemory("primaryWieldedMagazine2", "int", "50", codeFile);
+                    MemLib.WriteMemory("secondaryWieldedMagazine", "int", "50", codeFile);
+                    MemLib.WriteMemory("primaryMagazine", "int", "50", codeFile);
+                    MemLib.WriteMemory("secondaryAmmo", "int", "50", codeFile);
+                    MemLib.WriteMemory("secondaryMagazine", "int", "50", codeFile);
                 }
             }
         }
@@ -131,29 +131,29 @@ namespace MW2_Trainer
         private void godmode_checkbox_CheckedChanged(object sender, EventArgs e)
         {
             if (godmode_checkbox.Checked)
-                MemLib.writeMemory("godMode", "int", "1", codeFile);
+                MemLib.WriteMemory("godMode", "int", "1", codeFile);
             else
-                MemLib.writeMemory("godMode", "int", "0", codeFile);
+                MemLib.WriteMemory("godMode", "int", "0", codeFile);
         }
 
         private void noClip(bool enabled)
         {
             if (enabled)
-                MemLib.writeMemory("noClip", "int", "1", codeFile);
+                MemLib.WriteMemory("noClip", "int", "1", codeFile);
             else
-                MemLib.writeMemory("noClip", "int", "0", codeFile);
+                MemLib.WriteMemory("noClip", "int", "0", codeFile);
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             double timeScale = timescale_trackbar.Value * 0.2;
-            MemLib.writeMemory("timescale", "float", timeScale.ToString(), codeFile);
+            MemLib.WriteMemory("timescale", "float", timeScale.ToString(), codeFile);
         }
 
         private void resetBtn_Click(object sender, EventArgs e)
         {
             timescale_trackbar.Value = 5; //5 * 0.2 = 1.0 (normal speed) See trackBar1_Scroll function for example
-            MemLib.writeMemory("timescale", "float", "1", codeFile);
+            MemLib.WriteMemory("timescale", "float", "1", codeFile);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -162,7 +162,7 @@ namespace MW2_Trainer
                 return;
 
             timescale_trackbar.Value = timescale_trackbar.Value + 1;
-            MemLib.writeMemory("timescale", "float", (timescale_trackbar.Value * 0.2).ToString(), codeFile);
+            MemLib.WriteMemory("timescale", "float", (timescale_trackbar.Value * 0.2).ToString(), codeFile);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -171,12 +171,12 @@ namespace MW2_Trainer
                 return;
 
             timescale_trackbar.Value = timescale_trackbar.Value - 1;
-            MemLib.writeMemory("timescale", "float", (timescale_trackbar.Value * 0.2).ToString(), codeFile);
+            MemLib.WriteMemory("timescale", "float", (timescale_trackbar.Value * 0.2).ToString(), codeFile);
         }
 
         private void label6_Click(object sender, EventArgs e)
         {
-            Process.Start("http://newagesoldier.com");
+            Process.Start("https://newagesoldier.com");
         }
     }
 }

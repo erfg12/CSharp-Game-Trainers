@@ -68,7 +68,7 @@ namespace Bards_Tail_Trainer
                     value = Convert.ToInt64(value).ToString("X");
             }
 
-            m.writeMemory(address, type, value);
+            m.WriteMemory(address, type, value);
         }
 
         private void experience_TextChanged(object sender, EventArgs e)
@@ -175,16 +175,16 @@ namespace Bards_Tail_Trainer
         {
             if (m.OpenProcess("The Bard's Tale")) //write defaults
             {
-                health.Text = m.read2Byte("base+0x008703C4").ToString();
-                experience.Text = m.readInt("base+0x0087030C").ToString();
-                silver.Text = m.readInt("base+0x0087031C").ToString();
-                strength.Text = m.readByte("base+0x0087044d").ToString();
-                vitality.Text = m.readByte("base+0x0087044e").ToString();
-                luck.Text = m.readByte("base+0x0087044f").ToString();
-                dexterity.Text = m.readByte("base+0x00870450").ToString();
-                charisma.Text = m.readByte("base+0x00870451").ToString();
-                rhythm.Text = m.readByte("base+0x00870452").ToString();
-                addrstones.Text = m.readByte("base+0x008703CA").ToString();
+                health.Text = m.Read2Byte("base+0x008703C4").ToString();
+                experience.Text = m.ReadInt("base+0x0087030C").ToString();
+                silver.Text = m.ReadInt("base+0x0087031C").ToString();
+                strength.Text = m.ReadByte("base+0x0087044d").ToString();
+                vitality.Text = m.ReadByte("base+0x0087044e").ToString();
+                luck.Text = m.ReadByte("base+0x0087044f").ToString();
+                dexterity.Text = m.ReadByte("base+0x00870450").ToString();
+                charisma.Text = m.ReadByte("base+0x00870451").ToString();
+                rhythm.Text = m.ReadByte("base+0x00870452").ToString();
+                addrstones.Text = m.ReadByte("base+0x008703CA").ToString();
             }
         }  
     }

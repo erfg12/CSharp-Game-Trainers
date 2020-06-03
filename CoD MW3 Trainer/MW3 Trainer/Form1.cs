@@ -37,15 +37,15 @@ namespace MW3_Trainer
             if (loaded)
                 return;
             
-            int gameProcId = MemLib.getProcIDFromName("iw5sp"); //use task manager to find game name. For CoD MW3 it is iw5sp. Do not add .exe extension
+            bool gameProc = MemLib.OpenProcess("iw5sp"); //use task manager to find game name. For CoD MW3 it is iw5sp. Do not add .exe extension
 
-            if (gameProcId != 0)
+            if (gameProc)
             {
                 ProcessID.Invoke(new MethodInvoker(delegate
                 {
-                    ProcessID.Text = gameProcId.ToString();
+                    ProcessID.Text = gameProc.ToString();
                 }));
-                MemLib.OpenProcess(gameProcId.ToString());
+                MemLib.OpenProcess("iw5sp");
                 loaded = true;
             }
         }
@@ -99,25 +99,25 @@ namespace MW3_Trainer
 
                 label2.Invoke(new MethodInvoker(delegate
                 {
-                    label2.Text = "Health: " + MemLib.readInt("test", codeFile).ToString();
+                    label2.Text = "Health: " + MemLib.ReadInt("test", codeFile).ToString();
                 }));
 
                 godmode_checkbox.Invoke(new MethodInvoker(delegate
                 {
                     if (godmode_checkbox.Checked)
-                        MemLib.writeMemory("iw5sp.exe+0x00D97C28", "int", "100"); //keep writing 100 to create our own "god mode"
+                        MemLib.WriteMemory("iw5sp.exe+0x00D97C28", "int", "100"); //keep writing 100 to create our own "god mode"
                 }));
 
                 infammo_checkbox.Invoke(new MethodInvoker(delegate
                 {
                     if (infammo_checkbox.Checked) //since backgroundworker stays running, this will lock our ammo/magazine values
                     {
-                        MemLib.writeMemory("iw5sp.exe+0x00F820A0", "int", "999");
-                        MemLib.writeMemory("iw5sp.exe+0x00F82118", "int", "999");
-                        MemLib.writeMemory("iw5sp.exe+0x00F820B8", "int", "999");
-                        MemLib.writeMemory("iw5sp.exe+0x00F8213C", "int", "999");
-                        MemLib.writeMemory("iw5sp.exe+0x00F82124", "int", "4");
-                        MemLib.writeMemory("iw5sp.exe+0x00F82130", "int", "4");
+                        MemLib.WriteMemory("iw5sp.exe+0x00F820A0", "int", "999");
+                        MemLib.WriteMemory("iw5sp.exe+0x00F82118", "int", "999");
+                        MemLib.WriteMemory("iw5sp.exe+0x00F820B8", "int", "999");
+                        MemLib.WriteMemory("iw5sp.exe+0x00F8213C", "int", "999");
+                        MemLib.WriteMemory("iw5sp.exe+0x00F82124", "int", "4");
+                        MemLib.WriteMemory("iw5sp.exe+0x00F82130", "int", "4");
                     }
                 }));
             }
@@ -134,13 +134,13 @@ namespace MW3_Trainer
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             double timeScale = timescale_trackbar.Value * 0.2;
-            MemLib.writeMemory("iw5sp+185DBE8", "float", timeScale.ToString());
+            MemLib.WriteMemory("iw5sp+185DBE8", "float", timeScale.ToString());
         }
 
         private void resetBtn_Click(object sender, EventArgs e)
         {
             timescale_trackbar.Value = 5; //5 * 0.2 = 1.0 (normal speed) See trackBar1_Scroll function for example
-            MemLib.writeMemory("iw5sp+185DBE8", "float", "1");
+            MemLib.WriteMemory("iw5sp+185DBE8", "float", "1");
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -149,7 +149,7 @@ namespace MW3_Trainer
                 return;
 
             timescale_trackbar.Value = timescale_trackbar.Value + 1;
-            MemLib.writeMemory("iw5sp+185DBE8", "float", (timescale_trackbar.Value * 0.2).ToString());
+            MemLib.WriteMemory("iw5sp+185DBE8", "float", (timescale_trackbar.Value * 0.2).ToString());
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -158,12 +158,12 @@ namespace MW3_Trainer
                 return;
 
             timescale_trackbar.Value = timescale_trackbar.Value - 1;
-            MemLib.writeMemory("iw5sp+185DBE8", "float", (timescale_trackbar.Value * 0.2).ToString());
+            MemLib.WriteMemory("iw5sp+185DBE8", "float", (timescale_trackbar.Value * 0.2).ToString());
         }
 
         private void label6_Click(object sender, EventArgs e)
         {
-            Process.Start("http://newagesoldier.com");
+            Process.Start("https://newagesoldier.com");
         }
     }
 }
