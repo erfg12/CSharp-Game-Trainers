@@ -40,15 +40,16 @@ namespace MW2_Trainer
             if (gameProcId != 0)
             {
                 loaded = true;
-                ProcessID.Text = gameProcId.ToString();
+                ProcessID.Invoke(new MethodInvoker(delegate { ProcessID.Text = gameProcId.ToString(); }));
                 MemLib.OpenProcess(gameProcId.ToString());
 
-                int godMode = MemLib.ReadInt("godMode", codeFile);
-
-                if (godMode == 1)
-                    godmode_checkbox.Checked = true;
-                else
-                    godmode_checkbox.Checked = false;
+                godmode_checkbox.Invoke(new MethodInvoker(delegate {
+                    int godMode = MemLib.ReadInt("godMode", codeFile);
+                    if (godMode == 1)
+                        godmode_checkbox.Checked = true;
+                    else
+                        godmode_checkbox.Checked = false;
+                }));
             }
         }
 
