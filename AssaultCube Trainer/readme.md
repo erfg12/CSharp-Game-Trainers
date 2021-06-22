@@ -1,0 +1,1 @@
+This trainer was made in 22th of June 2021. See Assault Cube website: https://assault.cubers.net/
